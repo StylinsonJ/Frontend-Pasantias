@@ -1,0 +1,153 @@
+<div mat-subheader>
+  <mat-icon>add</mat-icon>Gastos
+</div>
+
+<form  class="normal-form">
+    <mat-card>
+    <mat-grid-list cols="2" rowHeight="600px"  >
+
+        <mat-grid-tile style="padding: 10px; ">
+          <div class="controles-container">
+            <input type="hidden" >
+
+            <mat-form-field appearance="fill">
+              <mat-label>Tipo de Gasto</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let type of types" [value]="type.value">
+                  {{type.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Tipo de Documento</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let doc of docs" [value]="doc.value">
+                  {{doc.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Fecha Emitida</mat-label>
+              <input matInput [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Razon Social</mat-label>
+              <input formControlName="raz_social" matInput>
+              <mat-error>This field is mandatory.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Dirección</mat-label>
+              <input formControlName="direccion" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Valor de Venta</mat-label>
+              <input formControlName="val_venta" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Estado de Pago</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let estado of estados" [value]="estado.value">
+                  {{estado.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile style="padding: 10px; ">
+          <div class="controles-container">
+              <mat-form-field appearance="fill">
+                <mat-label>Concepto</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let concepto of conceptos" [value]="concepto.value">
+                    {{concepto.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          
+          <mat-form-field appearance="fill">
+            <mat-label>Num de Documento</mat-label>
+            <input formControlName="num_doc" matInput>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>RUC</mat-label>
+            <input formControlName="ruc" matInput >
+            <mat-error >Minimo 11.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Descripcion</mat-label>
+            <input formControlName="descripcion" matInput>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Fecha de Vencimiento</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <div class="button-row">
+            <button mat-raised-button color="primary" type="submit" >Enviar</button>
+            <button mat-raised-button color="warn">Clear</button>
+          </div>
+
+        </div>
+
+          <!--
+          <mat-form-field>
+            <input formControlName="num_doc" matInput placeholder="Num de Documento">
+            <mat-error >Es necesario.</mat-error>
+            <mat-error >Minimo 8.</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+              <input formControlName="fullName" matInput placeholder="Full Name">
+              <mat-error>This field is mandatory.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input formControlName="email" matInput placeholder="Email">
+              <mat-error>Invalid email address.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input formControlName="mobile" matInput placeholder="Mobile">
+              <mat-error >Es necesario.</mat-error>
+              <mat-error >Minimo 8.</mat-error>
+            </mat-form-field>
+
+          <div class="controles-container">
+            <div class="add-bottom-padding">
+              <mat-radio-group formControlName="gender" >
+                <mat-radio-button value="1">Femenino</mat-radio-button>
+                <mat-radio-button value="2">Masculino</mat-radio-button>
+                <mat-radio-button value="3">Other</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          
+            <mat-form-field>
+              <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Hire Date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div class="add-bottom-padding">
+              <mat-checkbox  formControlName="isPermanent">Permanent Employee</mat-checkbox>
+            </div>
+            <div class="button-row">
+              <button mat-raised-button color="primary" type="submit" >Enviar</button>
+              <button mat-raised-button color="warn">Clear</button>
+            </div>
+          -->
+        </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+  </form>

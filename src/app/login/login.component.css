@@ -1,0 +1,36 @@
+.blue {
+    background-color: #3A63A7;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.card-center {
+    width: 400px;
+    margin: 100px auto;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.card-center .example-form mat-card-actions button {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.card-center .example-form mat-card-actions {
+    margin-bottom: 0;
+}
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  mat-card-title img {
+      width: 150px;
+      display: block;
+      margin: auto;
+  }

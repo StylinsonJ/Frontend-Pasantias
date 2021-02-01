@@ -1,1 +1,26 @@
-<p>login works!</p>
+<div class="blue">
+    <div class="card-center">
+        <mat-card>
+            <mat-card-title>
+                <img mat-card-image src="https://www.mibeatriz.com.pe/img/logo.png">
+            </mat-card-title><br>
+            <mat-card-content>
+                <form #f="ngForm" (ngSubmit)="onLogin()" class="example-form" novalidate>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Nombre de Usuario</mat-label>
+                        <input type="text" matInput name="username" [(ngModel)]="username" placeholder="Ejm. JosueTY" required>
+                    </mat-form-field>
+                
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Contraseña</mat-label>
+                        <input type="password" matInput name="password" [(ngModel)]="password" required>
+                    </mat-form-field>
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" [disabled]="!f.valid">Ingresar</button>
+                    </mat-card-actions>
+                </form>
+                <small *ngIf="f.submitted && isLoginFail" class="alert alert-danger mt-3" style="color:red;">Error en el login: {{ errMsj }}</small>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

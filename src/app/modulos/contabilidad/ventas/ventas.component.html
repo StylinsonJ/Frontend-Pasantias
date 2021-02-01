@@ -1,0 +1,58 @@
+<form [formGroup]="service.form" class="normal-form">
+  <mat-card>
+  <mat-grid-list cols="2" rowHeight="300px"  >
+      <mat-grid-tile style="padding: 10px; ">
+        <div class="controles-container">
+          <input type="hidden" formControlName="$key">
+          <mat-form-field appearance="fill">
+            <input formControlName="fullName" matInput placeholder="Full Name">
+            <mat-error>This field is mandatory.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="email" matInput placeholder="Email">
+            <mat-error>Invalid email address.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="mobile" matInput placeholder="Mobile">
+            <mat-error *ngIf="service.form.controls['mobile'].errors?.required">Es necesario.</mat-error>
+            <mat-error *ngIf="service.form.controls['mobile'].errors?.minlength">Minimo 8.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="city" matInput placeholder="City">
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="controles-container">
+          <div class="add-bottom-padding">
+            <mat-radio-group formControlName="gender" >
+              <mat-radio-button value="1">Femenino</mat-radio-button>
+              <mat-radio-button value="2">Masculino</mat-radio-button>
+              <mat-radio-button value="3">Other</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <mat-form-field>
+            <mat-select formControlName="department" placeholder="Department">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let department of departments">
+                <mat-option value="{{department.id}}">{{department.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Hire Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div class="add-bottom-padding">
+            <mat-checkbox  formControlName="isPermanent">Permanent Employee</mat-checkbox>
+          </div>
+          <div class="button-row">
+            <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Enviar</button>
+            <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+          </div>
+        </div>
+      </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
+</form>

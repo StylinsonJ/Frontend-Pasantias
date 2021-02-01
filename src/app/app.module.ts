@@ -1,32 +1,35 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import { TableroComponent } from './modulos/tablero/tablero.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavComponent } from './nav/nav.component';
+import { VentasService } from './services/contabilidad/ventas/ventas.service';
+
 import { ContabilidadComponent } from './modulos/contabilidad/contabilidad.component';
-import { AlmacenComponent } from './modulos/almacen/almacen.component';
-import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
+import { GastosComponent } from './modulos/contabilidad/gastos/gastos.component';
+import { VentasComponent } from './modulos/contabilidad/ventas/ventas.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     NavComponent,
-    AlmacenComponent,
     ContabilidadComponent,
-    FinanzasComponent,
-    TableroComponent,
+    PageNotFoundComponent,
+    GastosComponent,
+    VentasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
   ],
-  providers: [],
+  providers: [VentasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

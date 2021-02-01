@@ -2,11 +2,11 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+      [opened]="(isHandset$ | async) === false"
+  >
 
     <mat-nav-list>
-
-      <div class="perfil-card">
+      <div class="perfil-card" >
           <div class="perfil">
             <img src="https://www.mibeatriz.com.pe/img/logo.png"  >
           </div>
@@ -40,16 +40,16 @@
       <a mat-list-item routerLinkActive="list-item-active" routerLink="/perfil">
         <mat-icon>settings</mat-icon>Perfil
       </a>
-      <a mat-list-item routerLinkActive="list-item-active" routerLink="/logout">
-        <mat-icon>input</mat-icon>Cerrar Sesion
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/perfil">
+        <mat-icon>exit_to_app</mat-icon>logout
       </a>
+      
       
     </mat-nav-list>
   </mat-sidenav>
-
-  
+  <!--
   <mat-sidenav-content>
-    <mat-toolbar style="background-color: #3A63A7;">
+    <mat-toolbar style="background-color: #3A63A7;  box-shadow: 2px 2px 5px #999;">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -58,9 +58,10 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>MiBeatriz ERP</span>
+      
     </mat-toolbar>
-    <router-outlet></router-outlet>
 
   </mat-sidenav-content>
+  -->
+  <router-outlet></router-outlet>
 </mat-sidenav-container>

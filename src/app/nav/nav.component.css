@@ -7,6 +7,10 @@
 
 }
 
+.mat-sidenav-content{
+  background-color: #72717613;
+}
+
 .perfil-card{
   margin-top: 10px;
 }
@@ -28,3 +32,6 @@
   object-fit: cover;
 }
 
+.example-spacer {
+  flex: 1 1 auto;
+}
