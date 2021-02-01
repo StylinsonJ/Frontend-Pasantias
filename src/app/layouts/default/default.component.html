@@ -19,28 +19,28 @@
       
         <mat-divider></mat-divider>
   
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/tablero">
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/tablero" *ngIf="isLogged">
           <mat-icon>timeline</mat-icon>Tablero
         </a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/maestro">
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/maestro" *ngIf="isLogged">
           <mat-icon></mat-icon>Maestro
         </a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/almacen">
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/almacen" *ngIf="isLogged">
           <mat-icon></mat-icon>Almacen
         </a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/contabilidad">
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/contabilidad" *ngIf="isLogged">
           <mat-icon></mat-icon>Contabilidad
         </a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/finanzas">
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/finanzas" *ngIf="isLogged">
           <mat-icon></mat-icon>Finanzas
         </a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/rrhh">
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/rrhh" *ngIf="isLogged">
           <mat-icon></mat-icon>RR HH
         </a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/perfil">
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/perfil" *ngIf="isLogged">
           <mat-icon>settings</mat-icon>Perfil
         </a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/logout">
+        <a mat-list-item *ngIf="isLogged" (click)="onLogOut()">
           <mat-icon>input</mat-icon>Cerrar Sesion
         </a>
         

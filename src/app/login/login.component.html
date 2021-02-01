@@ -1,6 +1,9 @@
 <div class="blue">
     <div class="card-center">
-        <mat-card>
+        <mat-card *ngIf="isLogged">
+            <h3>Ya has iniciado sesión</h3>
+        </mat-card>
+        <mat-card *ngIf="!isLogged">
             <mat-card-title>
                 <img mat-card-image src="assets/img/logo.png">
             </mat-card-title><br>
