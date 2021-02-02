@@ -12,13 +12,25 @@
 
             <mat-form-field appearance="fill">
               <mat-label>Tipo de Gasto</mat-label>
-              <mat-select>
-                <mat-option *ngFor="let type of types" [value]="type.value">
-                  {{type.viewValue}}
+              <mat-select [(ngModel)]='selectedType.id' change="onSelect($event.target.value)">
+                <mat-option *ngFor="let type of types" value={{type.id}}>
+                  {{type.name}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
 
+           
+            <mat-form-field appearance="fill">
+              <mat-label>Concepto</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let concepto of conceptos" value={{concepto.id}}>
+                  {{concepto.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+
+            
             <mat-form-field appearance="fill">
               <mat-label>Tipo de Documento</mat-label>
               <mat-select>
@@ -66,15 +78,9 @@
 
         <mat-grid-tile style="padding: 10px; ">
           <div class="controles-container">
-              <mat-form-field appearance="fill">
-                <mat-label>Concepto</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let concepto of conceptos" [value]="concepto.value">
-                    {{concepto.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-          
+             
+        
+
           <mat-form-field appearance="fill">
             <mat-label>Num de Documento</mat-label>
             <input formControlName="num_doc" matInput>
@@ -102,10 +108,10 @@
             <button mat-raised-button color="primary" type="submit" >Enviar</button>
             <button mat-raised-button color="warn">Clear</button>
           </div>
-
+          {{ conceptos }}
         </div>
 
-          <!--
+          <!--(change)="onSelect($event.target.value)
           <mat-form-field>
             <input formControlName="num_doc" matInput placeholder="Num de Documento">
             <mat-error >Es necesario.</mat-error>

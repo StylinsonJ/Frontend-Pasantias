@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { NavComponent } from './nav/nav.component';
 import { VentasService } from './services/contabilidad/ventas/ventas.service';
 
+
 import { ContabilidadComponent } from './modulos/contabilidad/contabilidad.component';
 import { GastosComponent } from './modulos/contabilidad/gastos/gastos.component';
 import { VentasComponent } from './modulos/contabilidad/ventas/ventas.component';
