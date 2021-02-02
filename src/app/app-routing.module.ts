@@ -9,14 +9,18 @@ import { AlmacenComponent } from './modulos/almacen/almacen.component';
 
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DefaultComponent } from './layouts/default/default.component';
 
 
 const routes: Routes = [
   {path:'login', component: LoginComponent},
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
-  {path:'tablero', component: TableroComponent},
-  {path:'almacen', component: AlmacenComponent},
-  {path:'contabilidad', component: ContabilidadComponent},
+  {path: '', component: DefaultComponent, 
+    children: [
+      {path: '', component: AlmacenComponent},
+      {path: 'tablero', component: TableroComponent},
+      {path: 'contabilidad', component: ContabilidadComponent},
+      {path:'almacen', component: AlmacenComponent}
+    ]},
   {path:'finanzas', component: FinanzasComponent},
   {path:'rrhh', component: RrhhComponent},
   {path: '**', component: PageNotFoundComponent}

@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { NavComponent } from './nav/nav.component';
 import { VentasService } from './services/contabilidad/ventas/ventas.service';
 
 
@@ -13,22 +12,20 @@ import { ContabilidadComponent } from './modulos/contabilidad/contabilidad.compo
 import { GastosComponent } from './modulos/contabilidad/gastos/gastos.component';
 import { VentasComponent } from './modulos/contabilidad/ventas/ventas.component';
 import { LoginComponent } from './login/login.component';
+import { DefaultModule } from './layouts/default/default.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavComponent,
-    ContabilidadComponent,
-    PageNotFoundComponent,
-    GastosComponent,
-    VentasComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    DefaultModule
   ],
   providers: [VentasService],
   bootstrap: [AppComponent]
