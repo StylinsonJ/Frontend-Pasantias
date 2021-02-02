@@ -12,7 +12,6 @@ import { TokenStorageService } from '../_services/token-storage.service';
 export class LoginComponent implements OnInit {
 
   isLogged = false;
-  @Output() cambioLogin = new EventEmitter<boolean>();
   isLoginFail = false;
   loginUsuario: LoginUsuario | undefined;
   username:string | undefined;
@@ -40,13 +39,12 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginUsuario).subscribe(
       data => {
         this.isLogged = true;
-        this.cambioLogin.emit( this.isLogged );
         this.isLoginFail = false;
         this.tokenService.setToken(data.accessToken);
         this.tokenService.setUserName(data.username);
         this.tokenService.setAuthorities(data.roles);
         this.roles = data.roles;
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       },
       err => {
         this.isLogged = false;

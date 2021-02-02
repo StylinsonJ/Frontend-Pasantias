@@ -40,7 +40,7 @@
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/perfil">
           <mat-icon>settings</mat-icon>Perfil
         </a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/perfil">
+        <a mat-list-item *ngIf="isLogged" (click)="onLogOut()">
           <mat-icon>exit_to_app</mat-icon>logout
         </a>
         

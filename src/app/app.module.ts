@@ -13,6 +13,7 @@ import { GastosComponent } from './modulos/contabilidad/gastos/gastos.component'
 import { VentasComponent } from './modulos/contabilidad/ventas/ventas.component';
 import { LoginComponent } from './login/login.component';
 import { DefaultModule } from './layouts/default/default.module';
+import { interceptorProvider } from './interceptors/prod-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { DefaultModule } from './layouts/default/default.module';
     MaterialModule,
     DefaultModule
   ],
-  providers: [VentasService],
+  providers: [VentasService, interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
