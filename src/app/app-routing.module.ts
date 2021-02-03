@@ -21,7 +21,7 @@ const routes: Routes = [
       {path:'almacen', component: AlmacenComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
       {path: 'maestro', component: MaestroComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
       {path: 'finanzas', component: FinanzasComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-      {path:'rrhh', component: AlmacenComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}}
+      {path:'rrhh', component: RrhhComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}}
     ]},
   {path: '**', component: PageNotFoundComponent}
 ];
