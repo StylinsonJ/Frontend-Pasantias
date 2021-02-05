@@ -23,7 +23,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule} from '@angular/material/expansion';
+import { MatDialogModule} from '@angular/material/dialog';
+import { MatSortModule} from '@angular/material/sort';
 
 @NgModule({
     imports: [
@@ -51,7 +53,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatCheckboxModule,
         MatNativeDateModule,
         HttpClientModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatDialogModule,
+        MatSortModule
     ],
     exports:[
         MatButtonModule,
@@ -77,7 +81,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatCheckboxModule,
         MatNativeDateModule,
         HttpClientModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatDialogModule,
+        MatSortModule
     ]
 })
 export class MaterialModule {}

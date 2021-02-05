@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { interceptorProvider } from './interceptors/prod-interceptor.service';
 import { MaterialModule } from './material.module';
+import { DatePipe } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 import { DefaultModule } from './layouts/default/default.module';
-import { interceptorProvider } from './interceptors/prod-interceptor.service';
 
 import { ComprasComponent } from './modulos/home/compras/compras.component';
 import { GastosComponent } from './modulos/home/gastos/gastos.component';
@@ -21,7 +25,9 @@ import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
 import { HomeComponent } from './modulos/home/home.component';
 import { MaestroComponent } from './modulos/maestro/maestro.component';
 import { RrhhComponent } from './modulos/rrhh/rrhh.component';
+
 import { ProveedoresService } from './services/maestro/proveedores/proveedores.service';
+import { ProveeedorComponent } from './modulos/maestro/proveedores/proveeedor/proveeedor.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +43,8 @@ import { ProveedoresService } from './services/maestro/proveedores/proveedores.s
 
     ClientesComponent,
     ProveedoresComponent,
+    ProveeedorComponent,
+
     BancosMaestroComponent,
     BancosFinanzasComponent,
     ComprasComponent,
@@ -48,7 +56,8 @@ import { ProveedoresService } from './services/maestro/proveedores/proveedores.s
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    DefaultModule
+    DefaultModule,
+    NgbModule
   ],
   providers: [ProveedoresService, interceptorProvider],
   bootstrap: [AppComponent]

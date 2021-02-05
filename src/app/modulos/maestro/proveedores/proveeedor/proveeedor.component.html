@@ -1,0 +1,220 @@
+<div mat-dialog-title>Registro: PR0001{{data.id}}
+  <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>backspace</mat-icon></button>
+</div>
+<div mat-dialog-content>
+<form [formGroup]="form">
+  <mat-grid-list cols="2" rowHeight="80px" style="margin-bottom: 10px;">
+      <mat-grid-tile>
+        <div class="controles-container">
+          <mat-form-field>
+            <input matInput placeholder="RUC/DNI">
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="RazonSocial" matInput placeholder="Razón Social">
+          </mat-form-field>   
+        </div>
+      </mat-grid-tile>  
+      <mat-grid-tile>
+        <div class="controles-container">
+          <mat-form-field>
+            <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Fecha de Inicio">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="rubro" matInput placeholder="Rubro/Actividad económica">
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>  
+  </mat-grid-list>
+
+  <mat-accordion class="example-headers-align" style="margin-bottom: 10px;">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Direcciones
+        </mat-panel-title>
+        <mat-panel-description>
+          <mat-icon>map</mat-icon>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+  
+      <mat-form-field style="text-align: center;width: 100%;">
+        <mat-label>Direccion 1</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+            <mat-form-field  class="contacto">
+              <mat-label> Departamento</mat-label>
+              <mat-select>
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field  class="contacto">
+              <mat-label> Distrito</mat-label>
+              <mat-select>
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field  class="contacto">
+              <mat-label> Provincia</mat-label>
+              <mat-select>
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="contacto">
+              <mat-label>Ubigeo</mat-label>
+              <input matInput>
+            </mat-form-field>
+
+      <mat-form-field style="text-align: center;width: 100%;">
+        <mat-label>Direccion 2</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+            <mat-form-field  class="contacto">
+              <mat-label> Departamento</mat-label>
+              <mat-select>
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field  class="contacto">
+              <mat-label> Distrito</mat-label>
+              <mat-select>
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field  class="contacto">
+              <mat-label> Provincia</mat-label>
+              <mat-select>
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="contacto">
+              <mat-label>Ubigeo</mat-label>
+              <input matInput>
+            </mat-form-field>
+      
+        <mat-action-row>
+          <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Contacto
+          </mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+            <mat-form-field class="contacto">
+              <mat-label>Nombre</mat-label>
+              <input matInput>
+            </mat-form-field>
+            <mat-form-field class="contacto">
+              <mat-label>Cargo</mat-label>
+              <input matInput>
+            </mat-form-field>
+            <mat-form-field  class="contacto">
+              <mat-label>Telefono</mat-label>
+              <!-- <example-tel-input formControlName="tel" required></example-tel-input>-->
+              <input matInput>
+              <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+            <mat-form-field class="contacto">
+              <mat-label>Correo </mat-label>
+              <input matInput placeholder="pat@example.com" [formControl]="email" required>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Previous</button>
+          <button mat-button color="primary" (click)="nextStep()">End</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion> 
+
+  <div class="grid-but">
+      <div class="grid">
+        <div class="add-bottom-padding" >
+          <label id="example-radio-group-label">Impuestos Asociados</label>
+          <mat-radio-group aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            [(ngModel)]="impuestosAsociados">
+              <mat-radio-button class="example-radio-button" *ngFor="let impuesto of impuestos" [value]="impuesto">
+                {{impuesto}}
+              </mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="add-bottom-padding">
+          <label id="example-radio-group-label">Tipo de Pago</label>
+          <mat-radio-group aria-labelledby="example-radio-group-label"
+          class="example-radio-group"
+          [(ngModel)]="impuestosAsociados">
+            <mat-radio-button class="example-radio-button" *ngFor="let pago of pagos" [value]="pago">
+              {{pago}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div> 
+        <div style="margin-top: 10px;" >
+          <table class="table" id="tableId">
+            <thead class="thread-light">
+              <tr>
+                <th>Entidad</th>
+                <th>N° Cuenta</th>
+                <th>CCI</th>
+                <th>Tipo de Cuenta</th>
+                <th>Moneda</th>
+                <th></th>
+              </tr>
+              <!--<tr>
+                <th><input type="text"    class="form-control" id="entidad"      [(ngModel)]="entidad"     name="entidad"     placeholder="Entidad"></th>
+                <th><input type="number"  class="form-control" id="nro_cuenta"   [(ngModel)]="nro_cuenta"  name="nro_cuenta"  placeholder="N° Cuenta"></th>
+                <th><input type="number"  class="form-control" id="CCI"          [(ngModel)]="CCI"         name="CCI"         placeholder="CCI"></th>
+                <th><input type="text"    class="form-control" id="tipo_cuenta"  [(ngModel)]="tipo_cuenta" name="tipo_cuenta" placeholder="Tipo de Cuenta"></th>
+                <th><input type="text"    class="form-control" id="moneda"       [(ngModel)]="moneda"      name="moneda"      placeholder="Moneda"></th>
+                <th><button type="button" class="btn btn-primary" (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
+              </tr>-->
+              <tr>
+                <th><input type="text"    class="form-control" id="entidad"          name="entidad"     placeholder="Entidad"></th>
+                <th><input type="number"  class="form-control" id="nro_cuenta"     name="nro_cuenta"  placeholder="N° Cuenta"></th>
+                <th><input type="number"  class="form-control" id="CCI"                  name="CCI"         placeholder="CCI"></th>
+                <th><input type="text"    class="form-control" id="tipo_cuenta"   name="tipo_cuenta" placeholder="Tipo de Cuenta"></th>
+                <th><input type="text"    class="form-control" id="moneda"             name="moneda"      placeholder="Moneda"></th>
+                <th><button type="button" class="btn btn-primary" (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cuenta of (CUENTAS)" (click)="EditCuenta(cuenta,this)">
+                <td>{{cuenta.entidad}}</td>
+                <td>{{cuenta.nro_cuenta}}</td>
+                <td>{{cuenta.CCI}}</td>
+                <td>{{cuenta.tipo_cuenta}}</td>
+                <td>{{cuenta.moneda}}</td>
+                <td><button type="button" class="btn btn-secondary btn-sm" (click)="deleteCuenta(cuenta.id)"> <mat-icon>delete</mat-icon></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  </div>
+</form>
+</div>
+<mat-dialog-actions class="acciones" align="end">
+  <div class="comentario" >
+    <mat-form-field appearance="outline">
+        <mat-label>Comentario   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-label>
+        <textarea matNativeControl></textarea>
+      </mat-form-field>
+  </div>
+  <div>
+    <button mat-button >Cancelar</button>
+    <button mat-flat-button color="primary">Guardar</button>
+  </div>
+</mat-dialog-actions>

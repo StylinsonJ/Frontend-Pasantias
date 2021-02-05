@@ -1,185 +1,88 @@
-Registro | Consulta
+<div class="normal-form">
+  <button mat-flat-button (click)="openDialog()" color="primary">
+    <mat-icon>add</mat-icon>Proveedor
+  </button> 
 
-<mat-card>
-  
+  <mat-form-field>
+    <input matInput  (keyup)="applyFilter($event)" >
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
 
-<form [formGroup]="service.form" class="normal-form">
-  <mat-card-content>
-        <mat-grid-list cols="2" rowHeight="300px"  >
-          <mat-grid-tile style="padding: 10px; ">
-            <div class="controles-container">
-              <mat-form-field appearance="fill">
-                <mat-label>RUC / DNI </mat-label>
-                <input formControlName="ruc_dni" matInput >
-              </mat-form-field>
-              <mat-form-field appearance="fill">
-                <mat-label>Nombre / Razón Social</mat-label>
-                <input formControlName="raz_social" matInput>
-                <mat-error>This field is mandatory.</mat-error>
-              </mat-form-field>
-            </div>
-          </mat-grid-tile>
-          <mat-grid-tile style="padding: 10px; ">
-            <div class="controles-container">
-              <mat-form-field appearance="fill">
-                <mat-label>Fecha de Inicio</mat-label>
-                <input matInput [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-              <mat-form-field appearance="fill">
-                <mat-label>Rubro /  Actividad Economica</mat-label>
-                <input formControlName="raz_social" matInput>
-                <mat-error>This field is mandatory.</mat-error>
-              </mat-form-field>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list >
-  
-        <div>
-          <mat-accordion class="example-headers-align" multi >
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Direcciones
-                </mat-panel-title>
-                <mat-icon>location_on</mat-icon> 
-              </mat-expansion-panel-header>
-  
-              <div>
-                <mat-form-field appearance="fill" style="width:100%;">
-                  <mat-label>Dirección 1</mat-label>
-                  <input formControlName="ruc_dni" matInput >
-                </mat-form-field>
-              </div>
-              
-              <div>
-                    <mat-form-field appearance="fill" style="width:45%;">
-                      <mat-label>Distrito</mat-label>
-                      <mat-select>
-                        <mat-option>
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-  
-                    <mat-form-field appearance="fill" style="width:45%;">
-                      <mat-label>Provincia</mat-label>
-                      <mat-select>
-                        <mat-option>
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-              </div>
-  
-              <div>
-                <mat-form-field appearance="fill" style="width:45%;">
-                  <mat-label>Departamento</mat-label>
-                  <mat-select>
-                    <mat-option>
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+  <button mat-icon-button class="excel">
+        <mat-icon>get_app</mat-icon>Exportar a Excel
+  </button>
+</div> 
+
+<div>
+  <mat-card-content >
+    <br>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
     
-                <mat-form-field appearance="fill" style="width:45%;">
-                  <mat-label>Pais</mat-label>
-                  <mat-select>
-                    <mat-option>
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-  
-              <div>
-                <mat-form-field appearance="fill" style="width:100%;">
-                  <mat-label>Dirección 2</mat-label>
-                  <input formControlName="ruc_dni" matInput >
-                </mat-form-field>
-              </div>
-              
-              <div>
-                <mat-form-field appearance="fill">
-                  <mat-label>Distrito</mat-label>
-                  <mat-select>
-                    <mat-option>
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-  
-                <mat-form-field appearance="fill">
-                  <mat-label>Provincia</mat-label>
-                  <mat-select>
-                    <mat-option>
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-  
-              <div>
-                <mat-form-field appearance="fill">
-                  <mat-label>Departamento</mat-label>
-                  <mat-select>
-                    <mat-option>
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef > ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
     
-                <mat-form-field appearance="fill">
-                  <mat-label>Pais</mat-label>
-                  <mat-select>
-                    <mat-option>
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-  <br>
-        <div>
-          <mat-accordion class="example-headers-align" multi >
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Persona de Contacto
-                </mat-panel-title>
-                <mat-icon>account_circle</mat-icon> 
-              </mat-expansion-panel-header>
-              
-              <div>
-                  <mat-form-field appearance="fill">
-                    <mat-label>Nombre</mat-label>
-                    <input formControlName="ruc_dni" matInput >
-                  </mat-form-field>
-  
-                  <mat-form-field appearance="fill">
-                    <mat-label>Cargo</mat-label>
-                    <input formControlName="ruc_dni" matInput >
-                  </mat-form-field>
-              </div>
-  
-              <div>
-                  <mat-form-field appearance="fill">
-                    <mat-label>Telefono</mat-label>
-                    <input formControlName="ruc_dni" matInput >
-                  </mat-form-field>
-            
-                  <mat-form-field appearance="fill">
-                    <mat-label>Correo</mat-label>
-                    <input formControlName="ruc_dni" matInput >
-                  </mat-form-field>
-              </div>
-  
-              
-  
-             
-          
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-      </mat-card-content>
+      <!-- RUC/DNI Column -->
+      <ng-container matColumnDef="ruc_dni">
+        <th mat-header-cell *matHeaderCellDef> RUC - DNI </th>
+        <td mat-cell *matCellDef="let element"> {{element.ruc_dni}} </td>
+      </ng-container>
+    
+      <!-- Razon Social Column -->
+      <ng-container matColumnDef="razon_name">
+        <th mat-header-cell *matHeaderCellDef> Razón Social </th>
+        <td mat-cell *matCellDef="let element"> {{element.razon_name}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          (click)="selection.toggle(row)">
+      </tr>
+    <!--
+      <ng-container matColumnDef="loading">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          Loading data...
+        </mat-footer-cell>
+      </ng-container>
+      <ng-container matColumnDef="noData">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          No data.
+        </mat-footer-cell>
+      </ng-container>
+    
       
+     
+      <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+      <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
     
-  
-    <button mat-raised-button > Add column </button>
-  </form>
-</mat-card>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+  </tr>
+    -->
+     
+    </table>
+    
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+
+  </mat-card-content>
+</div>

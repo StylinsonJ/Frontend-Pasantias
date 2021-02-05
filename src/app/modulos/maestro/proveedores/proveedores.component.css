@@ -1,40 +1,24 @@
-.example-h2 {
-    margin: 10px;
-}
-  
-.example-section {
-display: flex;
-align-content: center;
-align-items: center;
-height: 60px;
+.normal-form{
+  margin: 20px;
 }
 
-.controles-container{
-    width: 100%;
-    padding: 5%;
+/* Busqueda - Tabla*/
+table {
+  width: 100%;
 }
 
-.controles-container > *{
-    width: 100%;
+.mat-form-field {
+  font-size: 14px;
+  width: 300px;
+  margin-left: 10%;
 }
 
-.example-action-buttons {
-    padding-bottom: 20px;
-  }
-  
-  .example-headers-align .mat-expansion-panel-header-title,
-  .example-headers-align .mat-expansion-panel-header-description {
-    flex-basis: 0;
-  }
-  
-  .example-headers-align .mat-expansion-panel-header-description {
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .example-headers-align  .mat-form-field  {
-    margin-left: 5px;
-    width: 45%;
-    
-  }
-  
+/* Excel*/
+.excel {
+  color: green;
+}
+
+td, th {
+  width: 25%;
+}
+

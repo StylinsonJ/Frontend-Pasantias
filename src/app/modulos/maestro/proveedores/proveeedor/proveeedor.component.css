@@ -1,0 +1,76 @@
+.example-action-buttons {
+    padding-bottom: 20px;
+  }
+  
+  .example-headers-align .mat-expansion-panel-header-title,
+  .example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+  }
+  
+  .example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .contacto{
+    max-width: 170px;
+  }
+  .example-headers-align .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+  /*EMAIL*/
+  .example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+/* Radio boton
+.grid {
+  display: grid;
+  grid-template-columns: 50px 300px;
+  grid-template-rows: 200px 75px;
+}*/
+  .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .grid-but {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 150px 0px;
+    margin-top: 15px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 150px 150px;
+    grid-template-rows: 150px 0px;
+  }
+
+  .acciones {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 80px 0px;
+
+  }
+  .comentario{
+    margin-left: 5px;
+    margin-top: 4px;
+    margin-right: 10px;
+  }
+
+  
+  .add-bottom-padding{
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  
+/* TABLA BANCARIA*/
+  table {
+    width: 100%;
+  }
+  
+  button {
+    margin: 16px 8px;
+  }
+  
