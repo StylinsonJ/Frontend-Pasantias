@@ -1,13 +1,24 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Proveedor } from 'src/app/componentes/maestro/proveedor';
 import { PeriodicElement } from '../../../intefaces/maestro/proveedores.interfaces';
+import Ubigeo, { District, Region, Province } from "ubigeos";
+import { PersonaContacto } from 'src/app/componentes/maestro/persona-contacto';
+import { CuentaBancaria } from 'src/app/componentes/maestro/cuenta-bancaria';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProveedoresService {
 
-  constructor() { }
+  private urlEndPoint: string = 'http://localhost:8082/api/proveedores';
+  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   private ELEMENT_DATA: PeriodicElement[] = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -51,5 +62,44 @@ export class ProveedoresService {
       hireDate: '',
       isPermanent: false
     });
-}
+  }
+
+  getProveedores(): Observable<Proveedor[]> {
+    // return of(CLIENTES);
+    return this.http.get<Proveedor[]>(this.urlEndPoint);
+  }
+
+  getId(): Observable<number> {
+    return this.http.get(`${this.urlEndPoint}/id`).pipe(
+      map((response: any) => response.identificador as number)
+    );
+  }
+
+  create(proveedor: Proveedor, personaContacto: PersonaContacto, cuentaBancaria: CuentaBancaria): Observable<any> {
+    proveedor.departamento = Region.instance(proveedor.departamento).getName();
+    proveedor.provincia = Province.instance(proveedor.provincia).getName();
+    proveedor.ubigeo = District.instance(proveedor.distrito).getCode();
+    proveedor.distrito = District.instance(proveedor.distrito).getName();
+
+    proveedor.departamentoDos = Region.instance(proveedor.departamentoDos).getName();
+    proveedor.provinciaDos = Province.instance(proveedor.provinciaDos).getName();
+    proveedor.ubigeoDos = District.instance(proveedor.distritoDos).getCode();
+    proveedor.distritoDos = District.instance(proveedor.distritoDos).getName();
+    return this.http.post(this.urlEndPoint, {proveedor, personaContacto, cuentaBancaria}, {headers: this.httpHeaders}).pipe(
+      map( (response: any) => response.proveedor as Proveedor)
+    );
+  }
+
+  getProveedor(id: number): Observable<Proveedor> {
+    return this.http.get<Proveedor>(`${this.urlEndPoint}/${id}`);
+  }
+
+  update(proveedor: Proveedor): Observable<any> {
+    return this.http.put<any>(`${this.urlEndPoint}/${proveedor.id}`, proveedor, {headers: this.httpHeaders});
+  }
+
+  delete(id: number): Observable<Proveedor> {
+    return this.http.delete<Proveedor>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+  }
+
 }

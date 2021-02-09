@@ -1,28 +1,46 @@
-<div mat-dialog-title>Registro: PR0001{{data.id}}
+<div mat-dialog-title>Registro: {{proveedorNuevo.codigo}}{{data.id}}
   <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>backspace</mat-icon></button>
 </div>
 <div mat-dialog-content>
-<form [formGroup]="form">
+<form>
   <mat-grid-list cols="2" rowHeight="80px" style="margin-bottom: 10px;">
       <mat-grid-tile>
         <div class="controles-container">
           <mat-form-field>
-            <input matInput placeholder="RUC/DNI">
+            <input 
+                matInput 
+                placeholder="RUC/DNI"
+                [(ngModel)]="proveedorNuevo.rucDni"
+                name="rucDni">
           </mat-form-field>
           <mat-form-field>
-            <input formControlName="RazonSocial" matInput placeholder="Razón Social">
+            <input 
+                matInput 
+                placeholder="Razón Social"
+                [(ngModel)]="proveedorNuevo.razonSocial"
+                name="razonSocial">
           </mat-form-field>   
         </div>
       </mat-grid-tile>  
       <mat-grid-tile>
         <div class="controles-container">
           <mat-form-field>
-            <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Fecha de Inicio">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-label>Fecha de inicio</mat-label>
+            <input 
+                matInput
+                type="date"
+                placeholder="Fecha de Inicio"
+                [(ngModel)]="proveedorNuevo.fechaIni"
+                name="fechaIni">
+            <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker> -->
           </mat-form-field>
           <mat-form-field>
-            <input formControlName="rubro" matInput placeholder="Rubro/Actividad económica">
+            <input 
+                matInput 
+                placeholder="Rubro/Actividad económica"
+                [(ngModel)]="proveedorNuevo.rubroActividad"
+                name="rubroActividad">
           </mat-form-field>
         </div>
       </mat-grid-tile>  
@@ -41,61 +59,117 @@
   
       <mat-form-field style="text-align: center;width: 100%;">
         <mat-label>Direccion 1</mat-label>
-        <input matInput>
+        <input 
+            matInput
+            [(ngModel)]="proveedorNuevo.direccion"
+            name="direccion">
       </mat-form-field>
 
             <mat-form-field  class="contacto">
               <mat-label> Departamento</mat-label>
-              <mat-select>
-                <mat-option value="option">Option</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field  class="contacto">
-              <mat-label> Distrito</mat-label>
-              <mat-select>
-                <mat-option value="option">Option</mat-option>
+              <mat-select 
+                  id="departamento" 
+                  (selectionChange)="onSelect($event.value)"
+                  [(ngModel)]="proveedorNuevo.departamento"
+                  name="departamento">
+                <mat-option *ngFor="let reg of region" value={{reg.getCode()}}>
+                  {{reg.getName()}}
+                </mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field  class="contacto">
               <mat-label> Provincia</mat-label>
-              <mat-select>
-                <mat-option value="option">Option</mat-option>
+              <mat-select
+                  id="provincia" 
+                  (selectionChange)="filtroProvincia($event.value)"
+                  [(ngModel)]="proveedorNuevo.provincia"
+                  name="provincia" [disabled]="provincias==null">
+                <mat-option selected hidden value="">Selecciona una provincia</mat-option>
+                <mat-option *ngFor="let provincia of provincias" value={{provincia.getCode()}}>
+                  {{provincia.getName()}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field  class="contacto">
+              <mat-label> Distrito</mat-label>
+              <mat-select
+                  id="distrito"
+                  (selectionChange)="obtenerUbigeo($event.value)"
+                  [(ngModel)]="proveedorNuevo.distrito"
+                  name="distrito" [disabled]="distritos==null">
+                <mat-option selected hidden value="">Selecciona un distrito</mat-option>
+                <mat-option *ngFor="let distrito of distritos" value={{distrito.getCode()}}>
+                  {{distrito.getName()}}
+                </mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field class="contacto">
               <mat-label>Ubigeo</mat-label>
-              <input matInput>
+              <input 
+                  matInput 
+                  [(ngModel)]="proveedorNuevo.ubigeo" 
+                  name="ubigeo" 
+                  value="{{ubigeo}}" 
+                  readonly>
             </mat-form-field>
 
       <mat-form-field style="text-align: center;width: 100%;">
         <mat-label>Direccion 2</mat-label>
-        <input matInput>
+        <input 
+            matInput
+            [(ngModel)]="proveedorNuevo.direccionDos"
+            name="direccionDos">
       </mat-form-field>
 
             <mat-form-field  class="contacto">
               <mat-label> Departamento</mat-label>
-              <mat-select>
-                <mat-option value="option">Option</mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field  class="contacto">
-              <mat-label> Distrito</mat-label>
-              <mat-select>
-                <mat-option value="option">Option</mat-option>
+              <mat-select
+                  id="departamentoDos" 
+                  (selectionChange)="onSelect2($event.value)"
+                  [(ngModel)]="proveedorNuevo.departamentoDos"
+                  name="departamentoDos">
+                  <mat-option *ngFor="let reg of region2" value={{reg.getCode()}}>
+                    {{reg.getName()}}
+                  </mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field  class="contacto">
               <mat-label> Provincia</mat-label>
-              <mat-select>
-                <mat-option value="option">Option</mat-option>
+              <mat-select
+                  id="provinciaDos" 
+                  (selectionChange)="filtroProvincia2($event.value)"
+                  [(ngModel)]="proveedorNuevo.provinciaDos"
+                  name="provinciaDos" [disabled]="provincias2==null">
+                <mat-option selected hidden value="">Selecciona una provincia</mat-option>
+                <mat-option *ngFor="let provincia of provincias2" value={{provincia.getCode()}}>
+                  {{provincia.getName()}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field  class="contacto">
+              <mat-label> Distrito</mat-label>
+              <mat-select
+                  id="distritoDos"
+                  (selectionChange)="obtenerUbigeo2($event.value)"
+                  [(ngModel)]="proveedorNuevo.distritoDos"
+                  name="distritoDos" [disabled]="distritos2==null">
+                <mat-option selected hidden value="">Selecciona un distrito</mat-option>
+                <mat-option *ngFor="let distrito of distritos2" value={{distrito.getCode()}}>
+                  {{distrito.getName()}}
+                </mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="contacto">
               <mat-label>Ubigeo</mat-label>
-              <input matInput>
+              <input 
+                  matInput 
+                  [(ngModel)]="proveedorNuevo.ubigeoDos" 
+                  name="ubigeoDos" 
+                  value="{{ubigeo2}}" 
+                  readonly>
             </mat-form-field>
       
         <mat-action-row>
@@ -115,21 +189,36 @@
     
             <mat-form-field class="contacto">
               <mat-label>Nombre</mat-label>
-              <input matInput>
+              <input 
+                  matInput
+                  [(ngModel)]="personaContacto.nombre"
+                  name="nombre">
             </mat-form-field>
             <mat-form-field class="contacto">
               <mat-label>Cargo</mat-label>
-              <input matInput>
+              <input 
+                  matInput
+                  [(ngModel)]="personaContacto.cargo"
+                  name="cargo">
             </mat-form-field>
             <mat-form-field  class="contacto">
               <mat-label>Telefono</mat-label>
               <!-- <example-tel-input formControlName="tel" required></example-tel-input>-->
-              <input matInput>
+              <input 
+                  matInput
+                  [(ngModel)]="personaContacto.telefono"
+                  name="telefono">
               <mat-icon matSuffix>phone</mat-icon>
             </mat-form-field>
             <mat-form-field class="contacto">
               <mat-label>Correo </mat-label>
-              <input matInput placeholder="pat@example.com" [formControl]="email" required>
+              <input 
+                  matInput 
+                  placeholder="pat@example.com" 
+                  [formControl]="email" 
+                  required
+                  [(ngModel)]="personaContacto.correo"
+                  name="correo">
               <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
         <mat-action-row>
@@ -143,9 +232,11 @@
       <div class="grid">
         <div class="add-bottom-padding" >
           <label id="example-radio-group-label">Impuestos Asociados</label>
-          <mat-radio-group aria-labelledby="example-radio-group-label"
-            class="example-radio-group"
-            [(ngModel)]="impuestosAsociados">
+          <mat-radio-group 
+              aria-labelledby="example-radio-group-label"
+              class="example-radio-group"
+              [(ngModel)]="proveedorNuevo.impuestoAsociado"
+              name="impuestoAsociado">
               <mat-radio-button class="example-radio-button" *ngFor="let impuesto of impuestos" [value]="impuesto">
                 {{impuesto}}
               </mat-radio-button>
@@ -153,9 +244,11 @@
         </div>
         <div class="add-bottom-padding">
           <label id="example-radio-group-label">Tipo de Pago</label>
-          <mat-radio-group aria-labelledby="example-radio-group-label"
-          class="example-radio-group"
-          [(ngModel)]="impuestosAsociados">
+          <mat-radio-group 
+              aria-labelledby="example-radio-group-label"
+              class="example-radio-group"
+              [(ngModel)]="proveedorNuevo.tipoPago"
+              name="tipoPago">
             <mat-radio-button class="example-radio-button" *ngFor="let pago of pagos" [value]="pago">
               {{pago}}
             </mat-radio-button>
@@ -182,11 +275,11 @@
                 <th><button type="button" class="btn btn-primary" (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
               </tr>-->
               <tr>
-                <th><input type="text"    class="form-control" id="entidad"          name="entidad"     placeholder="Entidad"></th>
-                <th><input type="number"  class="form-control" id="nro_cuenta"     name="nro_cuenta"  placeholder="N° Cuenta"></th>
-                <th><input type="number"  class="form-control" id="CCI"                  name="CCI"         placeholder="CCI"></th>
-                <th><input type="text"    class="form-control" id="tipo_cuenta"   name="tipo_cuenta" placeholder="Tipo de Cuenta"></th>
-                <th><input type="text"    class="form-control" id="moneda"             name="moneda"      placeholder="Moneda"></th>
+                <th><input type="text"    class="form-control" id="entidad" [(ngModel)]="cuentaBancaria.entidad" name="entidad"     placeholder="Entidad"></th>
+                <th><input type="number"  class="form-control" id="nro_cuenta" [(ngModel)]="cuentaBancaria.numCuenta"    name="nro_cuenta"  placeholder="N° Cuenta"></th>
+                <th><input type="number"  class="form-control" id="CCI" [(ngModel)]="cuentaBancaria.cci" name="CCI"         placeholder="CCI"></th>
+                <th><input type="text"    class="form-control" id="tipo_cuenta" [(ngModel)]="cuentaBancaria.tipoCuenta"   name="tipo_cuenta" placeholder="Tipo de Cuenta"></th>
+                <th><input type="text"    class="form-control" id="moneda" [(ngModel)]="cuentaBancaria.moneda" name="moneda"      placeholder="Moneda"></th>
                 <th><button type="button" class="btn btn-primary" (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
               </tr>
             </thead>
@@ -210,11 +303,11 @@
     <mat-form-field appearance="outline">
         <mat-label>Comentario   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-label>
-        <textarea matNativeControl></textarea>
+        <textarea matNativeControl [(ngModel)]="proveedorNuevo.comentarios" name="comentarios"></textarea>
       </mat-form-field>
   </div>
   <div>
     <button mat-button >Cancelar</button>
-    <button mat-flat-button color="primary">Guardar</button>
+    <button mat-flat-button color="primary" (click)='create()'>Guardar</button>
   </div>
 </mat-dialog-actions>

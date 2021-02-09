@@ -45,7 +45,7 @@ export class ProveedoresComponent implements OnInit  {
   }
 
   //CABECERA
-  displayedColumns: string[] = ['id', 'ruc_dni', 'razon_name'];
+  displayedColumns: string[] = ['select','id', 'ruc_dni', 'razon_name'];
   dataSource = new MatTableDataSource<ProveedoresList>(DATA);
   selection = new SelectionModel<ProveedoresList>(true, []);
 

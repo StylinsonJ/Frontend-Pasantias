@@ -28,6 +28,11 @@ import { RrhhComponent } from './modulos/rrhh/rrhh.component';
 
 import { ProveedoresService } from './services/maestro/proveedores/proveedores.service';
 import { ProveeedorComponent } from './modulos/maestro/proveedores/proveeedor/proveeedor.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+// External
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -54,10 +59,13 @@ import { ProveeedorComponent } from './modulos/maestro/proveedores/proveeedor/pr
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     MaterialModule,
     DefaultModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [ProveedoresService, interceptorProvider],
   bootstrap: [AppComponent]
