@@ -14,6 +14,7 @@ import { PersonaContacto } from 'src/app/componentes/maestro/persona-contacto';
 import { CuentaBancaria } from 'src/app/componentes/maestro/cuenta-bancaria';
 import { ProveedoresService } from 'src/app/services/maestro/proveedores/proveedores.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 export interface ProveedoresList {
   id: number;
@@ -65,7 +66,7 @@ export class ProveeedorComponent implements OnInit {
             this.proveedorNuevo.codigo = identificador+1 < 10 ? "PR000"+(identificador+1) :
             identificador+1 < 100 ? "PR00"+(identificador+1) : 
             identificador+1 < 1000 ? "PR0"+(identificador+1) : 
-            identificador.toString() 
+            (identificador+1).toString() 
       );
 
       // this.personaContacto[0] = new PersonaContacto();
@@ -142,8 +143,8 @@ export class ProveeedorComponent implements OnInit {
     public create():void{
       this.proveedorService.create(this.proveedorNuevo, this.personaContacto, this.cuentaBancaria).subscribe(
         proveedor => { 
-          // this.router.navigate(['/maestro'])
           this.onClose();
+          // this.router.navigate(['/maestro'])
           // swal('Nuevo Cliente', `El cliente ${proveedor.nombre} ha sido creado con éxito`, 'success')
         }
       )
