@@ -1,0 +1,145 @@
+<div mat-dialog-title class="detalle">
+    <div>
+      <h4><b>Registro: CL0001 </b></h4>
+    </div>
+    <div  align="end">
+      <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+    </div>
+  </div>
+  <hr>
+  <div mat-dialog-content>
+    <form>
+        <mat-grid-list cols="2" rowHeight="120px" style="margin-bottom: 10px;">
+            <mat-grid-tile>
+            <div class="controles-container">
+                <!-- RUC-DNI-->
+                <mat-form-field> 
+                <input  matInput       
+                        name="rucDni"       placeholder="RUC/DNI">
+                </mat-form-field>
+                <!-- RAZON SOCIAL-->
+                <mat-form-field>
+                <input  matInput
+                        name="razonSocial"  placeholder="Razón Social">
+                </mat-form-field>   
+            </div>
+            </mat-grid-tile>  
+            <mat-grid-tile>
+            <div class="controles-container">
+                <mat-form-field>
+                <!-- FECHA DE INICIO-->
+                <mat-label>Fecha de inicio</mat-label>
+                <input  matInput  type="date"
+                        name="fechaIni"     placeholder="Fecha de Inicio">
+                </mat-form-field>
+                <!-- RUBRO DE ACTIVIDAD -->
+                <mat-form-field>
+                <input  matInput 
+                        name="rubroActividad" placeholder="Rubro / Actividad Económica">
+                </mat-form-field>
+            </div>
+            </mat-grid-tile>  
+        </mat-grid-list>
+    
+        <mat-accordion style="margin-bottom: 10px;">
+        <mat-expansion-panel  (opened)="panelOpenState = true"
+                                (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+            <mat-panel-title> Direcciones </mat-panel-title>
+            <mat-panel-description>
+                <mat-icon>map</mat-icon>
+            </mat-panel-description>
+            </mat-expansion-panel-header>
+            <!-- DIRECCION 1-->
+            <mat-form-field style="text-align: center;width: 100%;">
+            <mat-label>Direccion 1</mat-label>
+            <input 
+                matInput name="direccion">
+            </mat-form-field>
+                <!-- PAIS-->
+                <mat-form-field  class="contacto">
+                    <mat-label> Pais</mat-label>
+                    <mat-select>
+                    <mat-option value="option">Option</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!-- DEPARTAMENTO-->
+                <mat-form-field  class="contacto">
+                    <mat-label> Departamento</mat-label>
+                    <mat-select>
+                    <mat-option value="option">Option</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!-- PROVINCIA-->
+                <mat-form-field  class="contacto">
+                    <mat-label> Provincia</mat-label>
+                    <mat-select>
+                    <mat-option value="option">Option</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!-- DISTRITO-->
+                <mat-form-field  class="contacto">
+                    <mat-label> Distrito</mat-label>
+                    <mat-select>
+                    <mat-option value="option">Option</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!-- UBIGEO-->
+                <mat-form-field  class="contacto">
+                    <mat-label> Ubigeo</mat-label>
+                    <mat-select>
+                    <mat-option value="option">Option</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-expansion-panel>
+        <!-- CONTACTO-->
+        <mat-expansion-panel  (opened)="panelOpenState = true"
+                                (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Contacto</mat-panel-title>
+                <mat-panel-description>
+                <mat-icon>account_circle</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+                <!-- NOMBRE-->
+                <mat-form-field class="contacto">
+                    <mat-label>Nombre</mat-label>
+                    <input  matInput name="nombre">
+                </mat-form-field>
+                <!-- CARGO-->
+                <mat-form-field class="contacto">
+                    <mat-label>Cargo</mat-label>
+                    <input  matInput name="cargo">
+                </mat-form-field>
+                <!-- TELEFONO-->
+                <mat-form-field  class="contacto">
+                    <mat-label>Telefono</mat-label>
+                    <input  matInput name="telefono">
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+                <!-- CORREO-->
+                <mat-form-field class="contacto">
+                    <mat-label>Correo </mat-label>
+                    <input matInput name="correo"
+                        placeholder="pat@example.com" 
+                       >
+                </mat-form-field>
+        </mat-expansion-panel>
+        </mat-accordion> 
+    </form>
+  </div>
+  <mat-dialog-actions class="acciones" align="end">
+    <div class="comentario" >
+      <!--COMENTARIO-->
+      <mat-form-field appearance="outline">
+          <mat-label>Comentario   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-label>
+          <textarea matNativeControl  name="comentarios"></textarea>
+        </mat-form-field>
+    </div>
+    <div>
+      <button mat-button >Cancelar</button>
+      <button mat-flat-button color="primary" >Guardar</button>
+    </div>
+  </mat-dialog-actions>
+  

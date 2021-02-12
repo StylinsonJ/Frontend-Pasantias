@@ -1,0 +1,7 @@
+ /* DETALLE*/
+ .detalle {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 20px 0px;
+    align-content: center;
+  }
