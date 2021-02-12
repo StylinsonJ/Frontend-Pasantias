@@ -1,60 +1,90 @@
+// External
+import { ToastrModule } from 'ngx-toastr';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { interceptorProvider } from './interceptors/prod-interceptor.service';
-import { MaterialModule } from './material.module';
-import { DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+//LOGIN-DEFAULT-PAGENOTFOUND
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 import { DefaultModule } from './layouts/default/default.module';
-
-import { ComprasComponent } from './modulos/home/compras/compras.component';
-import { GastosComponent } from './modulos/home/gastos/gastos.component';
-import { VentasComponent } from './modulos/home/ventas/ventas.component';
-import { ClientesComponent } from './modulos/maestro/clientes/clientes.component';
-import { ProveedoresComponent } from './modulos/maestro/proveedores/proveedores.component';
-import { BancosMaestroComponent } from './modulos/maestro/bancos-maestro/bancos-maestro.component';
-import { BancosFinanzasComponent } from './modulos/finanzas/bancos-finanzas/bancos-finanzas.component';
-import { AlmacenComponent } from './modulos/almacen/almacen.component';
-import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
-import { HomeComponent } from './modulos/home/home.component';
-import { MaestroComponent } from './modulos/maestro/maestro.component';
-import { RrhhComponent } from './modulos/rrhh/rrhh.component';
-
+//Material Angular
+import { MaterialModule } from './material.module';
+//Modulos
+//import { ModulosModule } from './modulos.module';
+//Services
 import { ProveedoresService } from './services/maestro/proveedores/proveedores.service';
-import { ProveeedorComponent } from './modulos/maestro/proveedores/proveeedor/proveeedor.component';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
-// External
-import { ToastrModule } from 'ngx-toastr';
-
+//Modulos
+         //Maestro
+         import { MaestroComponent } from './modulos/maestro/maestro.component';
+         import { ClientesComponent } from './modulos/maestro/clientes/clientes.component';
+              import { ClienteComponent } from './modulos/maestro/clientes/cliente/cliente.component';
+         import { ProveedoresComponent } from './modulos/maestro/proveedores/proveedores.component';
+             import { ProveeedorComponent } from './modulos/maestro/proveedores/proveeedor/proveeedor.component';
+         import { BancosMaestroComponent } from './modulos/maestro/bancos-maestro/bancos-maestro.component';
+               //Finanzas
+     import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
+         import { BancosFinanzasComponent } from './modulos/finanzas/bancos-finanzas/bancos-finanzas.component';
+         import { PagosComponent } from './modulos/finanzas/pagos/pagos.component';
+         import { CobrosComponent } from './modulos/finanzas/cobros/cobros.component';
+               //Almacen
+     import { AlmacenComponent } from './modulos/almacen/almacen.component';
+         import { SucursalComponent } from './modulos/almacen/sucursal/sucursal.component';
+         import { EntradaComponent } from './modulos/almacen/entrada/entrada.component';
+         import { ProductosComponent } from './modulos/almacen/productos/productos.component';
+               //RRHH
+     import { RrhhComponent } from './modulos/rrhh/rrhh.component';
+               //Compras
+     import { ComprasComponent } from './modulos/compras/compras.component';
+     import { CompraComponent } from './modulos/compras/compra/compra.component';
+     import { CompraListComponent } from './modulos/compras/compra-list/compra-list.component';
+   
+               //Ventas
+     import { VentasComponent } from './modulos/ventas/ventas.component';
+               //Gastos
+     import { GastosComponent } from './modulos/gastos/gastos.component';
+               //Tablero
+      import { TableroComponent } from './modulos/tablero/tablero.component';
+import { ContactoComponent } from './modulos/compras/compra/contacto/contacto.component';
+ 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PageNotFoundComponent,
+ //   ModulosModule,
 
     AlmacenComponent,
-    FinanzasComponent,
-    HomeComponent,
-    MaestroComponent,
-    RrhhComponent,
+    EntradaComponent,
+    ProductosComponent,
+    SucursalComponent,
 
+    FinanzasComponent,
+    BancosFinanzasComponent,
+    PagosComponent,
+    CobrosComponent,
+
+    MaestroComponent,
     ClientesComponent,
     ProveedoresComponent,
     ProveeedorComponent,
-
     BancosMaestroComponent,
-    BancosFinanzasComponent,
+
+    RrhhComponent,
     ComprasComponent,
-    GastosComponent,
+    CompraComponent,
+    CompraListComponent,
     VentasComponent,
+    GastosComponent,
+    TableroComponent,
+    CompraComponent,
+    ClienteComponent,
+    ContactoComponent,
   ],
   imports: [
     BrowserModule,

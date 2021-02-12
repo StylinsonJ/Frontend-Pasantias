@@ -1,16 +1,24 @@
 .normal-form{
-  margin: 20px;
+  margin-top: 3%;
+  margin-left: 10%;
+  margin-right: 10%;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 60px 0px;
 }
 
 /* Busqueda - Tabla*/
-table {
-  width: 100%;
+table  {
+  width: 80%;
+}
+
+.mat-paginator{
+  width: 80%;
 }
 
 .mat-form-field {
   font-size: 14px;
-  width: 300px;
-  margin-left: 10%;
+  width: 400px;
 }
 
 /* Excel*/
@@ -21,4 +29,5 @@ table {
 td, th {
   width: 25%;
 }
+
 

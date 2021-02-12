@@ -26,6 +26,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule} from '@angular/material/expansion';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatSortModule} from '@angular/material/sort';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
     imports: [
@@ -55,7 +56,8 @@ import { MatSortModule} from '@angular/material/sort';
         HttpClientModule,
         MatExpansionModule,
         MatDialogModule,
-        MatSortModule
+        MatSortModule,
+        MatSlideToggleModule
     ],
     exports:[
         MatButtonModule,
@@ -83,7 +85,8 @@ import { MatSortModule} from '@angular/material/sort';
         HttpClientModule,
         MatExpansionModule,
         MatDialogModule,
-        MatSortModule
+        MatSortModule,
+        MatSlideToggleModule
     ]
 })
 export class MaterialModule {}

@@ -1,57 +1,104 @@
-<mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #drawer class="sidenav" fixedInViewport
-        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-        [mode]="(isHandset$ | async) ? 'over' : 'side'"
-        [opened]="(isHandset$ | async) === false"
+<mat-sidenav-container class="example-container" autosize>
+  <mat-sidenav #sidenav class="example-sidenav" 
+    mode="side" opened="true" 
+    (mouseenter)="mouseenter()" 
+    (mouseleave)="mouseleave()"
     >
-  
-      <mat-nav-list>
-        <div class="perfil-card" >
-            <div class="perfil">
-              <img src="https://www.mibeatriz.com.pe/img/logo.png"  >
-            </div>
-            <br>
-            <div>
-              <mat-icon>portrait</mat-icon> Administrador
-            </div>
-            <br>
-        </div>
-      
-        <mat-divider></mat-divider>
-  
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/home">
-          <mat-icon>home</mat-icon>Home
-        </a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/maestro">
-          <mat-icon></mat-icon>Maestro
-        </a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/almacen">
-          <mat-icon></mat-icon>Almacen
-        </a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/finanzas">
-          <mat-icon></mat-icon>Finanzas
-        </a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/rrhh">
-          <mat-icon></mat-icon>RR HH
-        </a>
-        <a mat-list-item *ngIf="isLogged" (click)="onLogOut()">
-          <mat-icon>exit_to_app</mat-icon>logout
-        </a> 
-      </mat-nav-list>
-    </mat-sidenav>
     
-    <mat-sidenav-content>
-      <mat-toolbar style="background-color: #3A63A7;  box-shadow: 2px 2px 5px #999;">
-        <button
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()"
-          *ngIf="isHandset$ | async">
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-        </button>
-      </mat-toolbar>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+    <mat-nav-list>
+
+      <div (click)="isExpanded = !isExpanded">
+        <mat-list-item style="margin-top: 30px; margin-bottom: 30px;"> 
+          <div class="perfil-card"
+           *ngIf="isExpanded ||  isShowing">
+            <div class="perfil">
+              <img src="https://www.mibeatriz.com.pe/img/logo.png">
+            </div>
+          </div>
+        </mat-list-item>
+      </div>
+      
+      
+
+      <mat-list-item routerLinkActive="list-item-active" routerLink="/tablero" style="color: white;">
+        <span class="full-width" *ngIf="isExpanded ||  isShowing"> Tablero
+        </span>
+        <mat-icon mat-list-icon>dashboard</mat-icon>
+      </mat-list-item>
+
+      <mat-list-item routerLinkActive="list-item-active" routerLink="/maestro" style="color: white;">
+        <span class="full-width" *ngIf="isExpanded ||  isShowing"> Maestro
+        </span>
+        <mat-icon mat-list-icon svgIcon="maestro_icon"></mat-icon>
+      </mat-list-item>
+
+      <mat-list-item routerLinkActive="list-item-active" routerLink="/gastos" style="color: white;">
+        <span class="full-width" *ngIf="isExpanded ||  isShowing"> Gastos
+        </span>
+        <mat-icon mat-list-icon svgIcon="gastos_icon"></mat-icon>
+      </mat-list-item>
+
+      <mat-list-item routerLinkActive="list-item-active" routerLink="/ventas" style="color: white;">
+        <span class="full-width" *ngIf="isExpanded ||  isShowing"> Ventas
+        </span>
+        <mat-icon mat-list-icon svgIcon="ventas_icon"></mat-icon>
+      </mat-list-item>
+
+      <mat-list-item routerLinkActive="list-item-active" routerLink="/compras" style="color: white;">
+        <span class="full-width" *ngIf="isExpanded ||  isShowing"> Compras
+        </span>
+        <mat-icon mat-list-icon svgIcon="compras_icon"></mat-icon>
+      </mat-list-item>
+
+      <mat-list-item routerLinkActive="list-item-active" routerLink="/almacen" style="color: white;">
+        <span class="full-width" *ngIf="isExpanded ||  isShowing"> Almacen
+        </span>
+        <mat-icon mat-list-icon svgIcon="almacen_icon"></mat-icon>
+      </mat-list-item>
+
+      <mat-list-item routerLinkActive="list-item-active" routerLink="/finanzas" style="color: white;">
+        <span class="full-width" *ngIf="isExpanded ||  isShowing"> Finanzas
+        </span>
+        <mat-icon mat-list-icon svgIcon="finanzas_icon"></mat-icon>
+      </mat-list-item>
+
+      <mat-list-item routerLinkActive="list-item-active" routerLink="/rrhh" style="color: white;">
+        <span class="full-width" *ngIf="isExpanded ||  isShowing"> RR HH
+        </span>
+        <mat-icon mat-list-icon>groups</mat-icon>
+      </mat-list-item>
+
+      <mat-list-item style="color: white;" *ngIf="isLogged" (click)="onLogOut()">
+        <span class="full-width" *ngIf="isExpanded ||  isShowing"> Cerrar Sesion
+        </span>
+        <mat-icon mat-list-icon>exit_to_app</mat-icon>
+      </mat-list-item>
+          
+    </mat-nav-list> 
+  </mat-sidenav>
+
+  <router-outlet></router-outlet>
+</mat-sidenav-container>
+       
+<!-- 
+
+          <mat-list-item style="margin-top: 150px;">
+            <button mat-button [matMenuTriggerFor]="menu"  class="menu-item">
+              <mat-icon>portrait</mat-icon>Jassyra
+            </button>
+            <mat-menu #menu="matMenu" yPosition="above">
+              <button mat-menu-item>
+                <mat-icon>account_circle</mat-icon>
+                <span>perfil</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>settings</mat-icon>
+                <span>settings</span>
+              </button>
+              <button mat-menu-item *ngIf="isLogged" (click)="onLogOut()"> 
+                <mat-icon>exit_to_app</mat-icon>
+                <span>cerrar sesión</span>
+              </button>
+            </mat-menu>
+          </mat-list-item>-->
   
