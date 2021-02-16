@@ -1,4 +1,5 @@
 import { Proveedor } from "./proveedor";
+import { Cliente } from "./cliente";
 
 export class PersonaContacto {
     id: number | undefined;
@@ -7,4 +8,5 @@ export class PersonaContacto {
     telefono: string | undefined;
     correo: string | undefined;
     proveedorId: Proveedor | undefined;
+    clienteId: Cliente | undefined;
 }

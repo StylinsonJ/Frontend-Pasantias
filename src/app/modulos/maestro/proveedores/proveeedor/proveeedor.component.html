@@ -1,6 +1,6 @@
 <div mat-dialog-title class="detalle">
   <div>
-    <h4><b>Registro: PR0001 </b></h4>
+    <h4><b>Registro: PR0001</b></h4>
   </div>
   <div  align="end">
     <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
@@ -8,26 +8,26 @@
 </div>
 <hr>
 <div mat-dialog-content>
-<form>
+<form >
   <mat-grid-list cols="2" rowHeight="120px" style="margin-bottom: 10px;">
       <mat-grid-tile>
         <div class="controles-container">
-          <!-- RUC-DNI-->
-          <mat-form-field> 
+           <!-- RUC-DNI-->
+           <mat-form-field> 
             <input  matInput [(ngModel)]="proveedorNuevo.rucDni"       
                     name="rucDni"       placeholder="RUC/DNI">
           </mat-form-field>
-          <!-- RAZON SOCIAL-->
-          <mat-form-field>
+           <!-- RAZON SOCIAL-->
+           <mat-form-field>
             <input  matInput [(ngModel)]="proveedorNuevo.razonSocial"  
                     name="razonSocial"  placeholder="Razón Social">
-          </mat-form-field>   
+          </mat-form-field>  
         </div>
       </mat-grid-tile>  
       <mat-grid-tile>
         <div class="controles-container">
+          <!-- FECHA DE INICIO-->
           <mat-form-field>
-            <!-- FECHA DE INICIO-->
             <mat-label>Fecha de inicio</mat-label>
             <input  matInput [(ngModel)]="proveedorNuevo.fechaIni" type="date"
                     name="fechaIni"     placeholder="Fecha de Inicio">
@@ -45,17 +45,18 @@
     <mat-expansion-panel  (opened)="panelOpenState = true"
                           (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
-        <mat-panel-title> Direcciones </mat-panel-title>
+        <mat-panel-title>Direcciones</mat-panel-title>
         <mat-panel-description>
           <mat-icon>map</mat-icon>
         </mat-panel-description>
-    </mat-expansion-panel-header>
+      </mat-expansion-panel-header>
+  
       <!-- DIRECCION 1-->
       <mat-form-field style="text-align: center;width: 100%;">
         <mat-label>Direccion 1</mat-label>
         <input 
             matInput name="direccion"
-            [(ngModel)]="proveedorNuevo.direccion">
+            [(ngModel)]="direccion.direccion">
       </mat-form-field>
             <!-- PAIS-->
             <mat-form-field  class="contacto">
@@ -70,7 +71,7 @@
               <mat-select 
                   id="departamento" name="departamento"
                   (selectionChange)="onSelect($event.value)"
-                  [(ngModel)]="proveedorNuevo.departamento">
+                  [(ngModel)]="direccion.departamento">
                 <mat-option *ngFor="let reg of region" value={{reg.getCode()}}>
                   {{reg.getName()}}
                 </mat-option>
@@ -82,7 +83,7 @@
               <mat-select
                   id="provincia"  name="provincia"
                   (selectionChange)="filtroProvincia($event.value)"
-                  [(ngModel)]="proveedorNuevo.provincia"
+                  [(ngModel)]="direccion.provincia"
                   [disabled]="provincias==null">
                 <mat-option selected hidden value="">Selecciona una provincia</mat-option>
                 <mat-option *ngFor="let provincia of provincias" value={{provincia.getCode()}}>
@@ -96,7 +97,7 @@
               <mat-select
                   id="distrito" name="distrito" 
                   (selectionChange)="obtenerUbigeo($event.value)"
-                  [(ngModel)]="proveedorNuevo.distrito"
+                  [(ngModel)]="direccion.distrito"
                   [disabled]="distritos==null">
                 <mat-option selected hidden value="">Selecciona un distrito</mat-option>
                 <mat-option *ngFor="let distrito of distritos" value={{distrito.getCode()}}>
@@ -108,71 +109,43 @@
             <mat-form-field class="contacto">
               <mat-label>Ubigeo</mat-label>
               <input matInput name="ubigeo" 
-                  [(ngModel)]="proveedorNuevo.ubigeo" 
+                  [(ngModel)]="direccion.ubigeo" 
                   value="{{ubigeo}}" readonly>
             </mat-form-field>
-      <!-- DIRECCION 2-->
+            <br>
+      <!-- DIRECCION 2-->   
       <mat-form-field style="text-align: center;width: 100%;">
         <mat-label>Direccion 2</mat-label>
-        <input matInput name="direccionDos"
-            [(ngModel)]="proveedorNuevo.direccionDos"}>
+        <input matInput>
       </mat-form-field>
-            <!-- PAIS-->
+
             <mat-form-field  class="contacto">
-              <mat-label> Pais</mat-label>
+              <mat-label> Departamento</mat-label>
               <mat-select>
                 <mat-option value="option">Option</mat-option>
               </mat-select>
             </mat-form-field>
-            <!-- DEPARTAMENTO-->
-            <mat-form-field  class="contacto">
-              <mat-label> Departamento</mat-label>
-              <mat-select
-                  id="departamentoDos" name="departamentoDos"
-                  (selectionChange)="onSelect2($event.value)"
-                  [(ngModel)]="proveedorNuevo.departamentoDos">
-                  <mat-option *ngFor="let reg of region2" value={{reg.getCode()}}>
-                    {{reg.getName()}}
-                  </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <!-- PROVINCIA-->
-            <mat-form-field  class="contacto">
-              <mat-label> Provincia</mat-label>
-              <mat-select
-                  id="provinciaDos" name="provinciaDos" 
-                  (selectionChange)="filtroProvincia2($event.value)"
-                  [(ngModel)]="proveedorNuevo.provinciaDos"
-                  [disabled]="provincias2==null">
-                <mat-option selected hidden value="">Selecciona una provincia</mat-option>
-                <mat-option *ngFor="let provincia of provincias2" value={{provincia.getCode()}}>
-                  {{provincia.getName()}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <!-- DISTRITO-->
+
             <mat-form-field  class="contacto">
               <mat-label> Distrito</mat-label>
-              <mat-select
-                  id="distritoDos" name="distritoDos"
-                  (selectionChange)="obtenerUbigeo2($event.value)"
-                  [(ngModel)]="proveedorNuevo.distritoDos"
-                  [disabled]="distritos2==null">
-                <mat-option selected hidden value="">Selecciona un distrito</mat-option>
-                <mat-option *ngFor="let distrito of distritos2" value={{distrito.getCode()}}>
-                  {{distrito.getName()}}
-                </mat-option>
+              <mat-select>
+                <mat-option value="option">Option</mat-option>
               </mat-select>
             </mat-form-field>
-            <!-- UBIGEO-->
+
+            <mat-form-field  class="contacto">
+              <mat-label> Provincia</mat-label>
+              <mat-select>
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+
             <mat-form-field class="contacto">
               <mat-label>Ubigeo</mat-label>
-              <input matInput name="ubigeoDos" 
-                  [(ngModel)]="proveedorNuevo.ubigeoDos" 
-                  value="{{ubigeo2}}" readonly>
+              <input matInput>
             </mat-form-field>
     </mat-expansion-panel>
-    <!-- CONTACTO-->
+
     <mat-expansion-panel  (opened)="panelOpenState = true"
                           (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
@@ -181,67 +154,51 @@
             <mat-icon>account_circle</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
-            <!-- NOMBRE-->
+    
             <mat-form-field class="contacto">
               <mat-label>Nombre</mat-label>
-              <input  matInput name="nombre"
-                      [(ngModel)]="personaContacto.nombre">
+              <input matInput>
             </mat-form-field>
-            <!-- CARGO-->
             <mat-form-field class="contacto">
               <mat-label>Cargo</mat-label>
-              <input  matInput name="cargo"
-                      [(ngModel)]="personaContacto.cargo">
+              <input matInput>
             </mat-form-field>
-            <!-- TELEFONO-->
             <mat-form-field  class="contacto">
               <mat-label>Telefono</mat-label>
-              <input  matInput name="telefono"
-                      [(ngModel)]="personaContacto.telefono">
+              <!-- <example-tel-input formControlName="tel" required></example-tel-input>-->
+              <input matInput>
               <mat-icon matSuffix>phone</mat-icon>
             </mat-form-field>
-            <!-- CORREO-->
             <mat-form-field class="contacto">
               <mat-label>Correo </mat-label>
-              <input matInput name="correo"
-                  placeholder="pat@example.com" 
-                  [formControl]="email" 
-                  [(ngModel)]="personaContacto.correo" required>
+              <input matInput placeholder="pat@example.com" [formControl]="email" required>
               <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
     </mat-expansion-panel>
   </mat-accordion> 
-  
-  <div class="grid-but">
+    <div class="grid-but">
       <div class="grid">
-        <!-- IMPUESTOS ASOCIADOS-->
-        <div class="add-bottom-padding" >
-          <label id="example-radio-group-label">Impuestos Asociados</label>
-          <mat-radio-group 
-              aria-labelledby="example-radio-group-label"
+          <div class="add-bottom-padding" >
+            <label id="example-radio-group-label">Impuestos Asociados</label>
+            <mat-radio-group aria-labelledby="example-radio-group-label"
               class="example-radio-group"
-              [(ngModel)]="proveedorNuevo.impuestoAsociado"
-              name="impuestoAsociado">
-              <mat-radio-button class="example-radio-button" *ngFor="let impuesto of impuestos" [value]="impuesto">
-                {{impuesto}}
+              [(ngModel)]="impuestosAsociados">
+                <mat-radio-button class="example-radio-button" *ngFor="let impuesto of impuestos" [value]="impuesto">
+                  {{impuesto}}
+                </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="add-bottom-padding">
+            <label id="example-radio-group-label">Tipo de Pago</label>
+            <mat-radio-group aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            [(ngModel)]="impuestosAsociados">
+              <mat-radio-button class="example-radio-button" *ngFor="let pago of pagos" [value]="pago">
+                {{pago}}
               </mat-radio-button>
-          </mat-radio-group>
-        </div>
-        <!-- TIPO DE PAGO-->
-        <div class="add-bottom-padding">
-          <label id="example-radio-group-label">Tipo de Pago</label>
-          <mat-radio-group 
-              aria-labelledby="example-radio-group-label"
-              class="example-radio-group"
-              [(ngModel)]="proveedorNuevo.tipoPago"
-              name="tipoPago">
-            <mat-radio-button class="example-radio-button" *ngFor="let pago of pagos" [value]="pago">
-              {{pago}}
-            </mat-radio-button>
-          </mat-radio-group>
-        </div>
+            </mat-radio-group>
+          </div>
       </div> 
-        <!-- CUENRAS BANCARIAS-->
         <div style="margin-top: 10px;" >
           <p>Cuentas Bancarias</p>
           <table class="table" id="tableId">
@@ -254,13 +211,21 @@
                 <th>Moneda</th>
                 <th></th>
               </tr>
-              <tr>
-                <th><input type="text"    class="form-control" id="entidad"       [(ngModel)]="cuentaBancaria.entidad"          name="entidad"     placeholder="Entidad"></th>
-                <th><input type="number"  class="form-control" id="nro_cuenta"    [(ngModel)]="cuentaBancaria.numCuenta"        name="nro_cuenta"  placeholder="N° Cuenta"></th>
-                <th><input type="number"  class="form-control" id="CCI"           [(ngModel)]="cuentaBancaria.cci"              name="CCI"                      placeholder="CCI"></th>
-                <th><input type="text"    class="form-control" id="tipo_cuenta"   [(ngModel)]="cuentaBancaria.tipoCuenta"       name="tipo_cuenta" placeholder="Tipo de Cuenta"></th>
-                <th><input type="text"    class="form-control" id="moneda"        [(ngModel)]="cuentaBancaria.moneda"           name="moneda"      placeholder="Moneda"></th>
+              <!--<tr>
+                <th><input type="text"    class="form-control" id="entidad"      [(ngModel)]="entidad"     name="entidad"     placeholder="Entidad"></th>
+                <th><input type="number"  class="form-control" id="nro_cuenta"   [(ngModel)]="nro_cuenta"  name="nro_cuenta"  placeholder="N° Cuenta"></th>
+                <th><input type="number"  class="form-control" id="CCI"          [(ngModel)]="CCI"         name="CCI"         placeholder="CCI"></th>
+                <th><input type="text"    class="form-control" id="tipo_cuenta"  [(ngModel)]="tipo_cuenta" name="tipo_cuenta" placeholder="Tipo de Cuenta"></th>
+                <th><input type="text"    class="form-control" id="moneda"       [(ngModel)]="moneda"      name="moneda"      placeholder="Moneda"></th>
                 <th><button type="button" class="btn btn-primary" (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
+              </tr>-->
+              <tr>
+                <th><input type="text"    class="form-control" id="entidad"        name="entidad"     placeholder="Entidad"></th>
+                <th><input type="number"  class="form-control" id="nro_cuenta"     name="nro_cuenta"  placeholder="N° Cuenta"></th>
+                <th><input type="number"  class="form-control" id="CCI"            name="CCI"         placeholder="CCI"></th>
+                <th><input type="text"    class="form-control" id="tipo_cuenta"    name="tipo_cuenta" placeholder="Tipo de Cuenta"></th>
+                <th><input type="text"    class="form-control" id="moneda"         name="moneda"      placeholder="Moneda"></th>
+                <th><button mat-button color="primary"  (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
               </tr>
             </thead>
             <tbody>
@@ -270,25 +235,24 @@
                 <td>{{cuenta.CCI}}</td>
                 <td>{{cuenta.tipo_cuenta}}</td>
                 <td>{{cuenta.moneda}}</td>
-                <td><button type="button" class="btn btn-secondary btn-sm" (click)="deleteCuenta(cuenta.id)"> <mat-icon>delete</mat-icon></button></td>
+                <td><button mat-button type="button" class="btn btn-secondary btn-sm" (click)="deleteCuenta(cuenta.id)"> <mat-icon>delete</mat-icon></button></td>
               </tr>
             </tbody>
           </table>
         </div>
-  </div>
+     </div>
 </form>
 </div>
 <mat-dialog-actions class="acciones" align="end">
-  <div class="comentario" >
-    <!--COMENTARIO-->
+  <div class="comentario">
     <mat-form-field appearance="outline">
-        <mat-label>Comentario   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-label>Comentario<mat-icon>sentiment_very_satisfied</mat-icon>
         </mat-label>
-        <textarea matNativeControl [(ngModel)]="proveedorNuevo.comentarios" name="comentarios"></textarea>
-      </mat-form-field>
+        <textarea matNativeControl></textarea>
+    </mat-form-field>
   </div>
   <div>
-    <button mat-button >Cancelar</button>
-    <button mat-flat-button color="primary" (click)='create()'>Guardar</button>
+    <button mat-button >Limpiar</button>
+    <button mat-flat-button color="primary">Guardar <mat-icon>save</mat-icon></button>
   </div>
 </mat-dialog-actions>

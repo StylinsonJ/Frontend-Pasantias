@@ -1,16 +1,13 @@
 import { Component, ViewChild, OnInit} from '@angular/core';
+import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { SelectionModel} from '@angular/cdk/collections';
 
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
+import { MatTableDataSource} from '@angular/material/table';
+import { MatPaginator} from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
-import {MatDialog, MatDialogConfig,  MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {MatSort } from '@angular/material/sort';
-
-import {SelectionModel} from '@angular/cdk/collections';
-
-import {ProveeedorComponent } from './proveeedor/proveeedor.component';
-import { ProveedoresService } from '../../../services/maestro/proveedores/proveedores.service';
-
+import { ProveeedorComponent } from './proveeedor/proveeedor.component';
+import { ProveedoresService } from '../../../services/maestro/proveedores.service';
 
 export interface ProveedoresList {
   id: number;
@@ -37,7 +34,7 @@ export class ProveedoresComponent implements OnInit  {
   razon_name!: string;
 
   constructor(
-    public dialog: MatDialog,
+    public dialog: MatDialog
     ) {}
 
   ngOnInit() {
@@ -69,13 +66,11 @@ export class ProveedoresComponent implements OnInit  {
    openDialog(): void {
      
     const dialogRef = this.dialog.open(ProveeedorComponent, {
-      width: '100%',
-      data: {id: this.id, ruc_dni: this.ruc_dni, razon_name: this.razon_name}
+      width: '100%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.ruc_dni = result;
     });
   }
 

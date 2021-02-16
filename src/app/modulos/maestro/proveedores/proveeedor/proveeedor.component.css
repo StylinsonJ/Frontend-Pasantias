@@ -14,7 +14,10 @@
   }
   
   .contacto{
-    width: 170px;
+    margin-left: 5px;
+    width: 18%;
+    padding: 5px;  
+    /*width: 170px;*/
   }
   .example-headers-align .mat-form-field + .mat-form-field {
     margin-left: 8px;

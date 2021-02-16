@@ -1,15 +1,13 @@
 import { Component,ViewChild, OnInit } from '@angular/core';
+import { SelectionModel} from '@angular/cdk/collections';
 
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-
-import {MatDialog, MatDialogConfig,  MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {MatSort } from '@angular/material/sort';
-
-import {SelectionModel} from '@angular/cdk/collections';
+import { MatTableDataSource} from '@angular/material/table';
+import { MatPaginator} from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { ClienteComponent } from './cliente/cliente.component';
-import { ClientesService } from '../../../services/maestro/clientes/clientes.service';
+import { ClientesService } from '../../../services/maestro/clientes.service';
 
 export interface ClientesList {
   id: number;
@@ -68,12 +66,10 @@ export class ClientesComponent implements OnInit {
      
     const dialogRef = this.dialog.open(ClienteComponent, {
       width: '100%',
-      data: {id: this.id, ruc_dni: this.ruc_dni, razon_name: this.razon_name}
-    });
+   });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.ruc_dni = result;
     });
   }
 
