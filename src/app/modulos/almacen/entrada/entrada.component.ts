@@ -8,16 +8,17 @@ import {SelectionModel} from '@angular/cdk/collections';
 import { ExcelService} from '../../../services/excel/excel.service';
 
 export interface Ingreso {
-  id: string;
+  id: number;
   ruc_dni: number;
   razon_name: string;
   fec_doc: string;
-  estatus: string;
+  estado: string;
+  accion: string;
 }
 
 const DATA: Ingreso[] = [
-  {id:"RC0001", ruc_dni: 12345678901, razon_name: 'ABC',fec_doc: "08/02/2021", estatus: "pendiente"},
-  {id:"RC0002", ruc_dni: 700089012,   razon_name: 'DEF',fec_doc: "08/02/2011", estatus: "pendiente"},
+  {id:1, ruc_dni: 12345678901, razon_name: 'ABC',fec_doc: "08/02/2021",   estado: "pendiente", accion:""},
+  {id:2, ruc_dni: 700089012,   razon_name: 'DEF',fec_doc: "08/02/2011",   estado: "pendiente", accion:""},
 ];
 
 @Component({
@@ -27,11 +28,11 @@ const DATA: Ingreso[] = [
 })
 export class EntradaComponent implements OnInit {
 
-  id!: string;
+  id!: number;
   ruc_dni!: number;
   razon_name!: string;
   fec_doc!: string;
-  estatus!: string;
+  estado!: string;
 
   constructor(private excelService: ExcelService) { }
 
@@ -40,7 +41,7 @@ export class EntradaComponent implements OnInit {
   }
 
    //CABECERA
-   displayedColumns: string[] = ['select', 'id', 'ruc_dni', 'razon_name', 'fec_doc', 'estatus'];
+   displayedColumns: string[] = ['select', 'id', 'ruc_dni', 'razon_name', 'fec_doc', 'estado', 'accion'];
    dataSource = new MatTableDataSource<Ingreso>(DATA);
    selection = new SelectionModel<Ingreso>(true, []);
  

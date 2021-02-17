@@ -18,7 +18,9 @@ import { MaterialModule } from './material.module';
 //Modulos
 //import { ModulosModule } from './modulos.module';
 //Services
-import { ProveedoresService } from './services/maestro/proveedores/proveedores.service';
+import { ProveedoresService } from './services/maestro/proveedores.service';
+import { PersonaContactoService } from './services/maestro/persona-contacto.service';
+
 //Modulos
          //Maestro
          import { MaestroComponent } from './modulos/maestro/maestro.component';
@@ -51,7 +53,9 @@ import { ProveedoresService } from './services/maestro/proveedores/proveedores.s
                //Tablero
       import { TableroComponent } from './modulos/tablero/tablero.component';
 import { ContactoComponent } from './modulos/compras/compra/contacto/contacto.component';
- 
+import { DetalleComponent } from './modulos/almacen/productos/detalle/detalle.component';
+import { ClientesService } from './services/maestro/clientes.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,6 +89,7 @@ import { ContactoComponent } from './modulos/compras/compra/contacto/contacto.co
     CompraComponent,
     ClienteComponent,
     ContactoComponent,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +102,11 @@ import { ContactoComponent } from './modulos/compras/compra/contacto/contacto.co
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [ProveedoresService, interceptorProvider],
+  providers: [ProveedoresService,
+              PersonaContactoService,
+              ClientesService,
+              
+              interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

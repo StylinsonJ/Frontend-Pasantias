@@ -1,145 +1,175 @@
 <div mat-dialog-title class="detalle">
-    <div>
-      <h4><b>Registro: CL0001 </b></h4>
+    <div name="codigo" id="codigo">
+      <h4 ><b>Registro: {{clienteNuevo.codigo}} </b></h4>
     </div>
     <div  align="end">
       <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
     </div>
   </div>
   <hr>
-  <div mat-dialog-content>
-    <form>
-        <mat-grid-list cols="2" rowHeight="120px" style="margin-bottom: 10px;">
-            <mat-grid-tile>
-            <div class="controles-container">
-                <!-- RUC-DNI-->
-                <mat-form-field> 
-                <input  matInput       
-                        name="rucDni"       placeholder="RUC/DNI">
-                </mat-form-field>
-                <!-- RAZON SOCIAL-->
-                <mat-form-field>
-                <input  matInput
-                        name="razonSocial"  placeholder="Razón Social">
-                </mat-form-field>   
-            </div>
-            </mat-grid-tile>  
-            <mat-grid-tile>
-            <div class="controles-container">
-                <mat-form-field>
-                <!-- FECHA DE INICIO-->
-                <mat-label>Fecha de inicio</mat-label>
-                <input  matInput  type="date"
-                        name="fechaIni"     placeholder="Fecha de Inicio">
-                </mat-form-field>
-                <!-- RUBRO DE ACTIVIDAD -->
-                <mat-form-field>
-                <input  matInput 
-                        name="rubroActividad" placeholder="Rubro / Actividad Económica">
-                </mat-form-field>
-            </div>
-            </mat-grid-tile>  
-        </mat-grid-list>
-    
-        <mat-accordion style="margin-bottom: 10px;">
-        <mat-expansion-panel  (opened)="panelOpenState = true"
-                                (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-            <mat-panel-title> Direcciones </mat-panel-title>
-            <mat-panel-description>
-                <mat-icon>map</mat-icon>
-            </mat-panel-description>
-            </mat-expansion-panel-header>
-            <!-- DIRECCION 1-->
-            <mat-form-field style="text-align: center;width: 100%;">
-            <mat-label>Direccion 1</mat-label>
-            <input 
-                matInput name="direccion">
-            </mat-form-field>
-                <!-- PAIS-->
-                <mat-form-field  class="contacto">
-                    <mat-label> Pais</mat-label>
-                    <mat-select>
-                    <mat-option value="option">Option</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <!-- DEPARTAMENTO-->
-                <mat-form-field  class="contacto">
-                    <mat-label> Departamento</mat-label>
-                    <mat-select>
-                    <mat-option value="option">Option</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <!-- PROVINCIA-->
-                <mat-form-field  class="contacto">
-                    <mat-label> Provincia</mat-label>
-                    <mat-select>
-                    <mat-option value="option">Option</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <!-- DISTRITO-->
-                <mat-form-field  class="contacto">
-                    <mat-label> Distrito</mat-label>
-                    <mat-select>
-                    <mat-option value="option">Option</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <!-- UBIGEO-->
-                <mat-form-field  class="contacto">
-                    <mat-label> Ubigeo</mat-label>
-                    <mat-select>
-                    <mat-option value="option">Option</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </mat-expansion-panel>
-        <!-- CONTACTO-->
-        <mat-expansion-panel  (opened)="panelOpenState = true"
-                                (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>Contacto</mat-panel-title>
-                <mat-panel-description>
-                <mat-icon>account_circle</mat-icon>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-                <!-- NOMBRE-->
-                <mat-form-field class="contacto">
-                    <mat-label>Nombre</mat-label>
-                    <input  matInput name="nombre">
-                </mat-form-field>
-                <!-- CARGO-->
-                <mat-form-field class="contacto">
-                    <mat-label>Cargo</mat-label>
-                    <input  matInput name="cargo">
-                </mat-form-field>
-                <!-- TELEFONO-->
-                <mat-form-field  class="contacto">
-                    <mat-label>Telefono</mat-label>
-                    <input  matInput name="telefono">
-                    <mat-icon matSuffix>phone</mat-icon>
-                </mat-form-field>
-                <!-- CORREO-->
-                <mat-form-field class="contacto">
-                    <mat-label>Correo </mat-label>
-                    <input matInput name="correo"
-                        placeholder="pat@example.com" 
-                       >
-                </mat-form-field>
-        </mat-expansion-panel>
-        </mat-accordion> 
-    </form>
-  </div>
+    <div mat-dialog-content>
+         <form>
+                <mat-grid-list cols="2" rowHeight="120px" style="margin-bottom: 10px;">
+                    <mat-grid-tile>
+                    <div class="controles-container">
+                        <!-- RUC-DNI-->
+                        <mat-form-field> 
+                            <input  matInput [(ngModel)]="clienteNuevo.rucDni"       
+                            name="rucDni"       placeholder="RUC/DNI">
+                        </mat-form-field>
+                        <!-- RAZON SOCIAL-->
+                        <mat-form-field>
+                            <input  matInput [(ngModel)]="clienteNuevo.razonSocial"  
+                            name="razonSocial"  placeholder="Razón Social">
+                        </mat-form-field>   
+                    </div>
+                    </mat-grid-tile>  
+                    <mat-grid-tile>
+                    <div class="controles-container">
+                        <mat-form-field>
+                        <!-- FECHA DE INICIO-->
+                        <mat-label>Fecha de inicio</mat-label>
+                            <input  matInput [(ngModel)]="clienteNuevo.fechaIni" type="date"
+                                name="fechaIni"     placeholder="Fecha de Inicio">
+                            </mat-form-field>
+                        <!-- RUBRO DE ACTIVIDAD -->
+                        <mat-form-field>
+                            <input  matInput [(ngModel)]="clienteNuevo.rubroActividad"
+                            name="rubroActividad" placeholder="Rubro / Actividad Económica">
+                        </mat-form-field>
+                    </div>
+                    </mat-grid-tile>  
+                </mat-grid-list>
+            
+                <mat-accordion style="margin-bottom: 10px;">
+                    <mat-expansion-panel  (opened)="panelOpenState = true"
+                                            (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title> Direcciones </mat-panel-title>
+                            <mat-panel-description>
+                                <mat-icon>map</mat-icon>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                     
+                        <!-- DIRECCION 1-->
+                        <mat-form-field style="text-align: center;width: 100%;">
+                        <mat-label>Direccion 1</mat-label>
+                        <input 
+                            matInput name="direccion"
+                            [(ngModel)]="direccion.direccion">
+                        </mat-form-field>
+                        <!-- PAIS-->
+                        <mat-form-field  class="contacto">
+                            <mat-label> Pais</mat-label>
+                            <mat-select
+                                id="pais" name="pais"
+                                [(ngModel)]="direccion.pais">
+                                <mat-option value="option">Option</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- DEPARTAMENTO-->
+                        <mat-form-field  class="contacto">
+                            <mat-label> Departamento</mat-label>
+                            <mat-select 
+                                id="departamento" name="departamento"
+                                (selectionChange)="onSelect($event.value)"
+                                [(ngModel)]="direccion.departamento">
+                                <mat-option *ngFor="let reg of region" value={{reg.getCode()}}>
+                                {{reg.getName()}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- PROVINCIA-->
+                        <mat-form-field  class="contacto">
+                            <mat-label> Provincia</mat-label>
+                            <mat-select
+                                id="provincia"  name="provincia"
+                                (selectionChange)="filtroProvincia($event.value)"
+                                [(ngModel)]="direccion.provincia"
+                                [disabled]="provincias==null">
+                                <mat-option selected hidden value="">Selecciona una provincia</mat-option>
+                                <mat-option *ngFor="let provincia of provincias" value={{provincia.getCode()}}>
+                                {{provincia.getName()}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- DISTRITO-->
+                        <mat-form-field  class="contacto">
+                            <mat-label> Distrito</mat-label>
+                            <mat-select
+                                id="distrito" name="distrito" 
+                                (selectionChange)="obtenerUbigeo($event.value)"
+                                [(ngModel)]="direccion.distrito"
+                                [disabled]="distritos==null">
+                                <mat-option selected hidden value="">Selecciona un distrito</mat-option>
+                                <mat-option *ngFor="let distrito of distritos" value={{distrito.getCode()}}>
+                                {{distrito.getName()}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- UBIGEO-->
+                        <mat-form-field  class="contacto">
+                            <mat-label> Ubigeo</mat-label>
+                            <input matInput name="ubigeo" 
+                                [(ngModel)]="direccion.ubigeo" 
+                                value="{{ubigeo}}" readonly>
+                        </mat-form-field>
+                        <button mat-button color="primary"  (click)="addDir(this)"> <mat-icon>add</mat-icon></button>
+                    </mat-expansion-panel>
+                    <!-- CONTACTO-->
+                    <mat-expansion-panel  (opened)="panelOpenState = true"
+                                            (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Contacto</mat-panel-title>
+                            <mat-panel-description>
+                            <mat-icon>account_circle</mat-icon>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                            <!-- NOMBRE-->
+                            <mat-form-field class="contacto">
+                                <mat-label>Nombre</mat-label>
+                                <input  matInput name="nombre"
+                                        [(ngModel)]="personaContacto.nombre">
+                            </mat-form-field>
+                            <!-- CARGO-->
+                            <mat-form-field class="contacto">
+                                <mat-label>Cargo</mat-label>
+                                <input  matInput name="cargo"
+                                        [(ngModel)]="personaContacto.cargo">
+                            </mat-form-field>
+                        <!-- TELEFONO-->
+                        <mat-form-field  class="contacto">
+                            <mat-label>Telefono</mat-label>
+                            <input  matInput name="telefono"
+                                    [(ngModel)]="personaContacto.telefono">
+                            <mat-icon matSuffix>phone</mat-icon>
+                        </mat-form-field>
+                        <!-- CORREO-->
+                        <mat-form-field class="contacto">
+                            <mat-label>Correo </mat-label>
+                            <input  matInput name="correo"
+                                    [(ngModel)]="personaContacto.correo"
+                                    placeholder="pat@example.com">
+                        </mat-form-field>
+                    </mat-expansion-panel>
+                </mat-accordion> 
+                <br>
+            </form>
+           
+    </div>
   <mat-dialog-actions class="acciones" align="end">
     <div class="comentario" >
       <!--COMENTARIO-->
       <mat-form-field appearance="outline">
           <mat-label>Comentario   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
           </mat-label>
-          <textarea matNativeControl  name="comentarios"></textarea>
+          <textarea matNativeControl  name="comentarios"
+                    [(ngModel)]="clienteNuevo.comentarios"></textarea>
         </mat-form-field>
     </div>
     <div>
-      <button mat-button >Cancelar</button>
-      <button mat-flat-button color="primary" >Guardar</button>
+      <button mat-button >Limpiar</button>
+      <button mat-flat-button color="primary"  (click)="edit ? updateCliente() : saveNewCliente()">Guardar</button>
     </div>
   </mat-dialog-actions>
   
