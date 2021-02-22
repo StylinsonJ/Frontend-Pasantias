@@ -1,0 +1,80 @@
+  <div mat-dialog-title class="detalle">
+    <div name="codigo" id="codigo">
+      <h4 ><b>Nuevo Registro </b></h4>
+    </div>
+    <div  align="end">
+      <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+    </div>
+  </div>
+  <hr>
+
+<div mat-dialog-content>
+    <form>  
+        <div class="controles-container">
+            <!-- ENTIDAD O BANCO-->
+            <mat-form-field> 
+                <input  matInput      
+                name="entidad"       placeholder="Entidad">
+            </mat-form-field>
+            <!-- MONEDA-->
+            <mat-form-field>
+                <input  matInput
+                name="moneda"  placeholder="Moneda">
+            </mat-form-field>
+            <!-- TIPO DE CUENTA -->
+            <mat-form-field>
+                <input  matInput
+                name="cuenta"  placeholder="Tipo de Cuenta">
+            </mat-form-field>
+            <!-- FECHA DE APERTURA-->
+            <mat-form-field>
+                <mat-label>Fecha de Apertura</mat-label>
+                <input  matInput        type="date"
+                    name="fechaIni"     placeholder="Fecha de Inicio">
+            </mat-form-field>
+            <!-- N° CUENTA-->
+            <mat-form-field>
+                <input  matInput
+                name="num_cuenta"  placeholder="N° Cuenta">
+            </mat-form-field>   
+            <!-- CCI-->
+            <mat-form-field>
+                <input  matInput
+                name="CCI"  placeholder="CCI">
+            </mat-form-field>     
+            <!-- FUNCIONARIO -->
+            <mat-form-field>
+                <input  matInput
+                name="funcionario"  placeholder="Funcionario">
+                </mat-form-field>
+            <!-- AGENCIA DE APERTURA -->
+            <mat-form-field>
+                <input  matInput
+                name="ag_apertura"  placeholder="Agencia de Apertura">
+            </mat-form-field>
+            <!-- ESTADO-->
+            <mat-form-field>
+                <mat-label> Estado</mat-label>
+                <mat-select>
+                  <mat-option value="option">Activo</mat-option>
+                  <mat-option value="option">De baja</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+    
+<mat-dialog-actions class="acciones" align="end">
+    <div class="comentario">
+        <mat-form-field appearance="outline">
+            <mat-label>Comentario<mat-icon>sentiment_very_satisfied</mat-icon>
+            </mat-label>
+            <textarea matNativeControl></textarea>
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-button >Limpiar</button>
+        <button mat-flat-button color="primary">Guardar <mat-icon>save</mat-icon></button>
+    </div>
+</mat-dialog-actions>
+      

@@ -9,3 +9,12 @@ export class Cuenta {
    ) {}
 }
   
+export interface Banco {
+     id:number,
+     entidad: string,
+     nro_cuenta: number,
+     CCI: number,
+     tipo_cuenta: string,
+     moneda: string
+}
+

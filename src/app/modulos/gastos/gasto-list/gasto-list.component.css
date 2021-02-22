@@ -1,0 +1,33 @@
+.normal-form{
+    margin-top: 3%;
+    margin-left: 5%;
+    margin-right: 5%;
+   
+  }
+  
+  /* Busqueda - Tabla*/
+  table  {
+    width: 90%;
+    height: 100%;
+  }
+  
+  .mat-paginator{
+    width: 90%;
+    height: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 50%;
+  }
+  
+  /* Excel*/
+  .excel {
+    color: green;
+  }
+  /*
+  td, th {
+    width: 20%;
+  }
+  
+  */

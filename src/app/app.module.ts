@@ -55,6 +55,34 @@ import { PersonaContactoService } from './services/maestro/persona-contacto.serv
 import { ContactoComponent } from './modulos/compras/compra/contacto/contacto.component';
 import { DetalleComponent } from './modulos/almacen/productos/detalle/detalle.component';
 import { ClientesService } from './services/maestro/clientes.service';
+import { BancoComponent } from './modulos/maestro/bancos-maestro/banco/banco.component';
+import { GastoComponent } from './modulos/gastos/gasto/gasto.component';
+import { GastoListComponent } from './modulos/gastos/gasto-list/gasto-list.component';
+import { VentaComponent } from './modulos/ventas/venta/venta.component';
+import { VentaListComponent } from './modulos/ventas/venta-list/venta-list.component';
+import { ComprobanteComponent } from './modulos/ventas/comprobante/comprobante.component';
+import { StockComponent } from './modulos/ventas/stock/stock.component';
+import { DashboardComponent } from './modulos/dashboard/dashboard.component';
+import { CatalogosComponent } from './modulos/maestro/catalogos/catalogos.component';
+import { BienesComponent } from './modulos/maestro/catalogos/bienes/bienes.component';
+import { ServiciosComponent } from './modulos/maestro/catalogos/servicios/servicios.component';
+import { BieneComponent } from './modulos/maestro/catalogos/bienes/biene/biene.component';
+import { ServicioComponent } from './modulos/maestro/catalogos/servicios/servicio/servicio.component';
+import { OrganizacionComponent } from './modulos/maestro/organizacion/organizacion.component';
+import { UnidadesComponent } from './modulos/maestro/organizacion/unidades/unidades.component';
+import { AreasComponent } from './modulos/maestro/organizacion/areas/areas.component';
+import { TablasGeneralesComponent } from './modulos/maestro/tablas-generales/tablas-generales.component';
+import { UnidadMedidaComponent } from './modulos/maestro/tablas-generales/unidad-medida/unidad-medida.component';
+import { EstadosComponent } from './modulos/maestro/tablas-generales/estados/estados.component';
+import { ClasificacionComponent } from './modulos/maestro/tablas-generales/clasificacion/clasificacion.component';
+import { TipoPagoComponent } from './modulos/maestro/tablas-generales/tipo-pago/tipo-pago.component';
+import { TipoVentaComponent } from './modulos/maestro/tablas-generales/tipo-venta/tipo-venta.component';
+import { SalidaComponent } from './modulos/almacen/salida/salida.component';
+import { ConsultaStockComponent } from './modulos/almacen/consulta-stock/consulta-stock.component';
+import { ConsultaActivosComponent } from './modulos/almacen/consulta-activos/consulta-activos.component';
+import { OrdenTrasladoComponent } from './modulos/almacen/orden-traslado/orden-traslado.component';
+import { NuevaOtComponent } from './modulos/almacen/orden-traslado/nueva-ot/nueva-ot.component';
+import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-ot/consulta-ot.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +117,35 @@ import { ClientesService } from './services/maestro/clientes.service';
     CompraComponent,
     ClienteComponent,
     ContactoComponent,
-    DetalleComponent
+    DetalleComponent,
+    BancoComponent,
+    GastoComponent,
+    GastoListComponent,
+    VentaComponent,
+    VentaListComponent,
+    ComprobanteComponent,
+    StockComponent,
+    DashboardComponent,
+    CatalogosComponent,
+    BienesComponent,
+    ServiciosComponent,
+    BieneComponent,
+    ServicioComponent,
+    OrganizacionComponent,
+    UnidadesComponent,
+    AreasComponent,
+    TablasGeneralesComponent,
+    UnidadMedidaComponent,
+    EstadosComponent,
+    ClasificacionComponent,
+    TipoPagoComponent,
+    TipoVentaComponent,
+    SalidaComponent,
+    ConsultaStockComponent,
+    ConsultaActivosComponent,
+    OrdenTrasladoComponent,
+    NuevaOtComponent,
+    ConsultaOtComponent
   ],
   imports: [
     BrowserModule,

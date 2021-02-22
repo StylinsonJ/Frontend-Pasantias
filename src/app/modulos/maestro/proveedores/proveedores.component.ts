@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit} from '@angular/core';
-import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { SelectionModel} from '@angular/cdk/collections';
 
 import { MatTableDataSource} from '@angular/material/table';

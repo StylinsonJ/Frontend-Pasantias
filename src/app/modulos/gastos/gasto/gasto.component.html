@@ -1,0 +1,221 @@
+<div mat-dialog-title class="detalle">
+    <div>
+      <mat-icon>add_box</mat-icon><b>Gasto: GT0001</b>
+    </div>
+</div>
+
+<div class="formulario">
+  <form>
+    <mat-grid-list cols="2" rowHeight="240px" style="margin-bottom: 10px;">
+        <mat-grid-tile>
+          <div class="controles-container">
+            <!--TIPO DE GASTO -->
+            <mat-form-field>
+                <mat-label>Tipo de Gasto</mat-label>
+                <mat-select>
+                  <mat-option value="option">Option</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!--TIPO DE COMPROBANTE -->
+            <mat-form-field>
+                <mat-label>Tipo de Comprobante</mat-label>
+                <mat-select>
+                  <mat-option value="option">Option</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!--N° Serie -->
+            <mat-form-field>
+              <input matInput placeholder="N° Serie">
+            </mat-form-field>
+
+            <div class="bus_grid">
+                <div>
+                    <!--RUC/DNI -->
+                    <mat-form-field style="width: 90%;">
+                        <input matInput placeholder="RUC/DNI">
+                    </mat-form-field>
+                </div>
+                <div> 
+                    <!--Bucador de RUC/DNI-->
+                    <button mat-raised-button style="background-color: #dbbd77; width: 100%;" ><mat-icon>person_search</mat-icon>Buscar </button>               
+                </div>
+            </div>
+               
+          </div>
+        </mat-grid-tile>  
+        <mat-grid-tile>
+          <div class="controles-container">
+            <!--CONCEPTO -->
+            <mat-form-field>
+                <mat-label>Concepto</mat-label>
+                <mat-select>
+                  <mat-option value="option">Option</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!--Fecha de Comprobante -->
+            <mat-form-field >
+              <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Fecha de Comprobante">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <!--N° Comprobante -->
+            <mat-form-field >
+                <input matInput placeholder="N° Comprobante">
+            </mat-form-field>
+            <!--NOMBRE/RAZON SOCIAL -->
+            <mat-form-field>
+                <input matInput placeholder="Nombre/Razon Social">
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>  
+    </mat-grid-list> 
+
+    <mat-accordion style="margin-bottom: 10px;">
+      <mat-expansion-panel  (opened)="panelOpenState = false"
+                            (closed)="panelOpenState = true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Direcciones</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>map</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <!--DIRECCION-->
+              <mat-form-field class="contacto">
+                <mat-label>Direccion 1</mat-label>
+                <input matInput>
+              </mat-form-field>
+              <!--PAIS-->
+              <mat-form-field  class="contacto">
+                <mat-label> Pais</mat-label>
+                <mat-select>
+                  <mat-option value="option">Option</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!--DEPARTAMENTO-->
+              <mat-form-field  class="contacto">
+                <mat-label> Departamento</mat-label>
+                <mat-select>
+                  <mat-option value="option">Option</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!--DISTRITO-->
+              <mat-form-field  class="contacto">
+                <mat-label> Distrito</mat-label>
+                <mat-select>
+                  <mat-option value="option">Option</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!--PROVINCIA-->
+              <mat-form-field  class="contacto">
+                <mat-label> Provincia</mat-label>
+                <mat-select>
+                  <mat-option value="option">Option</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!--UBIGEO-->
+              <mat-form-field class="contacto">
+                <mat-label>Ubigeo</mat-label>
+                <input matInput>
+              </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion> 
+      <br>
+    <mat-grid-list cols="2" rowHeight="100px" style="margin-bottom: 10px;">
+      <mat-grid-tile>
+        <div class="controles-container">
+            <mat-form-field>
+                <mat-label>Tipo de Compra</mat-label>
+                <mat-select>
+                <mat-option value="option">Option</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!--Orden de Compra -->
+            <mat-form-field>
+                <input matInput placeholder="Orden de compra">
+            </mat-form-field> 
+        </div>
+      </mat-grid-tile>  
+      <mat-grid-tile>
+        <div class="controles-container">
+          <mat-form-field>
+            <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Fecha de Vencimiento">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Moneda</mat-label>
+            <mat-select>
+              <mat-option value="option">Option</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+  </mat-grid-list>
+    
+        <div style="margin-top: 5px; margin-left: 15px; margin-right: 15px;" >
+            <p><b>Detalle Producto</b></p>
+            <table class="table" id="tableId">
+              <thead class="thread-light">
+                <tr>
+                  <th>ID</th>
+                  <th>Producto</th>
+                  <th>Descripcion</th>
+                  <th>Cantidad </th>
+                  <th>Valor de Venta</th>
+                  <th>IGV</th>
+                  <th>Total</th>
+                  <th></th>
+                </tr>
+                
+                <tr>
+                  <th><input type="number"    class="form-control" id="id"           ></th>
+                  <th><input type="text"      class="form-control" id="producto"     ></th>
+                  <th><input type="text"      class="form-control" id="descripcion"  ></th>
+                  <th><input type="number"    class="form-control" id="cantidad"     ></th>
+                  <th><input type="number"    class="form-control" id="val_venta"    ></th>
+                  <th><input type="number"    class="form-control" id="IGV"          ></th>
+                  <th><input type="number"    class="form-control" id="total"        ></th>
+                  <th><button mat-button color="primary"  (click)="addProducto(this)"> <mat-icon>add</mat-icon></button></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let producto of (PRODUCTOS)" (click)="EditProducto(producto,this)">
+                  <td>{{producto.id}}</td>
+                  <td>{{producto.producto}}</td>
+                  <td>{{producto.descripcion}}</td>
+                  <td>{{producto.cantidad}}</td>
+                  <td>{{producto.val_venta}}</td>
+                  <td>{{producto.IGV}}</td>
+                  <td>{{producto.total}}</td>
+                  <td><button mat-button type="button" class="btn btn-secondary btn-sm" (click)="deleteProducto(producto.id)"> <mat-icon>delete</mat-icon></button></td>
+                </tr>
+              </tbody>
+            </table>
+            <hr>
+            <div class="totalcomp">
+              <div style="margin-left: 15px;">
+                <th>Total de Comprobante</th>
+              </div>
+              <div>
+                <td style="width: 500px;"><input  class="form-control" id="total_comp" ></td>
+              </div>
+            </div> 
+            <hr>      
+        </div>   
+  </form>
+  <div class="acciones">
+    <div class="comentario" >
+      <!--COMENTARIO-->
+      <mat-form-field appearance="outline">
+          <mat-label>Comentario   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-label>
+          <textarea matNativeControl  name="comentarios"></textarea>
+        </mat-form-field>
+    </div>
+    <div>
+      <button mat-button >Cancelar</button>
+      <button mat-flat-button color="primary" >Guardar</button>
+    </div>
+  </div>
+</div>
+  

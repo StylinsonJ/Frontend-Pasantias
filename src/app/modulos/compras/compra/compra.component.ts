@@ -1,5 +1,4 @@
-import { Component, ElementRef,Inject,OnInit, NgModule, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Component,OnInit } from '@angular/core';
 import { Producto } from '../../../intefaces/home/compra.class';
 import {FormControl,Validators} from '@angular/forms';
 //import { AngularFileUploaderComponent } from "angular-file-uploader";
@@ -13,21 +12,6 @@ export interface NuevoContacto {
   telefono: number;
   correo: string;
 };
-
-export interface ComprasList {
-  id: number;
-  num_cotizacion: string ;
-  tipo_comprobante: string;
-  fec_emision: string;
-  num_serie: string;
-  num_comprobante: string;
-  ruc_dni: number;
-  razon_name: string;
-  moneda: string;
-  val_venta: number;
-  IGV: number;
-  monto_tot: number
-}
 
 @Component({
   selector: 'app-compra',

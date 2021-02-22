@@ -1,0 +1,130 @@
+<div class="detalle">
+    <div>
+      <mat-icon>rule</mat-icon><b>Stock Almacen: VT0001</b>
+    </div>
+    <div>
+        <mat-icon>shopping_cart</mat-icon>
+    </div>
+</div>
+
+<div class="normal-form">
+    <div>
+        <mat-form-field style="margin-right: 10px;">
+            <input matInput  (keyup)="applyFilter($event)" >
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <button mat-flat-button  color="primary">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <div align="end">
+        <div class="totalcomp">
+            <div style="margin-left: 15px;">
+              <th>Factor</th>
+              <td style="width: 80px;"><input  class="form-control" id="total_comp" ></td>
+            </div>
+          </div> 
+    </div>
+  </div> 
+
+  <div  align="center">    
+    <table mat-table  [dataSource]="dataSource" matSort >
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+     
+      <!-- ID Column -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> N° Registro </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+       <!-- Codigo Column -->
+    <ng-container matColumnDef="codigo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </th>
+        <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+      </ng-container>
+
+       <!-- PRODUCTO Column -->
+       <ng-container matColumnDef="producto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> PRODUCTO </th>
+        <td mat-cell *matCellDef="let element"> {{element.producto}} </td>
+    </ng-container>
+
+    <!-- DESCRIPCION Column -->
+    <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>  DESCRIPCION </th>
+        <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+    </ng-container>
+
+      <!--  CODIGO INTERNO  -->
+    <ng-container matColumnDef="codigo_int">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>  CODIGO INTERNO </th>
+        <td mat-cell *matCellDef="let element"> {{element.codigo_int}} </td>
+    </ng-container>
+
+   <!--  MARCA  -->
+   <ng-container matColumnDef="marca">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>  MARCA </th>
+        <td mat-cell *matCellDef="let element"> {{element.marca}} </td>
+    </ng-container>
+
+    <!--  MODELO  -->
+   <ng-container matColumnDef="modelo">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>  MODELO </th>
+    <td mat-cell *matCellDef="let element"> {{element.modelo}} </td>
+</ng-container>
+
+<!--  SERIE  -->
+<ng-container matColumnDef="serie">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>  SERIE </th>
+    <td mat-cell *matCellDef="let element"> {{element.serie}} </td>
+</ng-container>
+  
+<!--  STOCK  -->
+<ng-container matColumnDef="cant_stock">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>  # STOCK </th>
+    <td mat-cell *matCellDef="let element"> {{element.cant_stock}} </td>
+</ng-container>
+
+<!--   COSTO UNI  -->
+<ng-container matColumnDef="costo_uni">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>  COSTO UNI </th>
+    <td mat-cell *matCellDef="let element"> {{element.costo_uni}} </td>
+</ng-container>
+
+<!--   # A VENDER -->
+<ng-container matColumnDef="venta_cant">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>  # A VENDER </th>
+    <td mat-cell *matCellDef="let element"> {{element.venta_cant}} </td>
+</ng-container>
+<!--   VALOR DE VENTA UNI -->
+<ng-container matColumnDef="venta_uni">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>  VALOR DE VENTA UNI </th>
+    <td mat-cell *matCellDef="let element"> {{element.venta_uni}} </td>
+</ng-container>
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          (click)="selection.toggle(row)">
+      </tr> 
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+  </div>
+  <div align="center">
+  <button mat-flat-button color="primary">Añadir</button>
+  </div>
