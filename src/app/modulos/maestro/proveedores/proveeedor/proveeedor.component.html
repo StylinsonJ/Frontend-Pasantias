@@ -185,7 +185,7 @@
     <div class="grid-but">
       <div class="grid">
           <div class="add-bottom-padding" >
-            <label id="example-radio-group-label">Impuestos Asociados</label>
+            <label id="example-radio-group-label"><b>Impuestos Asociados</b></label>
             <mat-radio-group aria-labelledby="example-radio-group-label"
               class="example-radio-group"
               [(ngModel)]="proveedorNuevo.impuestoAsociado"
@@ -196,7 +196,7 @@
             </mat-radio-group>
           </div>
           <div class="add-bottom-padding">
-            <label id="example-radio-group-label">Tipo de Pago</label>
+            <label id="example-radio-group-label"><b>Tipo de Pago</b></label>
             <mat-radio-group aria-labelledby="example-radio-group-label"
             class="example-radio-group"
             [(ngModel)]="proveedorNuevo.tipoPago"
@@ -208,7 +208,7 @@
           </div>
       </div> 
         <div style="margin-top: 10px;" >
-          <p>Cuentas Bancarias</p>
+          <p><b>Cuentas Bancarias</b></p>
           <table class="table" id="tableId">
             <thead class="thread-light">
               <tr>
@@ -219,14 +219,6 @@
                 <th>Moneda</th>
                 <th></th>
               </tr>
-              <!--<tr>
-                <th><input type="text"    class="form-control" id="entidad"      [(ngModel)]="entidad"     name="entidad"     placeholder="Entidad"></th>
-                <th><input type="number"  class="form-control" id="nro_cuenta"   [(ngModel)]="nro_cuenta"  name="nro_cuenta"  placeholder="N° Cuenta"></th>
-                <th><input type="number"  class="form-control" id="CCI"          [(ngModel)]="CCI"         name="CCI"         placeholder="CCI"></th>
-                <th><input type="text"    class="form-control" id="tipo_cuenta"  [(ngModel)]="tipo_cuenta" name="tipo_cuenta" placeholder="Tipo de Cuenta"></th>
-                <th><input type="text"    class="form-control" id="moneda"       [(ngModel)]="moneda"      name="moneda"      placeholder="Moneda"></th>
-                <th><button type="button" class="btn btn-primary" (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
-              </tr>-->
               <tr *ngFor="let cuenta of cuentaBancaria; let in=index">
                 <th><input type="text"    class="form-control" id="entidad"    [(ngModel)]="cuentaBancaria[in].entidad"      name="entidad{{in}}"    ></th>
                 <th><input type="number"  class="form-control" id="numCuenta"  [(ngModel)]="cuentaBancaria[in].numCuenta"    name="numCuenta{{in}}"  ></th>

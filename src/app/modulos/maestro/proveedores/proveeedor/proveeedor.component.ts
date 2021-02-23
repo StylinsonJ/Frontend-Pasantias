@@ -19,14 +19,14 @@ import { ProveedoresService } from 'src/app/services/maestro/proveedores.service
 })
 
 export class ProveeedorComponent implements OnInit {
+  //SELECT DIRECCION
   public region: Region[] = [];
   public provincias!: Province[] | null;
   public distritos!: District[] | null;
   public ubigeo:string | null = "";
 
-  // Clases
+  //CLASES
   public proveedorNuevo: Proveedor = new Proveedor();
-  // public personaContacto: PersonaContacto[] = [];
   public personaContacto: PersonaContacto[] = [{
     cargo: "",
     clienteId: null,
@@ -55,16 +55,14 @@ export class ProveeedorComponent implements OnInit {
       ubigeo:'',
       clienteId:null}];
 
-  //data se lleva ProveedoresComponents
+  //llamar funciones
   constructor(
     private proveedorService: ProveedoresService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     public dialogRef: MatDialogRef<ProveeedorComponent>) {
-      
     }
     
-    //cuenta_bancaria
     ngOnInit(): void{
       this.deleteCuenta(1);
     //-----------------------
@@ -124,8 +122,7 @@ export class ProveeedorComponent implements OnInit {
     public create():void{
       this.proveedorService.create(this.proveedorNuevo, this.personaContacto, this.cuentaBancaria, this.direccion).subscribe(
         proveedor => { 
-          this.onClose();
-           this.router.navigate(['/maestro/proveedores/add'])
+           this.router.navigate(['/maestro/proveedores'])
           // swal('Nuevo Cliente', `El cliente ${proveedor.nombre} ha sido creado con éxito`, 'success')
         }
       )
@@ -141,13 +138,12 @@ export class ProveeedorComponent implements OnInit {
     
     onClose(): void {
       this.dialogRef.close();
+      this.router.navigate(['/maestro/proveedores'])
     }
   
 
     //CUENTA BANCARIA
     id = 1;
-
-    
     CUENTAS = [ new Cuenta(this.id, '', 0 , 0, '','')];
     
     isUpdate = null;
