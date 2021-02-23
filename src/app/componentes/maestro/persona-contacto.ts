@@ -7,6 +7,6 @@ export class PersonaContacto {
     cargo: string | undefined;
     telefono: string | undefined;
     correo: string | undefined;
-    proveedorId: Proveedor | undefined;
-    clienteId: Cliente | undefined;
+    proveedorId: Proveedor | undefined | null;
+    clienteId: Cliente | undefined | null;
 }

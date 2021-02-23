@@ -31,11 +31,14 @@ export class ProveedoresService {
     );
   }
 
-  create(proveedor: Proveedor, personaContacto: PersonaContacto, cuentaBancaria: CuentaBancaria, direccion: Direccion): Observable<any> {
-    direccion.departamento = Region.instance(direccion.departamento).getName();
-    direccion.provincia = Province.instance(direccion.provincia).getName();
-    direccion.ubigeo = District.instance(direccion.distrito).getCode();
-    direccion.distrito = District.instance(direccion.distrito).getName();
+  create(proveedor: Proveedor, personaContacto: PersonaContacto[], cuentaBancaria: CuentaBancaria[], direccion: Direccion[]): Observable<any> {
+    
+    for(let i=0; i<direccion.length; i++) {
+      direccion[i].departamento = Region.instance(direccion[i].departamento).getName();
+      direccion[i].provincia = Province.instance(direccion[i].provincia).getName();
+      direccion[i].ubigeo = District.instance(direccion[i].distrito).getCode();
+      direccion[i].distrito = District.instance(direccion[i].distrito).getName();
+    }
 
     return this.http.post(this.urlEndPoint, {proveedor, personaContacto, cuentaBancaria, direccion}, {headers: this.httpHeaders}).pipe(
       map( (response: any) => response.proveedor as Proveedor)
