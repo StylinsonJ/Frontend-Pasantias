@@ -58,81 +58,108 @@
     <mat-expansion-panel  (opened)="panelOpenState = true"
                           (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
-        <mat-panel-title>Direcciones</mat-panel-title>
+        <mat-panel-title>Ubicacion</mat-panel-title>
         <mat-panel-description>
-          <mat-icon>map</mat-icon>
+          <mat-icon>location</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-  
-      <!-- DIRECCION 1-->
-      <mat-form-field style="text-align: center;width: 100%;">
-        <mat-label>Direccion 1</mat-label>
-        <input 
-            matInput 
-            name="direccion"
-            [(ngModel)]="direccion[0].direccion">
-      </mat-form-field>
-            <!-- PAIS-->
-            <mat-form-field  class="contacto">
-              <mat-label> Pais</mat-label>
-              <mat-select
-                [(ngModel)]="direccion[0].pais"
-                name="pais">
-                <mat-option value="option">Option</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <!-- DEPARTAMENTO-->
-            <mat-form-field  class="contacto">
-              <mat-label> Departamento</mat-label>
-              <mat-select 
-                  id="departamento" 
-                  name="departamento"
-                  (selectionChange)="onSelect($event.value)"
-                  [(ngModel)]="direccion[0].departamento">
-                <mat-option *ngFor="let reg of region" value={{reg.getCode()}}>
-                  {{reg.getName()}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <!-- PROVINCIA-->
-            <mat-form-field  class="contacto">
-              <mat-label> Provincia</mat-label>
-              <mat-select
-                  id="provincia"  
-                  name="provincia"
-                  (selectionChange)="filtroProvincia($event.value)"
-                  [(ngModel)]="direccion[0].provincia"
-                  [disabled]="provincias==null">
-                <mat-option selected hidden value="">Selecciona una provincia</mat-option>
-                <mat-option *ngFor="let provincia of provincias" value={{provincia.getCode()}}>
-                  {{provincia.getName()}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <!-- DISTRITO-->
-            <mat-form-field  class="contacto">
-              <mat-label> Distrito</mat-label>
-              <mat-select
-                  id="distrito" 
-                  name="distrito" 
-                  (selectionChange)="obtenerUbigeo($event.value)"
-                  [(ngModel)]="direccion[0].distrito"
-                  [disabled]="distritos==null">
-                <mat-option selected hidden value="">Selecciona un distrito</mat-option>
-                <mat-option *ngFor="let distrito of distritos" value={{distrito.getCode()}}>
-                  {{distrito.getName()}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <!-- UBIGEO-->
-            <mat-form-field class="contacto">
-              <mat-label>Ubigeo</mat-label>
-              <input 
-                  matInput 
-                  name="ubigeo" 
-                  [(ngModel)]="direccion[0].ubigeo" 
-                  value="{{ubigeo}}" readonly>
-            </mat-form-field>
+
+      <tr *ngFor="let direcciones of direccion; let in=index">
+               
+        <!-- DIRECCION 1-->
+          <mat-form-field style="text-align: center;width: 100%;">
+            <mat-label>Direccion</mat-label>
+            <input 
+                matInput 
+                name="direccion{{in}}"
+                id="direccion"
+                [(ngModel)]="direccion[in].direccion">
+          </mat-form-field>
+
+        <!-- PAIS-->
+          <mat-form-field  class="ubicacion">
+            <mat-label> Pais</mat-label>
+            <mat-select
+              [(ngModel)]="direccion[in].pais"
+              name="pais{{in}}"
+              id="pais">
+              <mat-option value="option">Option</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <!-- DEPARTAMENTO-->
+          <mat-form-field  class="ubicacion">
+            <mat-label> Departamento</mat-label>
+            <mat-select 
+                id="departamento" 
+                name="departamento{{in}}"
+                (selectionChange)="onSelect($event.value)"
+                [(ngModel)]="direccion[in].departamento">
+              <mat-option *ngFor="let reg of region" value={{reg.getCode()}}>
+                {{reg.getName()}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <!-- PROVINCIA-->
+          <mat-form-field  class="ubicacion">
+            <mat-label> Provincia</mat-label>
+            <mat-select
+                id="provincia"  
+                name="provincia{{in}}"
+                (selectionChange)="filtroProvincia($event.value)"
+                [(ngModel)]="direccion[in].provincia"
+                [disabled]="provincias==null">
+              <mat-option selected hidden value="">Selecciona una provincia</mat-option>
+              <mat-option *ngFor="let provincia of provincias" value={{provincia.getCode()}}>
+                {{provincia.getName()}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <!-- DISTRITO-->
+          <mat-form-field  class="ubicacion">
+            <mat-label> Distrito</mat-label>
+            <mat-select
+                id="distrito" 
+                name="distrito{{in}}" 
+                (selectionChange)="obtenerUbigeo($event.value)"
+                [(ngModel)]="direccion[in].distrito"
+                [disabled]="distritos==null">
+              <mat-option selected hidden value="">Selecciona un distrito</mat-option>
+              <mat-option *ngFor="let distrito of distritos" value={{distrito.getCode()}}>
+                {{distrito.getName()}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <!-- UBIGEO-->
+          <mat-form-field class="ubicacion">
+            <mat-label>Ubigeo</mat-label>
+            <input 
+                matInput 
+                name="ubigeo{{in}}" 
+                [(ngModel)]="direccion[in].ubigeo" 
+                value="{{ubigeo}}" readonly>
+          </mat-form-field>
+        
+        <span *ngIf="in==0">
+          <button mat-button color="primary" (click)="addDireccion(this)"><mat-icon>add</mat-icon></button>
+        </span>
+        <span *ngIf="in!=0">
+          <button mat-button type="button" class="btn btn-secondary btn-sm" (click)="deleteDireccion(in)" > 
+            <mat-icon>delete</mat-icon></button>
+        </span>
+        <hr>
+        
+      </tr>
+
+            <!--
+            
+              <div *ngIf="in!=0">
+                <button mat-button type="button" class="btn btn-secondary btn-sm" (click)="deleteCuenta(in)" > 
+                  <mat-icon>delete</mat-icon></button><div>
+                -->
             <br>
 
     </mat-expansion-panel>
@@ -233,22 +260,11 @@
                     <option value="dólar estadounidense">Dolar Estadounidense</option>
                     <option value="euro">Euro</option>
                   </select>
-
                 </th>
                 <th *ngIf="in==0"><button mat-button color="primary"  (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
                 <td *ngIf="in!=0"><button mat-button type="button" class="btn btn-secondary btn-sm" (click)="deleteCuenta(in)" > <mat-icon>delete</mat-icon></button></td>
               </tr>
             </thead>
-            <!-- <tbody>
-              <tr *ngFor="let cuenta of (CUENTAS)" (click)="EditCuenta(cuenta,this)">
-                <td>{{cuenta.entidad}}</td>
-                <td>{{cuenta.nro_cuenta}}</td>
-                <td>{{cuenta.CCI}}</td>
-                <td>{{cuenta.tipo_cuenta}}</td>
-                <td>{{cuenta.moneda}}</td>
-                <td><button mat-button type="button" class="btn btn-secondary btn-sm" (click)="deleteCuenta(cuenta.id)"> <mat-icon>delete</mat-icon></button></td>
-              </tr>
-            </tbody> -->
           </table>
         </div>
      </div>
