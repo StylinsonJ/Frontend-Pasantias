@@ -1,5 +1,34 @@
-<mat-tab-group animationDuration="0ms" >
-    <mat-tab  label="Proveedores"><app-proveedores></app-proveedores></mat-tab>
+<nav mat-tab-nav-bar class="cabecera">
+    <a mat-tab-link 
+       *ngFor="let link of navLinks"
+       (click)="activeLink = link"
+       [active]="activeLink == link"
+       >
+      {{link.label}}
+    </a>
+  </nav>
+ <!--  
+     <a mat-tab-link 
+       *ngFor="let link of navLinks"
+       [routerLink]="link.path"
+       routerLinkActive #rla="routerLinkActive"
+       [routerLinkActiveOptions]="{exact:true}"
+       [active]="rla.isActive"
+       [ngStyle]="{'background-color': rla.isActive? '#3A63A7':''}">
+      {{link.label}}
+    </a> 
+
+    mat-stretch-tabs
+<nav mat-tab-nav-bar backgroundColor="primary" animationDuration="0ms">
+    <a mat-tab-link routerLink="proveedores" >Proveedores</a>
+    <a mat-tab-link routerLink="clientes"    >Clientes</a>
+
     <mat-tab label="Clientes"><app-clientes></app-clientes></mat-tab>
     <mat-tab label="Bancos"><app-bancos-maestro></app-bancos-maestro></mat-tab>
-</mat-tab-group>
+    <mat-tab label="Catálogos"><app-catalogos></app-catalogos></mat-tab>
+    <mat-tab label="Organización"><app-organizacion></app-organizacion></mat-tab>
+    <mat-tab label="Tablas Generales"><app-tablas-generales></app-tablas-generales></mat-tab>
+--> 
+
+<router-outlet></router-outlet>
+

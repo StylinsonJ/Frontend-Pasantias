@@ -20,23 +20,33 @@ import { VentasComponent } from './modulos/ventas/ventas.component';
 import { TableroComponent } from './modulos/tablero/tablero.component';
 import { ProveeedorComponent } from './modulos/maestro/proveedores/proveeedor/proveeedor.component';
 import { ProveedoresComponent } from './modulos/maestro/proveedores/proveedores.component';
+import { BancosMaestroComponent } from './modulos/maestro/bancos-maestro/bancos-maestro.component';
+import { CatalogosComponent } from './modulos/maestro/catalogos/catalogos.component';
+import { OrganizacionComponent } from './modulos/maestro/organizacion/organizacion.component';
+import { TablasGeneralesComponent } from './modulos/maestro/tablas-generales/tablas-generales.component';
 
 const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path: '', component: DefaultComponent, 
     children: [
-      {path: '',        component: AlmacenComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+      {path: '',        component: TableroComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
       {path: 'tablero', component: TableroComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
       {path: 'maestro', component: MaestroComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
-        /*children: [
-          {path: 'proveedores',          component: ProveedoresComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'proveedores/add',      component: ProveeedorComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'proveedores/edit/:id', component: ProveeedorComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'clientes',             component: ClientesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'clientes/add',         component: ClienteComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'clientes/edit/:id',    component: ClienteComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}}
-        ]*/
+        children: [
+          {path: 'clientes',  component: ClientesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'proveedores', component: ProveedoresComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+              children: [
+                {path: 'add',   component: ProveeedorComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+                /* {path: 'edit/:id', component: ProveeedorComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}}, */  
+              ]
+          },
+          {path: 'bancos',          component: BancosMaestroComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'catalogos',       component: CatalogosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'organizacion',    component: OrganizacionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'tablas-generales', component: TablasGeneralesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+        ]
       },
+  
       {path: 'gastos',  component: GastosComponent,  canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
       {path: 'ventas',  component: VentasComponent,  canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
       {path: 'compras', component: ComprasComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},

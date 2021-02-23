@@ -17,8 +17,6 @@
           </div>
         </mat-list-item>
       </div>
-      
-      
 
       <mat-list-item routerLinkActive="list-item-active" routerLink="/tablero" style="color: white;">
         <span class="full-width" *ngIf="isExpanded ||  isShowing"> Tablero
@@ -69,15 +67,14 @@
       </mat-list-item>
 
       <mat-list-item style="color: white;" *ngIf="isLogged" (click)="onLogOut()">
-        <span class="full-width" *ngIf="isExpanded ||  isShowing"> Cerrar Sesion
+        <span class="full-width" *ngIf="isExpanded ||  isShowing"> Logout
         </span>
         <mat-icon mat-list-icon>exit_to_app</mat-icon>
       </mat-list-item>
           
     </mat-nav-list> 
   </mat-sidenav>
-
-  <router-outlet></router-outlet>
+ <router-outlet></router-outlet>
 </mat-sidenav-container>
        
 <!-- 

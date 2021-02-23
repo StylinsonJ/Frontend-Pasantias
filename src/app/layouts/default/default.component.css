@@ -5,11 +5,13 @@
   margin-bottom: 30px;
 }
 
+
+
 :host .perfil-card {
   text-align: center;
-  padding-left: 5%;
-  padding-right: 5%;
-  width: 150px;
+  padding-left: 2%;
+  padding-right: 2%;
+  width: 120px;
 } 
 
 :host .perfil img {
@@ -87,6 +89,7 @@ mat-icon {
 }
 .full-width {
   width: 100%;
+  font-size:  16px;
 }
 .menu-button {
   transition: 300ms ease-in-out;
