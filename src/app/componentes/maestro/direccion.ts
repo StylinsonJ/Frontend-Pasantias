@@ -1,5 +1,6 @@
 //import { Proveedor } from "./proveedor";
 import { Cliente } from "./cliente";
+import { Proveedor } from "./proveedor";
 
 export class Direccion{
     constructor (
@@ -10,7 +11,7 @@ export class Direccion{
         public provincia: string="",
         public distrito: string="",
         public ubigeo: string="",
-    //    proveedorId: Proveedor | undefined;
-        public clienteId: number | Cliente | undefined ,
+        // public proveedorId: Proveedor | undefined,
+        public clienteId: number | Cliente | null ,
     ){}
 }

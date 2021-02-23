@@ -27,9 +27,33 @@ export class ProveeedorComponent implements OnInit {
   // Clases
   public proveedorNuevo: Proveedor = new Proveedor();
   // public personaContacto: PersonaContacto[] = [];
-  public personaContacto: PersonaContacto = new PersonaContacto();
-  public cuentaBancaria: CuentaBancaria = new CuentaBancaria();
-  public direccion: Direccion = new Direccion(0,'', '', '','','','',0);
+  public personaContacto: PersonaContacto[] = [{
+    cargo: "",
+    clienteId: null,
+    correo: "",
+    id: 0,
+    nombre: "",
+    telefono: "",
+    proveedorId: null
+  }];
+  public cuentaBancaria: CuentaBancaria[] = [{
+    id:0,
+    cci: "",
+    entidad:"",
+    moneda: "",
+    numCuenta: "",
+    tipoCuenta: "",
+    proveedorId: null
+  }];
+  public direccion: Direccion[] = [{ 
+      id:0,
+      direccion:'', 
+      pais:'',
+      departamento:'',
+      provincia:'',
+      distrito:'',
+      ubigeo:'',
+      clienteId:null}];
 
   //data se lleva ProveedoresComponents
   constructor(
@@ -49,7 +73,7 @@ export class ProveeedorComponent implements OnInit {
             this.proveedorNuevo.codigo = identificador+1 < 10 ? "PR000"+(identificador+1) :
             identificador+1 < 100 ? "PR00"+(identificador+1) : 
             identificador+1 < 1000 ? "PR0"+(identificador+1) : 
-            identificador.toString() 
+            (identificador+1).toString() 
       );
 
       // this.personaContacto[0] = new PersonaContacto();
@@ -67,8 +91,8 @@ export class ProveeedorComponent implements OnInit {
     onSelect(id:string):void {
       if(id) {
         this.provincias = Region.instance(id).getProvincies().filter(provincia => provincia != null);
-        this.direccion.provincia = "";
-        this.direccion.distrito = "";
+        // this.direccion.provincia = "";
+        // this.direccion.distrito = "";
         this.distritos = null;
         this.ubigeo = null;
       }
@@ -77,7 +101,7 @@ export class ProveeedorComponent implements OnInit {
     filtroProvincia(id:string):void {
       if(id) {
         this.distritos = Province.instance(id).getDistricts().filter(distrito => distrito != null);
-        this.direccion.distrito = "";
+        // this.direccion.distrito = "";
         this.ubigeo = null
       }
     }
@@ -100,8 +124,8 @@ export class ProveeedorComponent implements OnInit {
     public create():void{
       this.proveedorService.create(this.proveedorNuevo, this.personaContacto, this.cuentaBancaria, this.direccion).subscribe(
         proveedor => { 
-          // this.router.navigate(['/maestro'])
           this.onClose();
+          // this.router.navigate(['/maestro'])
           // swal('Nuevo Cliente', `El cliente ${proveedor.nombre} ha sido creado con éxito`, 'success')
         }
       )
@@ -128,14 +152,23 @@ export class ProveeedorComponent implements OnInit {
     
     isUpdate = null;
     addCuenta(Entity:any){
-      if(this.isUpdate != null){
-        this.update(this.TempEdit, Entity)
-      }else{
-        this.id +=1;
-        const cuentaEntry = new Cuenta(Entity.id, Entity.entidad, Entity.nro_cuenta, Entity.CCI, Entity.tipo_cuenta, Entity.moneda);
-        this.CUENTAS.push(cuentaEntry);
-        this.resetCuenta(Entity);
-      }
+      // if(this.isUpdate != null){
+      //   this.update(this.TempEdit, Entity)
+      // }else{
+      //   this.id +=1;
+      //   const cuentaEntry = new Cuenta(Entity.id, Entity.entidad, Entity.nro_cuenta, Entity.CCI, Entity.tipo_cuenta, Entity.moneda);
+      //   this.CUENTAS.push(cuentaEntry);
+      //   this.resetCuenta(Entity);
+      // }
+      this.cuentaBancaria.push({
+        id:0,
+        cci: "",
+        entidad:"",
+        moneda: "",
+        numCuenta: "",
+        tipoCuenta: "",
+        proveedorId: null
+      });
     }
     
     
@@ -155,11 +188,12 @@ export class ProveeedorComponent implements OnInit {
       this.isUpdate = null;
     }
       deleteCuenta(id:any){
-        for(let i=0; i < this.CUENTAS.length; ++i){
-          if(this.CUENTAS[i].id === id){
-            this.CUENTAS.splice(i,1);
-          }
-        }
+        // for(let i=0; i < this.CUENTAS.length; ++i){
+        //   if(this.CUENTAS[i].id === id){
+        //     this.CUENTAS.splice(i,1);
+        //   }
+        // }
+        this.cuentaBancaria.splice(id, 1);
       }
       
       EditCuenta(Entity:any, Model:any){
