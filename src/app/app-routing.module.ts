@@ -33,6 +33,7 @@ const routes: Routes = [
       {path: 'tablero', component: TableroComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
       {path: 'maestro', component: MaestroComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
         children: [
+          {path: '',  redirectTo: '/maestro/proveedores', pathMatch: 'full'},
           {path: 'clientes',  component: ClientesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
           {path: 'proveedores', component: ProveedoresComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
               children: [
