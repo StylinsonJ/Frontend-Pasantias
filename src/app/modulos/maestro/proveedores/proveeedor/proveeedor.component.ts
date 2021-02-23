@@ -122,6 +122,7 @@ export class ProveeedorComponent implements OnInit {
     public create():void{
       this.proveedorService.create(this.proveedorNuevo, this.personaContacto, this.cuentaBancaria, this.direccion).subscribe(
         proveedor => { 
+          this.onClose();
            this.router.navigate(['/maestro/proveedores'])
           // swal('Nuevo Cliente', `El cliente ${proveedor.nombre} ha sido creado con éxito`, 'success')
         }
@@ -138,7 +139,6 @@ export class ProveeedorComponent implements OnInit {
     
     onClose(): void {
       this.dialogRef.close();
-      this.router.navigate(['/maestro/proveedores'])
     }
   
 
