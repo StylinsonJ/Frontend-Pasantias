@@ -1,6 +1,5 @@
 import { Component,OnInit} from '@angular/core';
 import { MatDialogRef} from '@angular/material/dialog';
-import { Cuenta } from '../../../../intefaces/maestro/cuentas_bancarias.interface';
 import { FormControl,Validators} from '@angular/forms';
 import { District, Region, Province } from "ubigeos";
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,6 +12,10 @@ import { CuentaBancaria } from 'src/app/componentes/maestro/cuenta-bancaria';
 import { ProveedoresService } from 'src/app/services/maestro/proveedores.service';
 import { CountryI } from 'src/app/intefaces/maestro/pais.interface';
 
+import { NotificationService } from 'src/app/services/notificaciones/notification.service';
+//INTERFACE
+import { Cuenta } from '../../../../intefaces/maestro/cuentas_bancarias.interface';
+import { Direcciones } from '../../../../intefaces/maestro/direcciones.interface';
 @Component({
   selector: 'app-proveeedor',
   templateUrl: './proveeedor.component.html',
@@ -66,13 +69,34 @@ export class ProveeedorComponent implements OnInit {
     private router: Router,
     public dialogRef: MatDialogRef<ProveeedorComponent>) {
     }
+  
+  //---------------------CHECK RADIO
+  impuestosAsociados!: string;
+  impuestos: string[] = ['IGV', 'ISC', 'Servicios', 'Otros'];
+
+  tiposPagos!: string;
+  pagos: string[] = ['Tarjeta de Crédito', 'Transferencia', 'Efectivo', 'Cheque','Otros'];
+
+  //----------------------EXPANSION DE DIRECCION Y DATOS PERSONALES
+  panelOpenState = false;
+
+  //----------------------EMAIL
+  email = new FormControl('', [Validators.required, Validators.email]);
+
+    getErrorMessage() {
+      if (this.email.hasError('required')) {
+        return 'You must enter a value';
+      }
+
+      return this.email.hasError('email') ? 'Correo no valido' : '';
+    }
     
     ngOnInit(): void{
 
       this.countries = this.proveedorService.getCountries();
 
       this.deleteCuenta(1);
-    //-----------------------
+    //-----------------------Codigo Proveedor
       this.proveedorService.getId().subscribe(
         identificador => 
             this.proveedorNuevo.codigo = identificador+1 < 10 ? "PR000"+(identificador+1) :
@@ -81,8 +105,7 @@ export class ProveeedorComponent implements OnInit {
             (identificador+1).toString() 
       );
 
-      // this.personaContacto[0] = new PersonaContacto();
-      // Para las regiones
+    //---------------------Para las regiones de Direccion
       for (let i=1; i<=25; i++) {
         if(i<10) {
           this.region[i] = Region.instance(`0${i}`);
@@ -91,7 +114,7 @@ export class ProveeedorComponent implements OnInit {
         }
       }
       this.region = this.region.filter(reg => reg != null);
-    }
+  }
 
     onSelectCountry(id:any):void {
       if(id === "Perú") {
@@ -104,8 +127,6 @@ export class ProveeedorComponent implements OnInit {
     onSelect(id:string):void {
       if(id) {
         this.provincias = Region.instance(id).getProvincies().filter(provincia => provincia != null);
-        // this.direccion.provincia = "";
-        // this.direccion.distrito = "";
         this.distritos = null;
         this.ubigeo = null;
       }
@@ -114,7 +135,6 @@ export class ProveeedorComponent implements OnInit {
     filtroProvincia(id:string):void {
       if(id) {
         this.distritos = Province.instance(id).getDistricts().filter(distrito => distrito != null);
-        // this.direccion.distrito = "";
         this.ubigeo = null
       }
     }
@@ -122,7 +142,14 @@ export class ProveeedorComponent implements OnInit {
     obtenerUbigeo(id:string):void {
       this.ubigeo = id;
     }
-    
+
+    //---------------------Cerrar dialogo
+    onClose(): void {
+      this.dialogRef.close();
+      this.router.navigate(['/maestro/proveedores'])
+    }
+
+    //---------------------CREATE Proveedor
     cargarProveedor(): void {
       this.activatedRoute.params.subscribe(params => {
         let id = params['id']
@@ -139,38 +166,24 @@ export class ProveeedorComponent implements OnInit {
         proveedor => { 
           this.onClose();
            this.router.navigate(['/maestro/proveedores'])
-          // swal('Nuevo Cliente', `El cliente ${proveedor.nombre} ha sido creado con éxito`, 'success')
         }
       )
     }
   
+    //---------------------EDIT Proveedor
     updated(): void {
       this.proveedorService.update(this.proveedorNuevo).subscribe(
         json => {
-          this.router.navigate(['/maestro'])
+          this.router.navigate(['/maestro/proveedores'])
           // swal('Cliente Actualizado', `${json.mensaje}: ${json.cliente.nombre}`, 'success')
         })
     }
     
-    onClose(): void {
-      this.dialogRef.close();
-    }
-  
-
-    //CUENTA BANCARIA
-    id = 1;
-    CUENTAS = [ new Cuenta(this.id, '', 0 , 0, '','')];
-    
+    //--------------------CUENTA BANCARIA
+    idCuenta = 1;
+    CUENTAS = [ new Cuenta(this.idCuenta, '', 0 , 0, '','')];
     isUpdate = null;
     addCuenta(Entity:any){
-      // if(this.isUpdate != null){
-      //   this.update(this.TempEdit, Entity)
-      // }else{
-      //   this.id +=1;
-      //   const cuentaEntry = new Cuenta(Entity.id, Entity.entidad, Entity.nro_cuenta, Entity.CCI, Entity.tipo_cuenta, Entity.moneda);
-      //   this.CUENTAS.push(cuentaEntry);
-      //   this.resetCuenta(Entity);
-      // }
       this.cuentaBancaria.push({
         id:0,
         cci: "",
@@ -182,68 +195,33 @@ export class ProveeedorComponent implements OnInit {
       });
     }
     
+    deleteCuenta(id:any){
+      this.cuentaBancaria.splice(id, 1);
+    }
+
+    //--------------------DIRECCIONES
+    idDireccion = 1;
+    DIRECCION = [ new Direcciones(this.idDireccion, '', '' , '', '','','')];
     
-    TempEdit = null;
-    update(Model:any, Entity:any){
-      for(let i = 0; i < this.CUENTAS.length; ++i){
-        if (this.CUENTAS[i].id === Model.id ){
-          Entity.CUENTAS[i].entidad = Entity.entidad;
-          Entity.CUENTAS[i].nro_cuenta = Entity.nro_cuenta;
-          Entity.CUENTAS[i].CCI = Entity.CCI;
-          Entity.CUENTAS[i].tipo_cuenta = Entity.tipo_cuenta;
-          Entity.CUENTAS[i].moneda = Entity.moneda;
-        }
-      }
-      
-      this.resetCuenta(Entity);
-      this.isUpdate = null;
+    addDireccion(Entity:any){
+      this.direccion.push({
+        id:0,
+        direccion:'', 
+        pais:'',
+        departamento:'',
+        provincia:'',
+        distrito:'',
+        ubigeo:'',
+        clienteId: null
+      });
     }
-      deleteCuenta(id:any){
-        // for(let i=0; i < this.CUENTAS.length; ++i){
-        //   if(this.CUENTAS[i].id === id){
-        //     this.CUENTAS.splice(i,1);
-        //   }
-        // }
-        this.cuentaBancaria.splice(id, 1);
-      }
-      
-      EditCuenta(Entity:any, Model:any){
-        Model.entidad = Entity.entidad;
-        Model.nro_cuenta = Entity.nro_cuenta;
-        Model.CCI = Entity.CCI;
-        Model.tipo_cuenta = Entity.tipo_cuenta;
-        Model.moneda = Entity.moneda;
-      }
-
-      resetCuenta(Entity :any){
-        Entity.entidad = '';
-        Entity.nro_cuenta = 0;
-        Entity.CCI = 0;
-        Entity.tipo_cuenta = '';
-        Entity.moneda = '';
-      }
-
-    //CHECK RADIO
- 
-
-  impuestosAsociados!: string;
-  impuestos: string[] = ['IGV', 'ISC', 'Servicios', 'Otros'];
-
-  tiposPagos!: string;
-  pagos: string[] = ['Tarjeta de Crédito', 'Transferencia', 'Efectivo', 'Cheque','Otros'];
-
-  //EXPANSION DE DIRECCION Y DATOS PERSONALES
-  panelOpenState = false;
-
-//EMAIL
-email = new FormControl('', [Validators.required, Validators.email]);
-
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
+    
+    deleteDireccion(id:any){
+      this.direccion.splice(id, 1);
     }
+      
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
-  }
+  
+  
 
 }
