@@ -18,7 +18,7 @@
                 matInput 
                 [(ngModel)]="proveedorNuevo.rucDni"       
                 name="rucDni"       
-                placeholder="RUC/DNI">
+                placeholder="RUC / DNI">
           </mat-form-field>
            <!-- RAZON SOCIAL-->
            <mat-form-field>
@@ -26,7 +26,7 @@
                 matInput 
                 [(ngModel)]="proveedorNuevo.razonSocial"  
                 name="razonSocial"  
-                placeholder="Razón Social">
+                placeholder="Nombre / Razón Social">
           </mat-form-field>  
         </div>
       </mat-grid-tile>  
@@ -181,7 +181,7 @@
               <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
     </mat-expansion-panel>
-  </mat-accordion> 
+  </mat-accordion> <br>
     <div class="grid-but">
       <div class="grid">
           <div class="add-bottom-padding" >
@@ -228,11 +228,21 @@
                 <th><button type="button" class="btn btn-primary" (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
               </tr>-->
               <tr *ngFor="let cuenta of cuentaBancaria; let in=index">
-                <th><input type="text"    class="form-control" id="entidad"     [(ngModel)]="cuentaBancaria[in].entidad"      name="entidad{{in}}"     placeholder="Entidad"></th>
-                <th><input type="number"  class="form-control" id="numCuenta"  [(ngModel)]="cuentaBancaria[in].numCuenta"    name="numCuenta{{in}}"  placeholder="N° Cuenta"></th>
-                <th><input type="number"  class="form-control" id="cci"         [(ngModel)]="cuentaBancaria[in].cci"    name="cci{{in}}"         placeholder="CCI"></th>
-                <th><input type="text"    class="form-control" id="tipoCuenta" [(ngModel)]="cuentaBancaria[in].tipoCuenta"    name="tipoCuenta{{in}}" placeholder="Tipo de Cuenta"></th>
-                <th><input type="text"    class="form-control" id="moneda"      [(ngModel)]="cuentaBancaria[in].moneda"    name="moneda{{in}}"      placeholder="Moneda"></th>
+                <th><input type="text"    class="form-control" id="entidad"    [(ngModel)]="cuentaBancaria[in].entidad"      name="entidad{{in}}"    ></th>
+                <th><input type="number"  class="form-control" id="numCuenta"  [(ngModel)]="cuentaBancaria[in].numCuenta"    name="numCuenta{{in}}"  ></th>
+                <th><input type="number"  class="form-control" id="cci"        [(ngModel)]="cuentaBancaria[in].cci"          name="cci{{in}}"        ></th>
+                <th><input type="text"    class="form-control" id="tipoCuenta" [(ngModel)]="cuentaBancaria[in].tipoCuenta"   name="tipoCuenta{{in}}" ></th>
+                <th>
+                  <select   class="form-control" 
+                  id="moneda"  
+                  [(ngModel)]="cuentaBancaria[in].moneda"
+                  name="moneda{{in}}">
+                    <option value="soles" selected>Soles</option>
+                    <option value="dólar estadounidense">Dolar Estadounidense</option>
+                    <option value="euro">Euro</option>
+                  </select>
+
+                </th>
                 <th *ngIf="in==0"><button mat-button color="primary"  (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
                 <td *ngIf="in!=0"><button mat-button type="button" class="btn btn-secondary btn-sm" (click)="deleteCuenta(in)" > <mat-icon>delete</mat-icon></button></td>
               </tr>

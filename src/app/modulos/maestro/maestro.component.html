@@ -1,12 +1,15 @@
-<nav mat-tab-nav-bar class="cabecera">
+<nav mat-tab-nav-bar class="cabecera" backgroundColor="primary">
     <a mat-tab-link 
        *ngFor="let link of navLinks"
-       (click)="activeLink = link"
-       [active]="activeLink == link"
+       [routerLink]="link.path"
+       routerLinkActive #rla="routerLinkActive"
+       [routerLinkActiveOptions]="{exact:true}"
+       [active]="rla.isActive"
+       [ngStyle]="{'background-color': rla.isActive? '#727176af':''}"
        >
       {{link.label}}
     </a>
-  </nav>
+</nav>
  <!--  
      <a mat-tab-link 
        *ngFor="let link of navLinks"

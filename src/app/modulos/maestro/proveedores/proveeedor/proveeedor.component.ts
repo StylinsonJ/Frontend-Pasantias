@@ -125,7 +125,7 @@ export class ProveeedorComponent implements OnInit {
       this.proveedorService.create(this.proveedorNuevo, this.personaContacto, this.cuentaBancaria, this.direccion).subscribe(
         proveedor => { 
           this.onClose();
-          // this.router.navigate(['/maestro'])
+           this.router.navigate(['/maestro/proveedores/add'])
           // swal('Nuevo Cliente', `El cliente ${proveedor.nombre} ha sido creado con éxito`, 'success')
         }
       )
