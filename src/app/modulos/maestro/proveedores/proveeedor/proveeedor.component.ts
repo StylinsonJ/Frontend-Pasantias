@@ -11,6 +11,7 @@ import { PersonaContacto } from 'src/app/componentes/maestro/persona-contacto';
 import { CuentaBancaria } from 'src/app/componentes/maestro/cuenta-bancaria';
 //SERVICE
 import { ProveedoresService } from 'src/app/services/maestro/proveedores.service';
+import { CountryI } from 'src/app/intefaces/maestro/pais.interface';
 
 @Component({
   selector: 'app-proveeedor',
@@ -20,10 +21,13 @@ import { ProveedoresService } from 'src/app/services/maestro/proveedores.service
 
 export class ProveeedorComponent implements OnInit {
   //SELECT DIRECCION
+  public selectedCountry: CountryI = {id: '', value: ''};
+  public countries: CountryI[] = [];
   public region: Region[] = [];
   public provincias!: Province[] | null;
   public distritos!: District[] | null;
   public ubigeo:string | null = "";
+  public show:boolean = false;
 
   //CLASES
   public proveedorNuevo: Proveedor = new Proveedor();
@@ -64,6 +68,9 @@ export class ProveeedorComponent implements OnInit {
     }
     
     ngOnInit(): void{
+
+      this.countries = this.proveedorService.getCountries();
+
       this.deleteCuenta(1);
     //-----------------------
       this.proveedorService.getId().subscribe(
@@ -84,6 +91,14 @@ export class ProveeedorComponent implements OnInit {
         }
       }
       this.region = this.region.filter(reg => reg != null);
+    }
+
+    onSelectCountry(id:any):void {
+      if(id === "Perú") {
+        this.show = true;
+      }else {
+        this.show = false;
+      }
     }
 
     onSelect(id:string):void {

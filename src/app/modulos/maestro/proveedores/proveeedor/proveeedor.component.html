@@ -77,12 +77,15 @@
               <mat-label> Pais</mat-label>
               <mat-select
                 [(ngModel)]="direccion[0].pais"
-                name="pais">
-                <mat-option value="option">Option</mat-option>
+                name="pais"
+                (selectionChange)="onSelectCountry($event.value)">
+                <mat-option *ngFor="let country of countries" value="{{country.value}}">
+                  {{country.value}}
+                </mat-option>
               </mat-select>
             </mat-form-field>
             <!-- DEPARTAMENTO-->
-            <mat-form-field  class="contacto">
+            <mat-form-field  class="contacto" *ngIf="show">
               <mat-label> Departamento</mat-label>
               <mat-select 
                   id="departamento" 
@@ -95,7 +98,7 @@
               </mat-select>
             </mat-form-field>
             <!-- PROVINCIA-->
-            <mat-form-field  class="contacto">
+            <mat-form-field  class="contacto" *ngIf="show">
               <mat-label> Provincia</mat-label>
               <mat-select
                   id="provincia"  
@@ -110,7 +113,7 @@
               </mat-select>
             </mat-form-field>
             <!-- DISTRITO-->
-            <mat-form-field  class="contacto">
+            <mat-form-field  class="contacto" *ngIf="show">
               <mat-label> Distrito</mat-label>
               <mat-select
                   id="distrito" 
@@ -125,7 +128,7 @@
               </mat-select>
             </mat-form-field>
             <!-- UBIGEO-->
-            <mat-form-field class="contacto">
+            <mat-form-field class="contacto" *ngIf="show">
               <mat-label>Ubigeo</mat-label>
               <input 
                   matInput 
