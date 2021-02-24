@@ -104,12 +104,10 @@
           <input type="text"
             matInput
             name="pais{{in}}" 
-            id="pais"
+            id="pais{{in}}"
             [(ngModel)]="direccion[in].pais"
-            selectionChange="onSelectCountry($event.value, in)"
-            [formControl]="control"
             [matAutocomplete]="auto">
-            <mat-autocomplete  #auto="matAutocomplete">
+            <mat-autocomplete (optionSelected)="onSelectCountry($event.option.value, in)" #auto="matAutocomplete">
               <mat-option 
                 *ngFor="let country of filPais | async"
                 value="{{country.value}}">
@@ -119,13 +117,14 @@
         </mat-form-field>
 
          <!-- DEPARTAMENTO-->
-          <mat-form-field  class="ubicacion" *ngIf="dataUbigeo[in].show">
+          <mat-form-field  class="ubicacion">
             <mat-label> Departamento</mat-label>
             <mat-select 
                 id="departamento{{in}}" 
                 name="departamento{{in}}"
                 (selectionChange)="onSelect($event.value, in)"
-                [(ngModel)]="direccion[in].departamento">
+                [(ngModel)]="direccion[in].departamento"
+                [disabled]="!dataUbigeo[in].show">
               <mat-option *ngFor="let reg of region" value={{reg.getCode()}}>
                 {{reg.getName()}}
               </mat-option>
@@ -133,7 +132,7 @@
           </mat-form-field>
 
         <!-- PROVINCIA-->
-          <mat-form-field  class="ubicacion" *ngIf="dataUbigeo[in].show">
+          <mat-form-field  class="ubicacion">
             <mat-label> Provincia</mat-label>
             <mat-select
                 id="provincia{{in}}"  
@@ -149,7 +148,7 @@
           </mat-form-field>
 
         <!-- DISTRITO-->
-          <mat-form-field  class="ubicacion" *ngIf="dataUbigeo[in].show">
+          <mat-form-field  class="ubicacion">
             <mat-label> Distrito</mat-label>
             <mat-select
                 id="distrito{{in}}"  
@@ -165,7 +164,7 @@
           </mat-form-field>
 
         <!-- UBIGEO-->
-        <mat-form-field class="ubicacion" *ngIf="dataUbigeo[in].show">
+        <mat-form-field class="ubicacion">
             <mat-label>Ubigeo</mat-label>
             <input 
                 matInput 

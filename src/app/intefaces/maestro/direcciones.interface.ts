@@ -3,7 +3,7 @@ export class Direcciones {
       public id:number,
       public direccion: string,
       public pais: string,
-      public departamento: string,
+      public departamento: string | null,
       public provincia: string,
       public distrito: string,
       public ubigeo: string
