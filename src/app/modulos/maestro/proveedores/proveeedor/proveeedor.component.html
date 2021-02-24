@@ -198,8 +198,8 @@
               <mat-label>Nombre</mat-label>
                 <input 
                   matInput
-                  [(ngModel)]="personaContacto[0].nombre"
-                  name="nombre">
+                  [(ngModel)]="personaContacto[in].nombre"
+                  name="nombre{{in}}">
             </mat-form-field>
 
           <!-- CARGO-->
@@ -207,8 +207,8 @@
               <mat-label>Cargo</mat-label>
                 <input 
                   matInput
-                  [(ngModel)]="personaContacto[0].cargo"
-                  name="cargo">
+                  [(ngModel)]="personaContacto[in].cargo"
+                  name="cargo{{in}}">
             </mat-form-field>
 
           <!-- TELEFONO-->
@@ -216,8 +216,8 @@
               <mat-label>Telefono</mat-label>
                 <input 
                   matInput
-                  [(ngModel)]="personaContacto[0].telefono"
-                  name="telefono">
+                  [(ngModel)]="personaContacto[in].telefono"
+                  name="telefono{{in}}">
             </mat-form-field>
 
           <!-- CORREO-->
@@ -226,10 +226,9 @@
                 <input 
                   matInput 
                   placeholder="pat@example.com" 
-                  [formControl]="email" 
                   required
-                  [(ngModel)]="personaContacto[0].correo"
-                  name="correo"
+                  [(ngModel)]="personaContacto[in].correo"
+                  name="correo{{in}}"
                 >
               <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
