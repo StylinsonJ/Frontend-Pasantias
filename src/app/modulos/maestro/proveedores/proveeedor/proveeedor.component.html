@@ -3,7 +3,11 @@
     <h4><b>Registro: {{proveedorNuevo.codigo}}</b></h4>
   </div>
   <div  align="end">
-    <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-button 
+            (click)="onClose()" tabIndex="-1">
+              <mat-icon>clear</mat-icon>
+    </button>
   </div>
 </div>
 <hr>
@@ -289,7 +293,7 @@
         </thead>
       </table>
   </div>  
-      
+
 </form>
 </div>
 <mat-dialog-actions class="acciones" align="end">
@@ -305,6 +309,8 @@
   </div>
   <div>
     <button mat-button >Limpiar</button>
-    <button mat-flat-button color="primary" (click)='create()'>Guardar <mat-icon>save</mat-icon></button>
+    <button mat-flat-button color="primary" (click)="create()" >
+                  Guardar <mat-icon>save</mat-icon>
+    </button>
   </div>
 </mat-dialog-actions>

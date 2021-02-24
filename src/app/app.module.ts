@@ -19,6 +19,7 @@ import { MaterialModule } from './material.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 import { DefaultModule } from './layouts/default/default.module';
+import { SaveNotifComponent } from './layouts/notificaciones/save-notif';
 
 //Services
 import { ProveedoresService } from './services/maestro/proveedores.service';
@@ -148,7 +149,8 @@ import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-o
     ConsultaActivosComponent,
     OrdenTrasladoComponent,
     NuevaOtComponent,
-    ConsultaOtComponent
+    ConsultaOtComponent,
+    SaveNotifComponent
   ],
   imports: [
     BrowserModule,

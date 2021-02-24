@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpErrorResponse  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable, throwError } from 'rxjs';
 import { map, retry, catchError } from 'rxjs/operators';
 import Ubigeo, { District, Region, Province } from "ubigeos";
@@ -93,6 +94,67 @@ export class ProveedoresService {
     return throwError(errorMessage);
   }
 
-  
+  /*
+  form: FormGroup = new FormGroup({
+    $key:             new FormControl(null),
+    rucDni:           new FormControl(''),
+    razonSocial:      new FormControl(''),
+    fechaIni:         new FormControl(''),
+    rubroActividad:   new FormControl(''),
+    comentarios:      new FormControl(''),
+    impuestoAsociado: new FormControl(''),
+    tipoPago:         new FormControl(''),
+
+    direccion:        new FormControl(''),
+    pais:             new FormControl(''),
+    departamento:     new FormControl(''),
+    provincia:        new FormControl(''),
+    distrito:         new FormControl(''),
+    ubigeo:           new FormControl(''),
+
+    nombre:           new FormControl(''),
+    cargo:            new FormControl(''),
+    telefono:         new FormControl(''),
+    correo:           new FormControl(''),
+
+    entidad:          new FormControl(''),
+    numCuenta:        new FormControl(0),
+    cci:              new FormControl(0),
+    tipoCuenta:       new FormControl(''),
+    moneda:           new FormControl(''),
+
+  });
+
+  initializeFormGroup() {
+      this.form.setValue({
+      $key:             null,
+      
+      rucDni:           '',
+      razonSocial:      '',
+      fechaIni:         '',
+      rubroActividad:   '',
+      comentarios:      '',
+      impuestoAsociado: '',
+      tipoPago:         '',
+
+      direccion:        '',
+      pais:             '',
+      departamento:     '',
+      provincia:        '',
+      distrito:         '',
+      ubigeo:           '',
+
+      nombre:           '',
+      cargo:            '',
+      telefono:         '',
+      correo:           '',
+
+      entidad:          '',
+      numCuenta:        0,
+      cci:              0,
+      tipoCuenta:       '',
+      moneda:           '',
+    });
+  }*/  
 
 }

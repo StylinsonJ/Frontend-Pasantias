@@ -5,7 +5,10 @@ import { District, Region, Province } from "ubigeos";
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable} from 'rxjs';
 import { startWith, map} from 'rxjs/operators';
-
+import { MatSnackBar, 
+         MatSnackBarHorizontalPosition,
+         MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
+import { SaveNotifComponent} from '../../../../layouts/notificaciones/save-notif'
 //COMPONENTE
 import { Direccion } from 'src/app/componentes/maestro/direccion'; 
 import { Proveedor } from 'src/app/componentes/maestro/proveedor';
@@ -15,7 +18,6 @@ import { CuentaBancaria } from 'src/app/componentes/maestro/cuenta-bancaria';
 import { ProveedoresService } from 'src/app/services/maestro/proveedores.service';
 import { CountryI } from 'src/app/intefaces/maestro/pais.interface';
 import { DireccionService } from 'src/app/services/maestro/direccion.service';
-import { NotificationService } from 'src/app/services/notificaciones/notification.service';
 //INTERFACE
 import { Cuenta } from '../../../../intefaces/maestro/cuentas_bancarias.interface';
 import { Direcciones } from '../../../../intefaces/maestro/direcciones.interface';
@@ -78,6 +80,7 @@ export class ProveeedorComponent implements OnInit {
 
   //llamar funciones
   constructor(
+    private _snackBar: MatSnackBar,
     private proveedorService: ProveedoresService,
     private direccionService: DireccionService,
     private activatedRoute: ActivatedRoute,
@@ -175,10 +178,13 @@ export class ProveeedorComponent implements OnInit {
 
     //---------------------Cerrar dialogo
     onClose(): void {
+      //this.proveedorService.form.reset();
+      //this.proveedorService.initializeFormGroup();
       this.dialogRef.close();
       this.router.navigate(['/maestro/proveedores'])
     }
-
+    //---------------------Limpiar dialogo
+   
     //---------------------CREATE Proveedor
     cargarProveedor(): void {
       this.activatedRoute.params.subscribe(params => {
@@ -191,15 +197,26 @@ export class ProveeedorComponent implements OnInit {
       })
     }
   
+    //---------------Alerta 
+    durationInSeconds = 3;
+    horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+    verticalPosition: MatSnackBarVerticalPosition = 'top';
+   
     public create():void{
       this.proveedorService.create(this.proveedorNuevo, this.personaContacto, this.cuentaBancaria, this.direccion).subscribe(
-        proveedor => { 
-          this.onClose();
-           this.router.navigate(['/maestro/proveedores'])
-        }
-      )
+            proveedor => { 
+              this.onClose();
+              this.router.navigate(['/maestro/proveedores']); 
+              this._snackBar.openFromComponent(SaveNotifComponent, {
+                duration: this.durationInSeconds * 1000,
+                horizontalPosition: this.horizontalPosition,
+                verticalPosition: this.verticalPosition,
+                panelClass: ['mat-toolbar','mat-warn']
+              });
+            }
+          )
     }
-  
+
     //---------------------EDIT Proveedor
     updated(): void {
       this.proveedorService.update(this.proveedorNuevo).subscribe(
@@ -280,6 +297,4 @@ export class ProveeedorComponent implements OnInit {
       this.personaContacto.splice(id, 1);
     }
   
-  
-
 }

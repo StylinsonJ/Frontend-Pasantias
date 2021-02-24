@@ -33,7 +33,8 @@ import { MatSortModule} from '@angular/material/sort';
 import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
     imports: [
@@ -70,7 +71,9 @@ import { MatAutocompleteModule} from '@angular/material/autocomplete';
         MatSlideToggleModule,
         MatProgressBarModule,
         ProgressBarModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule
     ],
     exports:[
         PortalModule,
@@ -105,7 +108,9 @@ import { MatAutocompleteModule} from '@angular/material/autocomplete';
         MatSlideToggleModule,
         MatProgressBarModule,
         ProgressBarModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule
     ]
 })
 export class MaterialModule {}
