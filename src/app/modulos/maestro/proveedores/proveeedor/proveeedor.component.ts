@@ -112,10 +112,9 @@ export class ProveeedorComponent implements OnInit {
     ngOnInit(): void{
 
      this.countries = this.direccionService.getCountries();
-     this.control = new FormControl();
      this.filPais = this.control.valueChanges
           .pipe(
-            startWith(null),
+            startWith(''),
             map(value => this.findOption(value))
           );
 
@@ -129,28 +128,30 @@ export class ProveeedorComponent implements OnInit {
             (identificador+1).toString() 
       );
     //---------------------Para las regiones de Direccion
-      for (let i=1; i<=25; i++) {
-        if(i<10) {
-          this.region[i] = Region.instance(`0${i}`);
-        }else {
-          this.region[i] = Region.instance(`${i}`);
-        }
+    for (let i=1; i<=25; i++) {
+      if(i<10) {
+        this.region[i] = Region.instance(`0${i}`);
+      }else {
+        this.region[i] = Region.instance(`${i}`);
       }
-      this.region = this.region.filter(reg => reg != null);
+    }
+    this.region = this.region.filter(reg => reg != null);
   }
 
     //---------------------Autocomplete PAIS
-    control!: FormControl;
+    control: FormControl = new FormControl();
     filPais!: Observable<any[]>;
     findOption(value: string) {
-
-      return this.countries.filter((s) => new RegExp(value, 'gi').test(s.value));
-  }
+      const filterValue = value.toLowerCase();
+      return this.countries.filter((countries) => countries.value.toLowerCase().indexOf(filterValue) === 0);
+    }
     onSelectCountry(id:any,i:number):void {
       if(id === "Perú") {
         this.dataUbigeo[i].show = true;
       }else {
         this.dataUbigeo[i].show = false;
+        this.direccion[i].departamento = '';
+        this.dataUbigeo[i].provincia = null;
         this.dataUbigeo[i].distrito = null;
         this.dataUbigeo[i].ubigeo = null;
       }
