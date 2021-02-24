@@ -98,7 +98,7 @@
               [(ngModel)]="direccion[in].direccion">
         </mat-form-field>
 
-        <!-- PAIS selectionChange -->
+        <!-- PAIS  -->
         <mat-form-field  class="ubicacion">
           <mat-label> Pais</mat-label>
           <input type="text"
@@ -106,14 +106,14 @@
             name="pais{{in}}" 
             id="pais"
             [(ngModel)]="direccion[in].pais"
-            (selectionChange)="onSelectCountry($event, in)"
+            selectionChange="onSelectCountry($event.value, in)"
             [formControl]="control"
             [matAutocomplete]="auto">
             <mat-autocomplete  #auto="matAutocomplete">
               <mat-option 
                 *ngFor="let country of filPais | async"
-                [value]="country.value">
-                {{country.value}}
+                value="{{country.value}}">
+                  {{country.value}}
               </mat-option>
             </mat-autocomplete>
         </mat-form-field>

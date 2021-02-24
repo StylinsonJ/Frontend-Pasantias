@@ -1,10 +1,10 @@
 import { Component,OnInit} from '@angular/core';
 import { MatDialogRef} from '@angular/material/dialog';
-import { FormControl,ReactiveFormsModule ,Validators} from '@angular/forms';
+import { FormControl ,Validators} from '@angular/forms';
 import { District, Region, Province } from "ubigeos";
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable} from 'rxjs';
-import { startWith, map, debounceTime} from 'rxjs/operators';
+import { startWith, map} from 'rxjs/operators';
 
 //COMPONENTE
 import { Direccion } from 'src/app/componentes/maestro/direccion'; 
@@ -143,8 +143,8 @@ export class ProveeedorComponent implements OnInit {
 
       return this.countries.filter((s) => new RegExp(value, 'gi').test(s.value));
   }
-    onSelectCountry(value:any,i:number):void {
-      if(value === "Perú") {
+    onSelectCountry(id:any,i:number):void {
+      if(id === "Perú") {
         this.dataUbigeo[i].show = true;
       }else {
         this.dataUbigeo[i].show = false;

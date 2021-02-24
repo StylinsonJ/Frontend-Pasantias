@@ -1,23 +1,25 @@
 // External
 import { ToastrModule } from 'ngx-toastr';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { interceptorProvider } from './interceptors/prod-interceptor.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// Forms module
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// Routing module for router service
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+// HttpClient module for RESTful API
+import { HttpClientModule } from '@angular/common/http';
+//Material Angular
+import { MaterialModule } from './material.module';
 
 //LOGIN-DEFAULT-PAGENOTFOUND
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 import { DefaultModule } from './layouts/default/default.module';
-//Material Angular
-import { MaterialModule } from './material.module';
-//Modulos
-//import { ModulosModule } from './modulos.module';
+
 //Services
 import { ProveedoresService } from './services/maestro/proveedores.service';
 import { PersonaContactoService } from './services/maestro/persona-contacto.service';
@@ -165,7 +167,6 @@ import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-o
               ClientesService,
               
               interceptorProvider],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
