@@ -5,6 +5,7 @@ import { SelectionModel} from '@angular/cdk/collections';
 import { MatTableDataSource} from '@angular/material/table';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { ExcelService} from '../../../services/excel/excel.service';
 
 import { ProveeedorComponent } from './proveeedor/proveeedor.component';
 import { ProveedoresService } from '../../../services/maestro/proveedores.service';
@@ -34,6 +35,7 @@ export class ProveedoresComponent implements OnInit  {
   razon_name!: string;
 
   constructor(
+    private excelService: ExcelService,
     public dialog: MatDialog
     ) {}
 
@@ -101,5 +103,18 @@ export class ProveedoresComponent implements OnInit  {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+  }
+
+  //EXPORTAR A EXCEL 
+  exportAsXLSX():void{
+    this.excelService.exportToExcel(this.dataSource.data , 'my_export');
+  }
+
+  exportAsCSVFiltro():void{
+    this.excelService.exportToExcel(this.dataSource.filteredData , 'my_export');
+  }
+
+  exportAsExcelCheck():void{
+    this.excelService.exportToExcel(this.selection.selected , 'my_export');
   }
 }

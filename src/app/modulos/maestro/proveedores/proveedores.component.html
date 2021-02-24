@@ -1,10 +1,8 @@
 <div class="normal-form">
   <div>
-    
-      <button mat-flat-button (click)="openDialog()" color="primary" routerLink="add">
+      <button mat-flat-button (click)="openDialog()" color="primary" class="addprov" routerLink="add">
         <mat-icon>add</mat-icon>Proveedor
       </button> 
-    
   </div>
   <div align="end">
     <mat-form-field>
@@ -16,11 +14,20 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="exportAsXLSX()">
         <mat-icon>get_app</mat-icon>
-        <span>Exportar a Excel</span>
+        <span>Excel</span>
+      </button>
+      <button mat-menu-item (click)="exportAsCSVFiltro()">
+        <mat-icon>cloud_download</mat-icon>
+        <span>Filtro</span>
+      </button>
+      <button mat-menu-item (click)="exportAsExcelCheck()">
+        <mat-icon>cloud_download</mat-icon>
+        <span>Check</span>
       </button>
     </mat-menu>
+    
   </div>
 </div> 
 
