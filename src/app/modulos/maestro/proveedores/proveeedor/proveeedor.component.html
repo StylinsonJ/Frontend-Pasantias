@@ -104,18 +104,21 @@
             <mat-select
               [(ngModel)]="direccion[in].pais"
               name="pais{{in}}"
+              (selectionChange)="onSelectCountry($event.value, in)"
               id="pais">
-              <mat-option value="option">Option</mat-option>
+              <mat-option *ngFor="let country of countries" value="{{country.value}}">
+                {{country.value}}
+              </mat-option>
             </mat-select>
           </mat-form-field>
 
         <!-- DEPARTAMENTO-->
-          <mat-form-field  class="ubicacion">
+          <mat-form-field  class="ubicacion" *ngIf="dataUbigeo[in].show">
             <mat-label> Departamento</mat-label>
             <mat-select 
-                id="departamento" 
+                id="departamento{{in}}" 
                 name="departamento{{in}}"
-                (selectionChange)="onSelect($event.value)"
+                (selectionChange)="onSelect($event.value, in)"
                 [(ngModel)]="direccion[in].departamento">
               <mat-option *ngFor="let reg of region" value={{reg.getCode()}}>
                 {{reg.getName()}}
@@ -124,45 +127,45 @@
           </mat-form-field>
 
         <!-- PROVINCIA-->
-          <mat-form-field  class="ubicacion">
+          <mat-form-field  class="ubicacion" *ngIf="dataUbigeo[in].show">
             <mat-label> Provincia</mat-label>
             <mat-select
-                id="provincia"  
+                id="provincia{{in}}"  
                 name="provincia{{in}}"
-                (selectionChange)="filtroProvincia($event.value)"
+                (selectionChange)="filtroProvincia($event.value, in)"
                 [(ngModel)]="direccion[in].provincia"
-                [disabled]="provincias==null">
+                [disabled]="dataUbigeo[in].provincia==null">
               <mat-option selected hidden value="">Selecciona una provincia</mat-option>
-              <mat-option *ngFor="let provincia of provincias" value={{provincia.getCode()}}>
+              <mat-option *ngFor="let provincia of dataUbigeo[in].provincia" value={{provincia.getCode()}}>
                 {{provincia.getName()}}
               </mat-option>
             </mat-select>
           </mat-form-field>
 
         <!-- DISTRITO-->
-          <mat-form-field  class="ubicacion">
+          <mat-form-field  class="ubicacion" *ngIf="dataUbigeo[in].show">
             <mat-label> Distrito</mat-label>
             <mat-select
-                id="distrito" 
+                id="distrito{{in}}" 
                 name="distrito{{in}}" 
-                (selectionChange)="obtenerUbigeo($event.value)"
+                (selectionChange)="obtenerUbigeo($event.value, in)"
                 [(ngModel)]="direccion[in].distrito"
-                [disabled]="distritos==null">
+                [disabled]="dataUbigeo[in].distrito==null">
               <mat-option selected hidden value="">Selecciona un distrito</mat-option>
-              <mat-option *ngFor="let distrito of distritos" value={{distrito.getCode()}}>
+              <mat-option *ngFor="let distrito of dataUbigeo[in].distrito" value={{distrito.getCode()}}>
                 {{distrito.getName()}}
               </mat-option>
             </mat-select>
           </mat-form-field>
 
         <!-- UBIGEO-->
-          <mat-form-field class="ubicacion">
+          <mat-form-field class="ubicacion" *ngIf="dataUbigeo[in].show">
             <mat-label>Ubigeo</mat-label>
             <input 
                 matInput 
                 name="ubigeo{{in}}" 
                 [(ngModel)]="direccion[in].ubigeo" 
-                value="{{ubigeo}}" readonly>
+                value="{{dataUbigeo[in].ubigeo}}" readonly>
           </mat-form-field>
         
         <span *ngIf="in==0">

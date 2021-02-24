@@ -10,11 +10,14 @@ import { PersonaContacto } from 'src/app/componentes/maestro/persona-contacto';
 import { CuentaBancaria } from 'src/app/componentes/maestro/cuenta-bancaria';
 //SERVICE
 import { ProveedoresService } from 'src/app/services/maestro/proveedores.service';
+import { CountryI } from 'src/app/intefaces/maestro/pais.interface';
+
 import { NotificationService } from 'src/app/services/notificaciones/notification.service';
 //INTERFACE
 import { Cuenta } from '../../../../intefaces/maestro/cuentas_bancarias.interface';
 import { Direcciones } from '../../../../intefaces/maestro/direcciones.interface';
 import { Contactos } from '../../../../intefaces/maestro/contactos.interfaces';
+import { DataUbigeoI } from 'src/app/intefaces/maestro/data-ubigeo.interface';
 @Component({
   selector: 'app-proveeedor',
   templateUrl: './proveeedor.component.html',
@@ -23,11 +26,21 @@ import { Contactos } from '../../../../intefaces/maestro/contactos.interfaces';
 
 export class ProveeedorComponent implements OnInit {
   //SELECT DIRECCION
+  public selectedCountry: CountryI = {id: '', value: ''};
+  public countries: CountryI[] = [];
   public region: Region[] = [];
   public provincias!: Province[] | null;
   public distritos!: District[] | null;
   public ubigeo:string | null = "";
-
+  public show:boolean = false;
+  public dataUbigeo: DataUbigeoI[] = [{
+    country: [],
+    region: [],
+    provincia: null,
+    distrito: null,
+    ubigeo: "",
+    show: false
+  }];
   //CLASES
   public proveedorNuevo: Proveedor = new Proveedor();
   public personaContacto: PersonaContacto[] = [{
@@ -87,7 +100,10 @@ export class ProveeedorComponent implements OnInit {
       return this.email.hasError('email') ? 'Correo no valido' : '';
     }
     
-  ngOnInit(): void{
+    ngOnInit(): void{
+
+      this.countries = this.proveedorService.getCountries();
+
       this.deleteCuenta(1);
     //-----------------------Codigo Proveedor
       this.proveedorService.getId().subscribe(
@@ -109,23 +125,34 @@ export class ProveeedorComponent implements OnInit {
       this.region = this.region.filter(reg => reg != null);
   }
 
-    onSelect(id:string):void {
-      if(id) {
-        this.provincias = Region.instance(id).getProvincies().filter(provincia => provincia != null);
-        this.distritos = null;
-        this.ubigeo = null;
+    onSelectCountry(id:any,i:number):void {
+      if(id === "Perú") {
+        this.dataUbigeo[i].show = true;
+      }else {
+        this.dataUbigeo[i].show = false;
+        this.dataUbigeo[i].distrito = null;
+        this.dataUbigeo[i].ubigeo = null;
       }
     }
 
-    filtroProvincia(id:string):void {
+    onSelect(id:string,i:number):void {
       if(id) {
-        this.distritos = Province.instance(id).getDistricts().filter(distrito => distrito != null);
-        this.ubigeo = null
+        this.dataUbigeo[i].provincia = Region.instance(id).getProvincies().filter(provincia => provincia != null);
+        // this.provincias = Region.instance(id).getProvincies().filter(provincia => provincia != null);
+        this.dataUbigeo[i].distrito = null;
+        this.dataUbigeo[i].ubigeo = null;
       }
     }
 
-    obtenerUbigeo(id:string):void {
-      this.ubigeo = id;
+    filtroProvincia(id:string,i:number):void {
+      if(id) {
+        this.dataUbigeo[i].distrito = Province.instance(id).getDistricts().filter(distrito => distrito != null);
+        this.dataUbigeo[i].ubigeo = null
+      }
+    }
+
+    obtenerUbigeo(id:string,i:number):void {
+      this.dataUbigeo[i].ubigeo = id;
     }
 
     //---------------------Cerrar dialogo
@@ -199,10 +226,20 @@ export class ProveeedorComponent implements OnInit {
         ubigeo:'',
         clienteId: null
       });
+
+      this.dataUbigeo.push({
+        country: [],
+        region: [],
+        provincia: null,
+        distrito: null,
+        ubigeo: "",
+        show: false
+      });
     }
     
     deleteDireccion(id:any){
       this.direccion.splice(id, 1);
+      this.dataUbigeo.splice(id, 1);
     }
       
     //--------------------PERSONA DE CONTACTO
