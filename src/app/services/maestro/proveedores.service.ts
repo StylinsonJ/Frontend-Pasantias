@@ -38,12 +38,9 @@ export class ProveedoresService {
   }
 
   //API get() Proveedores List
-  getProveedores(): Observable<Proveedor[]> {
-    return this.http.get<Proveedor[]>(this.urlEndPoint)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
+  getProveedores(request: any): Observable<Proveedor[]> {
+    const params = request;
+    return this.http.get<Proveedor[]>(this.urlEndPoint, {params});
   }
 
   //API post() Create Proveedores 

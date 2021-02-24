@@ -8,6 +8,8 @@ import { MatSort } from '@angular/material/sort';
 
 import { ProveeedorComponent } from './proveeedor/proveeedor.component';
 import { ProveedoresService } from '../../../services/maestro/proveedores.service';
+import { ProveedorDataSource } from './proveedor.datasource';
+import { tap } from 'rxjs/operators';
 
 export interface ProveedoresList {
   id: number;
@@ -32,12 +34,16 @@ export class ProveedoresComponent implements OnInit  {
   id!: number;
   ruc_dni!: number;
   razon_name!: string;
+  proveedorDataSource!: ProveedorDataSource;
 
   constructor(
+    private proveedorService: ProveedoresService,
     public dialog: MatDialog
     ) {}
 
   ngOnInit() {
+    this.proveedorDataSource = new ProveedorDataSource(this.proveedorService);
+    this.proveedorDataSource.loadProveedores();
     this.dataSource.sort = this.sort;
   }
 
@@ -58,8 +64,27 @@ export class ProveedoresComponent implements OnInit  {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+
+    this.proveedorDataSource.counter$
+        .pipe(
+          tap((count) => {
+            this.paginator.length = count;
+          })
+        )
+        .subscribe();
+    
+    this.paginator.page
+      .pipe(
+        tap(() => this.loadProveedores())
+      )
+      .subscribe();
+
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+  }
+
+  loadProveedores() {
+    this.proveedorDataSource.loadProveedores(this.paginator.pageIndex, this.paginator.pageSize);
   }
 
    //REGISTRO-PROVEEDOR ABRIR DIALOGO
