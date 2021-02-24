@@ -14,6 +14,7 @@ import { NotificationService } from 'src/app/services/notificaciones/notificatio
 //INTERFACE
 import { Cuenta } from '../../../../intefaces/maestro/cuentas_bancarias.interface';
 import { Direcciones } from '../../../../intefaces/maestro/direcciones.interface';
+import { Contactos } from '../../../../intefaces/maestro/contactos.interfaces';
 @Component({
   selector: 'app-proveeedor',
   templateUrl: './proveeedor.component.html',
@@ -204,7 +205,25 @@ export class ProveeedorComponent implements OnInit {
       this.direccion.splice(id, 1);
     }
       
-
+    //--------------------PERSONA DE CONTACTO
+    idContacto = 1;
+    CONTACTO = [ new Contactos(this.idContacto, '', '' , '', '')];
+    
+    addContacto(Entity:any){
+      this.personaContacto.push({
+        cargo: "",
+        clienteId: null,
+        correo: "",
+        id: 0,
+        nombre: "",
+        telefono: "",
+        proveedorId: null
+      });
+    }
+    
+    deleteContacto(id:any){
+      this.personaContacto.splice(id, 1);
+    }
   
   
 

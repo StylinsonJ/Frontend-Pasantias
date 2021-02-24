@@ -9,65 +9,87 @@
 <hr>
 <div mat-dialog-content>
 <form >
-  <mat-grid-list cols="2" rowHeight="120px" style="margin-bottom: 10px;">
-      <mat-grid-tile>
-        <div class="controles-container">
-           <!-- RUC-DNI-->
-           <mat-form-field> 
-            <input  
-                matInput 
-                [(ngModel)]="proveedorNuevo.rucDni"       
-                name="rucDni"       
-                placeholder="RUC / DNI">
-          </mat-form-field>
-           <!-- RAZON SOCIAL-->
-           <mat-form-field>
-            <input  
-                matInput 
-                [(ngModel)]="proveedorNuevo.razonSocial"  
-                name="razonSocial"  
-                placeholder="Nombre / Razón Social">
-          </mat-form-field>  
-        </div>
-      </mat-grid-tile>  
-      <mat-grid-tile>
-        <div class="controles-container">
-          <!-- FECHA DE INICIO-->
-          <mat-form-field>
-            <mat-label>Fecha de inicio</mat-label>
-            <input  
-                matInput 
-                [(ngModel)]="proveedorNuevo.fechaIni" 
-                type="date"
-                name="fechaIni"     
-                placeholder="Fecha de Inicio">
-          </mat-form-field>
-          <!-- RUBRO DE ACTIVIDAD -->
-          <mat-form-field>
-            <input  
-                matInput 
-                [(ngModel)]="proveedorNuevo.rubroActividad"
-                name="rubroActividad" 
-                placeholder="Rubro / Actividad Económica">
-          </mat-form-field>
-        </div>
-      </mat-grid-tile>  
-  </mat-grid-list>
+  <div class="grid-but">
+    <div class="grid1">
+      <div class="controles-container">
+        <!-- RUC-DNI-->
+        <mat-form-field appearance="outline"> 
+          <mat-label>RUC / DNI</mat-label>
+          <input  
+              matInput 
+              [(ngModel)]="proveedorNuevo.rucDni"       
+              name="rucDni">
+        </mat-form-field>
+        <!-- RAZON SOCIAL-->
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre / Razón Social</mat-label>
+          <input  
+              matInput 
+              [(ngModel)]="proveedorNuevo.razonSocial"  
+              name="razonSocial">
+        </mat-form-field>  
+      </div>
+      <div class="controles-container">
+        <!-- FECHA DE INICIO-->
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de inicio</mat-label>
+          <input  
+              matInput 
+              [(ngModel)]="proveedorNuevo.fechaIni" 
+              type="date"
+              name="fechaIni"     
+              placeholder="Fecha de Inicio">
+        </mat-form-field>
+        <!-- RUBRO DE ACTIVIDAD -->
+        <mat-form-field appearance="outline">
+          <mat-label>Rubro / Actividad Económica</mat-label>
+          <input  
+              matInput 
+              [(ngModel)]="proveedorNuevo.rubroActividad"
+              name="rubroActividad" >
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="add-bottom-padding" >
+        <label id="example-radio-group-label"><b>Impuestos Asociados</b></label>
+          <mat-radio-group aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            [(ngModel)]="proveedorNuevo.impuestoAsociado"
+            name="impuestoAsociado">
+              <mat-radio-button class="example-radio-button" *ngFor="let impuesto of impuestos" [value]="impuesto">
+                {{impuesto}}
+              </mat-radio-button>
+          </mat-radio-group>
+      </div>
+      <div class="add-bottom-padding" >
+        <label id="example-radio-group-label"><b>Tipo de Pago</b></label>
+          <mat-radio-group aria-labelledby="example-radio-group-label"
+          class="example-radio-group"
+          [(ngModel)]="proveedorNuevo.tipoPago"
+          name="tipoPago">
+            <mat-radio-button class="example-radio-button" *ngFor="let pago of pagos" [value]="pago">
+              {{pago}}
+            </mat-radio-button>
+          </mat-radio-group>
+      </div>
+    </div>
+  </div>
 
   <mat-accordion style="margin-bottom: 10px;">
     <mat-expansion-panel  (opened)="panelOpenState = true"
                           (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
-        <mat-panel-title>Ubicacion</mat-panel-title>
+        <mat-panel-title>Ubicación</mat-panel-title>
         <mat-panel-description>
-          <mat-icon>location</mat-icon>
+          <mat-icon>location_on</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
       <tr *ngFor="let direcciones of direccion; let in=index">
                
         <!-- DIRECCION 1-->
-          <mat-form-field style="text-align: center;width: 100%;">
+          <mat-form-field style="text-align: center;width: 92%;">
             <mat-label>Direccion</mat-label>
             <input 
                 matInput 
@@ -144,23 +166,17 @@
           </mat-form-field>
         
         <span *ngIf="in==0">
-          <button mat-button color="primary" (click)="addDireccion(this)"><mat-icon>add</mat-icon></button>
+          <button mat-button color="primary" (click)="addDireccion(this)">
+            <mat-icon>add_circle_</mat-icon>
+          </button>
         </span>
         <span *ngIf="in!=0">
-          <button mat-button type="button" class="btn btn-secondary btn-sm" (click)="deleteDireccion(in)" > 
-            <mat-icon>delete</mat-icon></button>
+          <button mat-button color="warn" class="btn btn-secondary btn-sm" (click)="deleteDireccion(in)" > 
+            <mat-icon>remove_circle</mat-icon>
+          </button>
         </span>
         <hr>
-        
       </tr>
-
-            <!--
-            
-              <div *ngIf="in!=0">
-                <button mat-button type="button" class="btn btn-secondary btn-sm" (click)="deleteCuenta(in)" > 
-                  <mat-icon>delete</mat-icon></button><div>
-                -->
-            <br>
 
     </mat-expansion-panel>
 
@@ -173,101 +189,99 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
     
+        <tr *ngFor="let contactos of personaContacto; let in=index">
+          <!-- NOMBRE-->
             <mat-form-field class="contacto">
               <mat-label>Nombre</mat-label>
-              <input 
+                <input 
                   matInput
                   [(ngModel)]="personaContacto[0].nombre"
                   name="nombre">
             </mat-form-field>
+
+          <!-- CARGO-->
             <mat-form-field class="contacto">
               <mat-label>Cargo</mat-label>
-              <input 
+                <input 
                   matInput
                   [(ngModel)]="personaContacto[0].cargo"
                   name="cargo">
             </mat-form-field>
+
+          <!-- TELEFONO-->
             <mat-form-field  class="contacto">
               <mat-label>Telefono</mat-label>
-              <!-- <example-tel-input formControlName="tel" required></example-tel-input>-->
-              <input 
+                <input 
                   matInput
                   [(ngModel)]="personaContacto[0].telefono"
                   name="telefono">
-              <mat-icon matSuffix>phone</mat-icon>
             </mat-form-field>
+
+          <!-- CORREO-->
             <mat-form-field class="contacto">
               <mat-label>Correo </mat-label>
-              <input 
+                <input 
                   matInput 
                   placeholder="pat@example.com" 
                   [formControl]="email" 
                   required
                   [(ngModel)]="personaContacto[0].correo"
-                  name="correo">
+                  name="correo"
+                >
               <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
+
+            <span *ngIf="in==0">
+              <button mat-button color="primary" (click)="addContacto(this)">
+                <mat-icon>add_circle_</mat-icon>
+              </button>
+            </span>
+            <span *ngIf="in!=0">
+              <button mat-button color="warn" class="btn btn-secondary btn-sm" (click)="deleteContacto(in)" > 
+                <mat-icon>remove_circle</mat-icon>
+              </button>
+            </span>
+            <hr>
+        </tr>
+        
     </mat-expansion-panel>
-  </mat-accordion> <br>
-    <div class="grid-but">
-      <div class="grid">
-          <div class="add-bottom-padding" >
-            <label id="example-radio-group-label"><b>Impuestos Asociados</b></label>
-            <mat-radio-group aria-labelledby="example-radio-group-label"
-              class="example-radio-group"
-              [(ngModel)]="proveedorNuevo.impuestoAsociado"
-              name="impuestoAsociado">
-                <mat-radio-button class="example-radio-button" *ngFor="let impuesto of impuestos" [value]="impuesto">
-                  {{impuesto}}
-                </mat-radio-button>
-            </mat-radio-group>
-          </div>
-          <div class="add-bottom-padding">
-            <label id="example-radio-group-label"><b>Tipo de Pago</b></label>
-            <mat-radio-group aria-labelledby="example-radio-group-label"
-            class="example-radio-group"
-            [(ngModel)]="proveedorNuevo.tipoPago"
-            name="tipoPago">
-              <mat-radio-button class="example-radio-button" *ngFor="let pago of pagos" [value]="pago">
-                {{pago}}
-              </mat-radio-button>
-            </mat-radio-group>
-          </div>
-      </div> 
-        <div style="margin-top: 10px;" >
-          <p><b>Cuentas Bancarias</b></p>
-          <table class="table" id="tableId">
-            <thead class="thread-light">
-              <tr>
-                <th>Entidad</th>
-                <th>N° Cuenta</th>
-                <th>CCI</th>
-                <th>Tipo de Cuenta</th>
-                <th>Moneda</th>
-                <th></th>
-              </tr>
-              <tr *ngFor="let cuenta of cuentaBancaria; let in=index">
-                <th><input type="text"    class="form-control" id="entidad"    [(ngModel)]="cuentaBancaria[in].entidad"      name="entidad{{in}}"    ></th>
-                <th><input type="number"  class="form-control" id="numCuenta"  [(ngModel)]="cuentaBancaria[in].numCuenta"    name="numCuenta{{in}}"  ></th>
-                <th><input type="number"  class="form-control" id="cci"        [(ngModel)]="cuentaBancaria[in].cci"          name="cci{{in}}"        ></th>
-                <th><input type="text"    class="form-control" id="tipoCuenta" [(ngModel)]="cuentaBancaria[in].tipoCuenta"   name="tipoCuenta{{in}}" ></th>
-                <th>
-                  <select   class="form-control" 
-                  id="moneda"  
-                  [(ngModel)]="cuentaBancaria[in].moneda"
-                  name="moneda{{in}}">
-                    <option value="soles" selected>Soles</option>
-                    <option value="dólar estadounidense">Dolar Estadounidense</option>
-                    <option value="euro">Euro</option>
-                  </select>
-                </th>
-                <th *ngIf="in==0"><button mat-button color="primary"  (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
-                <td *ngIf="in!=0"><button mat-button type="button" class="btn btn-secondary btn-sm" (click)="deleteCuenta(in)" > <mat-icon>delete</mat-icon></button></td>
-              </tr>
-            </thead>
-          </table>
-        </div>
-     </div>
+  </mat-accordion> <br><!--Prueba-->
+    
+  
+  <div style="margin-top: 10px;" >
+      <p><b>Cuentas Bancarias</b></p>
+      <table class="table" id="tableId">
+        <thead class="thread-light">
+          <tr>
+            <th>Entidad</th>
+            <th>N° Cuenta</th>
+            <th>CCI</th>
+            <th>Tipo de Cuenta</th>
+            <th>Moneda</th>
+            <th></th>
+          </tr>
+          <tr *ngFor="let cuenta of cuentaBancaria; let in=index">
+            <th><input type="text"    class="form-control" id="entidad"    [(ngModel)]="cuentaBancaria[in].entidad"      name="entidad{{in}}"    ></th>
+            <th><input type="number"  class="form-control" id="numCuenta"  [(ngModel)]="cuentaBancaria[in].numCuenta"    name="numCuenta{{in}}"  ></th>
+            <th><input type="number"  class="form-control" id="cci"        [(ngModel)]="cuentaBancaria[in].cci"          name="cci{{in}}"        ></th>
+            <th><input type="text"    class="form-control" id="tipoCuenta" [(ngModel)]="cuentaBancaria[in].tipoCuenta"   name="tipoCuenta{{in}}" ></th>
+            <th>
+              <select   class="form-control" 
+              id="moneda"  
+              [(ngModel)]="cuentaBancaria[in].moneda"
+              name="moneda{{in}}">
+                <option value="soles" selected>Soles</option>
+                <option value="dólar estadounidense">Dolar Estadounidense</option>
+                <option value="euro">Euro</option>
+              </select>
+            </th>
+            <th *ngIf="in==0"><button mat-button color="primary"  (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
+            <td *ngIf="in!=0"><button mat-button type="button" color="warn" class="btn btn-secondary btn-sm" (click)="deleteCuenta(in)" > <mat-icon>remove</mat-icon></button></td>
+          </tr>
+        </thead>
+      </table>
+  </div>  
+      
 </form>
 </div>
 <mat-dialog-actions class="acciones" align="end">
