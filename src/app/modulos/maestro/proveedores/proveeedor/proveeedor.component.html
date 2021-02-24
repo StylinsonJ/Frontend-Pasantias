@@ -89,30 +89,36 @@
       <tr *ngFor="let direcciones of direccion; let in=index">
                
         <!-- DIRECCION 1-->
-          <mat-form-field style="text-align: center;width: 92%;">
-            <mat-label>Direccion</mat-label>
-            <input 
-                matInput 
-                name="direccion{{in}}"
-                id="direccion"
-                [(ngModel)]="direccion[in].direccion">
-          </mat-form-field>
+        <mat-form-field style="text-align: center;width: 90%;">
+          <mat-label>Direccion</mat-label>
+          <input 
+              matInput 
+              name="direccion{{in}}"
+              id="direccion"
+              [(ngModel)]="direccion[in].direccion">
+        </mat-form-field>
 
-        <!-- PAIS-->
-          <mat-form-field  class="ubicacion">
-            <mat-label> Pais</mat-label>
-            <mat-select
-              [(ngModel)]="direccion[in].pais"
-              name="pais{{in}}"
-              (selectionChange)="onSelectCountry($event.value, in)"
-              id="pais">
-              <mat-option *ngFor="let country of countries" value="{{country.value}}">
+        <!-- PAIS selectionChange -->
+        <mat-form-field  class="ubicacion">
+          <mat-label> Pais</mat-label>
+          <input type="text"
+            matInput
+            name="pais{{in}}" 
+            id="pais"
+            [(ngModel)]="direccion[in].pais"
+            (selectionChange)="onSelectCountry($event, in)"
+            [formControl]="control"
+            [matAutocomplete]="auto">
+            <mat-autocomplete  #auto="matAutocomplete">
+              <mat-option 
+                *ngFor="let country of filPais | async"
+                [value]="country.value">
                 {{country.value}}
               </mat-option>
-            </mat-select>
-          </mat-form-field>
+            </mat-autocomplete>
+        </mat-form-field>
 
-        <!-- DEPARTAMENTO-->
+         <!-- DEPARTAMENTO-->
           <mat-form-field  class="ubicacion" *ngIf="dataUbigeo[in].show">
             <mat-label> Departamento</mat-label>
             <mat-select 
@@ -146,7 +152,7 @@
           <mat-form-field  class="ubicacion" *ngIf="dataUbigeo[in].show">
             <mat-label> Distrito</mat-label>
             <mat-select
-                id="distrito{{in}}" 
+                id="distrito{{in}}"  
                 name="distrito{{in}}" 
                 (selectionChange)="obtenerUbigeo($event.value, in)"
                 [(ngModel)]="direccion[in].distrito"
@@ -159,7 +165,7 @@
           </mat-form-field>
 
         <!-- UBIGEO-->
-          <mat-form-field class="ubicacion" *ngIf="dataUbigeo[in].show">
+        <mat-form-field class="ubicacion" *ngIf="dataUbigeo[in].show">
             <mat-label>Ubigeo</mat-label>
             <input 
                 matInput 

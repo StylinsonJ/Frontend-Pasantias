@@ -3,6 +3,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import {ProgressBarModule} from "angular-progress-bar";
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { PortalModule } from '@angular/cdk/portal';
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -26,12 +30,16 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule} from '@angular/material/expansion';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatSortModule} from '@angular/material/sort';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatProgressBarModule} from '@angular/material/progress-bar';
-import {ProgressBarModule} from "angular-progress-bar";
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 @NgModule({
     imports: [
+        PortalModule,
+        CdkTreeModule,
+        OverlayModule,
         CommonModule,
         MatButtonModule,
         LayoutModule,
@@ -61,9 +69,13 @@ import {ProgressBarModule} from "angular-progress-bar";
         MatSortModule,
         MatSlideToggleModule,
         MatProgressBarModule,
-        ProgressBarModule
+        ProgressBarModule,
+        MatAutocompleteModule
     ],
     exports:[
+        PortalModule,
+        CdkTreeModule,
+        OverlayModule,
         MatButtonModule,
         LayoutModule,
         MatToolbarModule,
@@ -92,7 +104,8 @@ import {ProgressBarModule} from "angular-progress-bar";
         MatSortModule,
         MatSlideToggleModule,
         MatProgressBarModule,
-        ProgressBarModule
+        ProgressBarModule,
+        MatAutocompleteModule
     ]
 })
 export class MaterialModule {}

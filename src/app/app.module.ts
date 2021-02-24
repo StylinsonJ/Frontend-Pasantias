@@ -1,14 +1,15 @@
 // External
 import { ToastrModule } from 'ngx-toastr';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { interceptorProvider } from './interceptors/prod-interceptor.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 //LOGIN-DEFAULT-PAGENOTFOUND
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
@@ -153,6 +154,7 @@ import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-o
     MaterialModule,
     DefaultModule,
     NgbModule,
+    ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -163,6 +165,7 @@ import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-o
               ClientesService,
               
               interceptorProvider],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

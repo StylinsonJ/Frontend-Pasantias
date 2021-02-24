@@ -27,6 +27,7 @@
     "bootstrap": "^4.6.0",
     "file-saver": "^2.0.5",
     "install": "^0.13.0",
+    "ionic-angular": "^3.9.10",
     "lodash": "^4.17.20",
     "ngx-bootstrap": "^6.2.0",
     "ngx-toastr": "^13.2.0",

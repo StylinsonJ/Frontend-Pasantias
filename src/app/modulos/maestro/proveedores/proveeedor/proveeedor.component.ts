@@ -1,8 +1,11 @@
 import { Component,OnInit} from '@angular/core';
 import { MatDialogRef} from '@angular/material/dialog';
-import { FormControl,Validators} from '@angular/forms';
+import { FormControl,ReactiveFormsModule ,Validators} from '@angular/forms';
 import { District, Region, Province } from "ubigeos";
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable} from 'rxjs';
+import { startWith, map, debounceTime} from 'rxjs/operators';
+
 //COMPONENTE
 import { Direccion } from 'src/app/componentes/maestro/direccion'; 
 import { Proveedor } from 'src/app/componentes/maestro/proveedor';
@@ -11,13 +14,14 @@ import { CuentaBancaria } from 'src/app/componentes/maestro/cuenta-bancaria';
 //SERVICE
 import { ProveedoresService } from 'src/app/services/maestro/proveedores.service';
 import { CountryI } from 'src/app/intefaces/maestro/pais.interface';
-
+import { DireccionService } from 'src/app/services/maestro/direccion.service';
 import { NotificationService } from 'src/app/services/notificaciones/notification.service';
 //INTERFACE
 import { Cuenta } from '../../../../intefaces/maestro/cuentas_bancarias.interface';
 import { Direcciones } from '../../../../intefaces/maestro/direcciones.interface';
 import { Contactos } from '../../../../intefaces/maestro/contactos.interfaces';
 import { DataUbigeoI } from 'src/app/intefaces/maestro/data-ubigeo.interface';
+
 @Component({
   selector: 'app-proveeedor',
   templateUrl: './proveeedor.component.html',
@@ -25,6 +29,7 @@ import { DataUbigeoI } from 'src/app/intefaces/maestro/data-ubigeo.interface';
 })
 
 export class ProveeedorComponent implements OnInit {
+  
   //SELECT DIRECCION
   public selectedCountry: CountryI = {id: '', value: ''};
   public countries: CountryI[] = [];
@@ -74,9 +79,10 @@ export class ProveeedorComponent implements OnInit {
   //llamar funciones
   constructor(
     private proveedorService: ProveedoresService,
+    private direccionService: DireccionService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    public dialogRef: MatDialogRef<ProveeedorComponent>) {
+    public  dialogRef: MatDialogRef<ProveeedorComponent>) {
     }
   
   //---------------------CHECK RADIO
@@ -102,7 +108,13 @@ export class ProveeedorComponent implements OnInit {
     
     ngOnInit(): void{
 
-      this.countries = this.proveedorService.getCountries();
+     this.countries = this.direccionService.getCountries();
+     this.control = new FormControl();
+     this.filPais = this.control.valueChanges
+          .pipe(
+            startWith(null),
+            map(value => this.findOption(value))
+          );
 
       this.deleteCuenta(1);
     //-----------------------Codigo Proveedor
@@ -113,7 +125,6 @@ export class ProveeedorComponent implements OnInit {
             identificador+1 < 1000 ? "PR0"+(identificador+1) : 
             (identificador+1).toString() 
       );
-
     //---------------------Para las regiones de Direccion
       for (let i=1; i<=25; i++) {
         if(i<10) {
@@ -125,8 +136,15 @@ export class ProveeedorComponent implements OnInit {
       this.region = this.region.filter(reg => reg != null);
   }
 
-    onSelectCountry(id:any,i:number):void {
-      if(id === "Perú") {
+    //---------------------Autocomplete PAIS
+    control!: FormControl;
+    filPais!: Observable<any[]>;
+    findOption(value: string) {
+
+      return this.countries.filter((s) => new RegExp(value, 'gi').test(s.value));
+  }
+    onSelectCountry(value:any,i:number):void {
+      if(value === "Perú") {
         this.dataUbigeo[i].show = true;
       }else {
         this.dataUbigeo[i].show = false;
