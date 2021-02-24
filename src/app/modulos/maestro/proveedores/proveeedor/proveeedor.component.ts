@@ -16,6 +16,7 @@ import { NotificationService } from 'src/app/services/notificaciones/notificatio
 //INTERFACE
 import { Cuenta } from '../../../../intefaces/maestro/cuentas_bancarias.interface';
 import { Direcciones } from '../../../../intefaces/maestro/direcciones.interface';
+import { DataUbigeoI } from 'src/app/intefaces/maestro/data-ubigeo.interface';
 @Component({
   selector: 'app-proveeedor',
   templateUrl: './proveeedor.component.html',
@@ -31,7 +32,14 @@ export class ProveeedorComponent implements OnInit {
   public distritos!: District[] | null;
   public ubigeo:string | null = "";
   public show:boolean = false;
-
+  public dataUbigeo: DataUbigeoI[] = [{
+    country: [],
+    region: [],
+    provincia: null,
+    distrito: null,
+    ubigeo: "",
+    show: false
+  }];
   //CLASES
   public proveedorNuevo: Proveedor = new Proveedor();
   public personaContacto: PersonaContacto[] = [{
@@ -116,31 +124,34 @@ export class ProveeedorComponent implements OnInit {
       this.region = this.region.filter(reg => reg != null);
   }
 
-    onSelectCountry(id:any):void {
+    onSelectCountry(id:any,i:number):void {
       if(id === "Perú") {
-        this.show = true;
+        this.dataUbigeo[i].show = true;
       }else {
-        this.show = false;
+        this.dataUbigeo[i].show = false;
+        this.dataUbigeo[i].distrito = null;
+        this.dataUbigeo[i].ubigeo = null;
       }
     }
 
-    onSelect(id:string):void {
+    onSelect(id:string,i:number):void {
       if(id) {
-        this.provincias = Region.instance(id).getProvincies().filter(provincia => provincia != null);
-        this.distritos = null;
-        this.ubigeo = null;
+        this.dataUbigeo[i].provincia = Region.instance(id).getProvincies().filter(provincia => provincia != null);
+        // this.provincias = Region.instance(id).getProvincies().filter(provincia => provincia != null);
+        this.dataUbigeo[i].distrito = null;
+        this.dataUbigeo[i].ubigeo = null;
       }
     }
 
-    filtroProvincia(id:string):void {
+    filtroProvincia(id:string,i:number):void {
       if(id) {
-        this.distritos = Province.instance(id).getDistricts().filter(distrito => distrito != null);
-        this.ubigeo = null
+        this.dataUbigeo[i].distrito = Province.instance(id).getDistricts().filter(distrito => distrito != null);
+        this.dataUbigeo[i].ubigeo = null
       }
     }
 
-    obtenerUbigeo(id:string):void {
-      this.ubigeo = id;
+    obtenerUbigeo(id:string,i:number):void {
+      this.dataUbigeo[i].ubigeo = id;
     }
 
     //---------------------Cerrar dialogo
@@ -214,10 +225,20 @@ export class ProveeedorComponent implements OnInit {
         ubigeo:'',
         clienteId: null
       });
+
+      this.dataUbigeo.push({
+        country: [],
+        region: [],
+        provincia: null,
+        distrito: null,
+        ubigeo: "",
+        show: false
+      });
     }
     
     deleteDireccion(id:any){
       this.direccion.splice(id, 1);
+      this.dataUbigeo.splice(id, 1);
     }
       
 

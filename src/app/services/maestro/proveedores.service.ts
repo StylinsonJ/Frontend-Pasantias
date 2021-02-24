@@ -1038,10 +1038,12 @@ export class ProveedoresService {
   create(proveedor: Proveedor, personaContacto: PersonaContacto[], cuentaBancaria: CuentaBancaria[], direccion: Direccion[]): Observable<any> {
     
     for(let i=0; i<direccion.length; i++) {
-      direccion[i].departamento = Region.instance(direccion[i].departamento).getName();
-      direccion[i].provincia = Province.instance(direccion[i].provincia).getName();
-      direccion[i].ubigeo = District.instance(direccion[i].distrito).getCode();
-      direccion[i].distrito = District.instance(direccion[i].distrito).getName();
+        if(direccion[i].pais === "Perú") {
+            direccion[i].departamento = Region.instance(direccion[i].departamento).getName();
+            direccion[i].provincia = Province.instance(direccion[i].provincia).getName();
+            direccion[i].ubigeo = District.instance(direccion[i].distrito).getCode();
+            direccion[i].distrito = District.instance(direccion[i].distrito).getName();
+        }
     }
 
     return this.http.post(this.urlEndPoint, {proveedor, personaContacto, cuentaBancaria, direccion}, {headers: this.httpHeaders}).pipe(
