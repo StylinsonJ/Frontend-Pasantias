@@ -14,6 +14,19 @@ export class Proveedor {
     impuestoAsociado: string | undefined;
     tipoPago: string | undefined;
 }
+
+export interface ProveedoresList {
+    id: number;
+    codigo: string;
+    rucDni: string;
+    razonSocial: string;
+    fechaIni: Date;
+    rubroActividad: string;
+    comentarios: string;
+    impuestoAsociado: string;
+    tipoPago: string;
+}
+
 /*
 export class Proveedor {
     id: number | undefined;

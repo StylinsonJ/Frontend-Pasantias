@@ -1,12 +1,13 @@
 .normal-form{
-  margin-top: 5%;
+  margin-top: 40px;
   margin-left: 10%;
   margin-right: 10%;
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 20% 80%;
   grid-template-rows: 60px 0px;
 }
 
+/* Crear Proveedor */
 .addprov{
   width: 150px;
   height: 40px;
@@ -14,26 +15,43 @@
 }
 
 /* Busqueda - Tabla*/
-table  {
-  width: 80%;
-}
-
-.mat-paginator{
-  width: 80%;
-}
-
 .mat-form-field {
   font-size: 14px;
-  width: 400px;
+  width: 70%;
+  margin-right: 2%;
 }
 
-/* Excel*/
-.excel {
-  color: green;
+/*Tabla*/
+table  {
+  width: 80%;
+  background-color: #72717609;
 }
 
-td, th {
-  width: 25%;
+th, .mat-paginator{
+  background-color: #72717633 ;
+}
+
+.color-edit{
+  color: rgb(15, 134, 15);
+}
+
+th, td{
+  width: 20%;
+}
+
+.cajita th, td{
+  width: 100px;
+}
+
+.grid-action{
+  display: grid;
+  grid-template-columns: 40px 40px;
+}
+
+
+/* Paginacion*/
+.mat-paginator{
+  width: 80%;
 }
 
 

@@ -49,7 +49,7 @@ export class ProveedoresComponent implements OnInit  {
   }
 
   //CABECERA
-  displayedColumns: string[] = ['select','id', 'rucDni', 'razonSocial'];
+  displayedColumns: string[] = ['select','codigo', 'rucDni', 'razonSocial','actions'];
   dataSource = new MatTableDataSource<ProveedoresList>(DATA);
   selection = new SelectionModel<ProveedoresList>(true, []);
 
