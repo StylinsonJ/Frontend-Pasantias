@@ -9,17 +9,18 @@ import { ExcelService} from '../../../services/excel/excel.service';
 
 import { ProveeedorComponent } from './proveeedor/proveeedor.component';
 import { ProveedoresService } from '../../../services/maestro/proveedores.service';
+import { ProveedorDataSource } from './proveedor.datasource';
+import { tap } from 'rxjs/operators';
 
 export interface ProveedoresList {
   id: number;
-  ruc_dni: number;
-  razon_name: string;
+  rucDni: number;
+  razonSocial: string;
 }
 
 const DATA: ProveedoresList[] = [
-  {id: 1, ruc_dni: 12345678901, razon_name: 'ABC'},
-  {id: 2, ruc_dni: 88888888, razon_name: 'DEF'},
-  {id: 3, ruc_dni: 11111111111, razon_name: 'GHI'},
+  {id: 1, rucDni: 12345678901, razonSocial: 'ABC'},
+
 ];
 
 @Component({
@@ -33,18 +34,22 @@ export class ProveedoresComponent implements OnInit  {
   id!: number;
   ruc_dni!: number;
   razon_name!: string;
+  proveedorDataSource!: ProveedorDataSource;
 
   constructor(
     private excelService: ExcelService,
+    private proveedorService: ProveedoresService,
     public dialog: MatDialog
     ) {}
 
   ngOnInit() {
+    this.proveedorDataSource = new ProveedorDataSource(this.proveedorService);
+    this.proveedorDataSource.loadProveedores();
     this.dataSource.sort = this.sort;
   }
 
   //CABECERA
-  displayedColumns: string[] = ['select','id', 'ruc_dni', 'razon_name'];
+  displayedColumns: string[] = ['select','id', 'rucDni', 'razonSocial'];
   dataSource = new MatTableDataSource<ProveedoresList>(DATA);
   selection = new SelectionModel<ProveedoresList>(true, []);
 
@@ -60,8 +65,27 @@ export class ProveedoresComponent implements OnInit  {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+
+    this.proveedorDataSource.counter$
+        .pipe(
+          tap((count) => {
+            this.paginator.length = count;
+          })
+        )
+        .subscribe();
+    
+    this.paginator.page
+      .pipe(
+        tap(() => this.loadProveedores())
+      )
+      .subscribe();
+
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+  }
+
+  loadProveedores() {
+    this.proveedorDataSource.loadProveedores(this.paginator.pageIndex, this.paginator.pageSize);
   }
 
    //REGISTRO-PROVEEDOR ABRIR DIALOGO

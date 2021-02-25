@@ -201,7 +201,7 @@ export class ProveeedorComponent implements OnInit {
     }
   
     //---------------Alerta 
-    durationInSeconds = 3;
+    durationInSeconds = 5;
     horizontalPosition: MatSnackBarHorizontalPosition = 'right';
     verticalPosition: MatSnackBarVerticalPosition = 'top';
    
@@ -214,7 +214,7 @@ export class ProveeedorComponent implements OnInit {
                 duration: this.durationInSeconds * 1000,
                 horizontalPosition: this.horizontalPosition,
                 verticalPosition: this.verticalPosition,
-                panelClass: ['mat-toolbar','mat-warn']
+                
               });
             }
           )

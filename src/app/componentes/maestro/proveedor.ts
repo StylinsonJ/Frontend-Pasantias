@@ -1,3 +1,8 @@
+export interface ProveedorListResponse {
+    content: Proveedor[];
+    totalElements: number;
+}
+
 export class Proveedor {
     id: number | undefined;
     codigo: string | undefined;
