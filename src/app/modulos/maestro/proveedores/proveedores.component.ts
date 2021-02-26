@@ -11,6 +11,7 @@ import { ProveeedorComponent } from './proveeedor/proveeedor.component';
 import { ProveedoresService } from '../../../services/maestro/proveedores.service';
 import { ProveedorDataSource } from './proveedor.datasource';
 import { tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 export interface ProveedoresList {
   id: number;
@@ -39,7 +40,8 @@ export class ProveedoresComponent implements OnInit  {
   constructor(
     private excelService: ExcelService,
     private proveedorService: ProveedoresService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public route: ActivatedRoute
     ) {}
 
   ngOnInit() {
@@ -92,7 +94,10 @@ export class ProveedoresComponent implements OnInit  {
    openDialog(): void {
      
     const dialogRef = this.dialog.open(ProveeedorComponent, {
-      width: '100%'
+      width: '100%',
+      data: {
+        route: this.route
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

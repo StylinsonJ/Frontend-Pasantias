@@ -137,6 +137,8 @@ export class ProveeedorComponent implements OnInit {
       }
     }
     this.region = this.region.filter(reg => reg != null);
+
+    this.cargarProveedor();
   }
 
     //---------------------Autocomplete PAIS
@@ -193,7 +195,13 @@ export class ProveeedorComponent implements OnInit {
         let id = params['id']
         if(id) {
           this.proveedorService.getProveedor(id).subscribe(
-            (proveedorNuevo) => this.proveedorNuevo = proveedorNuevo
+            json => {
+              console.log(json)
+              this.proveedorNuevo = json.proveedor;
+              this.direccion = json.direccion;
+              this.cuentaBancaria = json.cuentaBancaria;
+              this.personaContacto = json.personaContacto;
+            }
           )
         }
       })

@@ -30,12 +30,12 @@ export class ProveedoresService {
   }
 
   //API get() Proveedor ID
-  getProveedor(id: number): Observable<Proveedor> {
-    return this.http.get<Proveedor>(`${this.urlEndPoint}/${id}`)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );  
+  getProveedor(id: number): Observable<any> {
+    return this.http.get<any>(`${this.urlEndPoint}/${id}`)
+      // .pipe(
+      //   retry(1),
+      //   catchError(this.handleError)
+      // );  
   }
 
   //API get() Proveedores List

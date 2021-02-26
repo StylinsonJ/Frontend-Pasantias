@@ -17,12 +17,14 @@
     <div class="grid1">
       <div class="controles-container">
         <!-- RUC-DNI-->
+        {{proveedorNuevo | json}}
         <mat-form-field appearance="outline"> 
           <mat-label>RUC / DNI</mat-label>
           <input  
               matInput 
               [(ngModel)]="proveedorNuevo.rucDni"       
-              name="rucDni">
+              name="rucDni"
+              #rucDni="ngModel">
         </mat-form-field>
         <!-- RAZON SOCIAL-->
         <mat-form-field appearance="outline">
@@ -273,10 +275,10 @@
             <th></th>
           </tr>
           <tr *ngFor="let cuenta of cuentaBancaria; let in=index">
-            <th><input type="text"    class="form-control" id="entidad"    [(ngModel)]="cuentaBancaria[in].entidad"      name="entidad{{in}}"    ></th>
-            <th><input type="number"  class="form-control" id="numCuenta"  [(ngModel)]="cuentaBancaria[in].numCuenta"    name="numCuenta{{in}}"  ></th>
-            <th><input type="number"  class="form-control" id="cci"        [(ngModel)]="cuentaBancaria[in].cci"          name="cci{{in}}"        ></th>
-            <th><input type="text"    class="form-control" id="tipoCuenta" [(ngModel)]="cuentaBancaria[in].tipoCuenta"   name="tipoCuenta{{in}}" ></th>
+            <th><input type="text"    class="form-control" id="entidad{{in}}"    [(ngModel)]="cuentaBancaria[in].entidad"      name="entidad{{in}}"    ></th>
+            <th><input type="number"  class="form-control" id="numCuenta{{in}}"  [(ngModel)]="cuentaBancaria[in].numCuenta"    name="numCuenta{{in}}"  ></th>
+            <th><input type="number"  class="form-control" id="cci{{in}}"        [(ngModel)]="cuentaBancaria[in].cci"          name="cci{{in}}"        ></th>
+            <th><input type="text"    class="form-control" id="tipoCuenta{{in}}" [(ngModel)]="cuentaBancaria[in].tipoCuenta"   name="tipoCuenta{{in}}" ></th>
             <th>
               <select   class="form-control" 
               id="moneda"  
