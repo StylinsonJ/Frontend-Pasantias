@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse  } from '@angular/common/htt
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, retry, catchError } from 'rxjs/operators';
 import Ubigeo, { District, Region, Province } from "ubigeos";
 //COMPONENTES
@@ -18,10 +18,20 @@ export class ProveedoresService {
 
   private urlEndPoint: string = 'http://localhost:8082/api/proveedores';
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
+  dataChange: BehaviorSubject<Proveedor[]> = new BehaviorSubject<Proveedor[]>([]);
+  dialogData: any;
 
   constructor(
     private http: HttpClient, 
     private router: Router) { }
+
+  get data(): Proveedor[] {
+    return this.dataChange.value;
+  }
+
+  getDialogData() {
+    return this.dialogData;
+  }
 
   getId(): Observable<number> {
     return this.http.get(`${this.urlEndPoint}/id`).pipe(
@@ -49,10 +59,7 @@ export class ProveedoresService {
     
     for(let i=0; i<direccion.length; i++) {
         if(direccion[i].pais === "Perú") {
-            direccion[i].departamento = Region.instance(direccion[i].departamento).getName();
-            direccion[i].provincia = Province.instance(direccion[i].provincia).getName();
             direccion[i].ubigeo = District.instance(direccion[i].distrito).getCode();
-            direccion[i].distrito = District.instance(direccion[i].distrito).getName();
         }
     }
 
@@ -65,8 +72,15 @@ export class ProveedoresService {
   }
 
   //API put() Update Proveedores
-  update(proveedor: Proveedor): Observable<any> {
-    return this.http.put<any>(`${this.urlEndPoint}/${proveedor.id}`, proveedor, {headers: this.httpHeaders});
+  update(proveedor: Proveedor, personaContacto: PersonaContacto[], cuentaBancaria: CuentaBancaria[], direccion: Direccion[]): Observable<any> {
+    
+    for(let i=0; i<direccion.length; i++) {
+      if(direccion[i].pais === "Perú") {
+          direccion[i].ubigeo = District.instance(direccion[i].distrito).getCode();
+      }
+    }
+    
+    return this.http.put<any>(`${this.urlEndPoint}/${proveedor.id}`, {proveedor, personaContacto, cuentaBancaria, direccion}, {headers: this.httpHeaders});
   }
 
   delete(id: number): Observable<Proveedor> {

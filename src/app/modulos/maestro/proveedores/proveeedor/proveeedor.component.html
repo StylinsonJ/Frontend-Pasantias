@@ -17,7 +17,6 @@
     <div class="grid1">
       <div class="controles-container">
         <!-- RUC-DNI-->
-        {{proveedorNuevo | json}}
         <mat-form-field appearance="outline"> 
           <mat-label>RUC / DNI</mat-label>
           <input  
@@ -147,7 +146,6 @@
                 (selectionChange)="filtroProvincia($event.value, in)"
                 [(ngModel)]="direccion[in].provincia"
                 [disabled]="dataUbigeo[in].provincia==null">
-              <mat-option selected hidden value="">Selecciona una provincia</mat-option>
               <mat-option *ngFor="let provincia of dataUbigeo[in].provincia" value={{provincia.getCode()}}>
                 {{provincia.getName()}}
               </mat-option>
@@ -163,7 +161,7 @@
                 (selectionChange)="obtenerUbigeo($event.value, in)"
                 [(ngModel)]="direccion[in].distrito"
                 [disabled]="dataUbigeo[in].distrito==null">
-              <mat-option selected hidden value="">Selecciona un distrito</mat-option>
+
               <mat-option *ngFor="let distrito of dataUbigeo[in].distrito" value={{distrito.getCode()}}>
                 {{distrito.getName()}}
               </mat-option>
@@ -311,8 +309,13 @@
   </div>
   <div>
     <button mat-button >Limpiar</button>
-    <button mat-flat-button color="primary" (click)="create()" >
+    <button mat-flat-button color="primary" (click)="create()" *ngIf="!data else elseBlock">
                   Guardar <mat-icon>save</mat-icon>
     </button>
+    <ng-template #elseBlock>
+      <button mat-flat-button color="primary" (click)="updated()">
+                    Actualizar <mat-icon>edit</mat-icon>
+      </button>
+    </ng-template>
   </div>
 </mat-dialog-actions>

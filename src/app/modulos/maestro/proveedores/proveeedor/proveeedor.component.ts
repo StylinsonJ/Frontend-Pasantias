@@ -1,5 +1,5 @@
-import { Component,OnInit} from '@angular/core';
-import { MatDialogRef} from '@angular/material/dialog';
+import { Component,Inject,OnInit} from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormControl ,Validators} from '@angular/forms';
 import { District, Region, Province } from "ubigeos";
 import { ActivatedRoute, Router } from '@angular/router';
@@ -70,7 +70,7 @@ export class ProveeedorComponent implements OnInit {
     proveedorId: null
   }];
   public direccion: Direccion[] = [{ 
-      id:0,
+      id:null,
       direccion:'', 
       pais:'',
       departamento:'',
@@ -86,7 +86,8 @@ export class ProveeedorComponent implements OnInit {
     private direccionService: DireccionService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    public  dialogRef: MatDialogRef<ProveeedorComponent>) {
+    public  dialogRef: MatDialogRef<ProveeedorComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
     }
   
   //---------------------CHECK RADIO
@@ -138,7 +139,9 @@ export class ProveeedorComponent implements OnInit {
     }
     this.region = this.region.filter(reg => reg != null);
 
-    this.cargarProveedor();
+    if(this.data != null) {
+      this.cargarProveedor();
+    }
   }
 
     //---------------------Autocomplete PAIS
@@ -189,22 +192,53 @@ export class ProveeedorComponent implements OnInit {
     }
     //---------------------Limpiar dialogo
    
-    //---------------------CREATE Proveedor
+    //---------------------traer datos de un proveedor 
     cargarProveedor(): void {
-      this.activatedRoute.params.subscribe(params => {
-        let id = params['id']
-        if(id) {
-          this.proveedorService.getProveedor(id).subscribe(
+        if(this.data.id) {
+          this.proveedorService.getProveedor(this.data.id).subscribe(
             json => {
               console.log(json)
               this.proveedorNuevo = json.proveedor;
               this.direccion = json.direccion;
+              if(this.direccion.length > 1) {
+                for(let i=0; i<this.direccion.length; i++) {
+                  if(this.direccion[i].pais === "Perú") {
+                    if(i===0) {
+                      this.dataUbigeo[i] = {
+                        country: [],
+                        region: [],
+                        provincia: Region.instance(this.direccion[i].departamento).getProvincies(),
+                        distrito: Province.instance(this.direccion[i].provincia).getDistricts(),
+                        ubigeo: "",
+                        show: true
+                      }
+                    }else {
+                      this.dataUbigeo.push({
+                        country: [],
+                        region: [],
+                        provincia: Region.instance(this.direccion[i].departamento).getProvincies(),
+                        distrito: Province.instance(this.direccion[i].provincia).getDistricts(),
+                        ubigeo: "",
+                        show: true
+                      });
+                    }
+                  }else {
+                    this.dataUbigeo.push({
+                      country: [],
+                      region: [],
+                      provincia: null,
+                      distrito: null,
+                      ubigeo: "",
+                      show: false
+                    });
+                  }
+                }
+              }
               this.cuentaBancaria = json.cuentaBancaria;
               this.personaContacto = json.personaContacto;
             }
           )
         }
-      })
     }
   
     //---------------Alerta 
@@ -229,8 +263,9 @@ export class ProveeedorComponent implements OnInit {
 
     //---------------------EDIT Proveedor
     updated(): void {
-      this.proveedorService.update(this.proveedorNuevo).subscribe(
+      this.proveedorService.update(this.proveedorNuevo, this.personaContacto, this.cuentaBancaria, this.direccion).subscribe(
         json => {
+          this.onClose();
           this.router.navigate(['/maestro/proveedores'])
           // swal('Cliente Actualizado', `${json.mensaje}: ${json.cliente.nombre}`, 'success')
         })
@@ -242,7 +277,7 @@ export class ProveeedorComponent implements OnInit {
     isUpdate = null;
     addCuenta(Entity:any){
       this.cuentaBancaria.push({
-        id:0,
+        id:null,
         cci: "",
         entidad:"",
         moneda: "",
@@ -262,7 +297,7 @@ export class ProveeedorComponent implements OnInit {
     
     addDireccion(Entity:any){
       this.direccion.push({
-        id:0,
+        id:null,
         direccion:'', 
         pais:'',
         departamento:'',
@@ -296,7 +331,7 @@ export class ProveeedorComponent implements OnInit {
         cargo: "",
         clienteId: null,
         correo: "",
-        id: 0,
+        id: null,
         nombre: "",
         telefono: "",
         proveedorId: null

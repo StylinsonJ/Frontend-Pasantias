@@ -4,7 +4,7 @@ import { Proveedor } from "./proveedor";
 
 export class Direccion{
     constructor (
-        public id: number | undefined,
+        public id: number | undefined | null,
         public direccion: string | undefined,
         public pais: string | undefined,
         public departamento: string="",
