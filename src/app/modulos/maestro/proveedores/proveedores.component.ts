@@ -92,7 +92,8 @@ export class ProveedoresComponent implements OnInit  {
    openDialog(): void {
      
     const dialogRef = this.dialog.open(ProveeedorComponent, {
-      width: '100%'
+      width: '100%',
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

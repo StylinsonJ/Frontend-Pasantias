@@ -41,6 +41,7 @@
     padding: 5px;  
     /*width: 170px;*/
   }
+
   .grid-but {
     display: grid;
     grid-template-columns:800px 400px;
@@ -51,7 +52,7 @@
   }
   .grid2 {
     display: grid;
-    grid-template-columns:200px 200px;
+    grid-template-columns:200px 180px;
   }
     @media only screen and (max-width:900px){
       .example-radio-group {
