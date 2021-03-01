@@ -11,6 +11,8 @@ import { ProveeedorComponent } from './proveeedor/proveeedor.component';
 import { ProveedoresService } from '../../../services/maestro/proveedores.service';
 import { ProveedorDataSource } from './proveedor.datasource';
 import { tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { Proveedor } from 'src/app/componentes/maestro/proveedor';
 
 export interface ProveedoresList {
   id: number;
@@ -31,7 +33,7 @@ const DATA: ProveedoresList[] = [
 
 export class ProveedoresComponent implements OnInit  {
 
-  id!: number;
+  id!: number | undefined;
   ruc_dni!: number;
   razon_name!: string;
   proveedorDataSource!: ProveedorDataSource;
@@ -39,7 +41,8 @@ export class ProveedoresComponent implements OnInit  {
   constructor(
     private excelService: ExcelService,
     private proveedorService: ProveedoresService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public route: ActivatedRoute
     ) {}
 
   ngOnInit() {
@@ -58,6 +61,22 @@ export class ProveedoresComponent implements OnInit  {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  //Eliminar proveedor
+  delete(proveedor: Proveedor): void {
+    this.id = proveedor.id;
+    this.proveedorService.delete(<number>proveedor.id).subscribe(
+      response => {
+        const foundIndex = this.proveedorService.dataChange.value.findIndex(x => x.id === this.id);
+        this.proveedorService.dataChange.value.splice(foundIndex, 1);
+        this.refreshTable();
+      }
+    )
+  }
+
+  private refreshTable() {
+    this.paginator._changePageSize(this.paginator.pageSize);
   }
 
   //PAGINATOR
@@ -84,12 +103,26 @@ export class ProveedoresComponent implements OnInit  {
     // this.dataSource.sort = this.sort;
   }
 
+  startEdit(id:number) {
+    this.id = id;
+    const dialogRef = this.dialog.open(ProveeedorComponent, {
+      data: {id: id}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        const foundIndex = this.proveedorService.dataChange.value.findIndex(x => x.id === this.id);
+        this.proveedorService.dataChange.value[foundIndex] = this.proveedorService.getDialogData();
+        this.refreshTable();
+      }
+    })
+  }
+
   loadProveedores() {
     this.proveedorDataSource.loadProveedores(this.paginator.pageIndex, this.paginator.pageSize);
   }
 
    //REGISTRO-PROVEEDOR ABRIR DIALOGO
-   openDialog(): void {
+  openDialog(): void {
      
     const dialogRef = this.dialog.open(ProveeedorComponent, {
       width: '100%',

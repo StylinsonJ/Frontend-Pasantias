@@ -38,7 +38,7 @@ const routes: Routes = [
           {path: 'proveedores', component: ProveedoresComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
               children: [
                 {path: 'add',   component: ProveeedorComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-                /* {path: 'edit/:id', component: ProveeedorComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}}, */  
+                {path: 'edit/:id', component: ProveeedorComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
               ]
           },
           {path: 'bancos',          component: BancosMaestroComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},

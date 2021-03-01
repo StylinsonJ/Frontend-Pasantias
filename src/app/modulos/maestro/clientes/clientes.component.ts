@@ -41,7 +41,7 @@ export class ClientesComponent implements OnInit {
   }
 
   //CABECERA
-  displayedColumns: string[] = ['select','id', 'ruc_dni', 'razon_name'];
+  displayedColumns: string[] = ['select','codigo', 'rucDni', 'razonSocial','actions'];
   dataSource = new MatTableDataSource<ClientesList>(DATA);
   selection = new SelectionModel<ClientesList>(true, []);
 

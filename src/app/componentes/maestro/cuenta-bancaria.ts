@@ -1,7 +1,7 @@
 import { Proveedor } from "./proveedor";
 
 export class CuentaBancaria {
-    public id:number | undefined;
+    public id:number | undefined | null;
     public entidad: string | undefined;
     public numCuenta: string | undefined;
     public cci: string | undefined;

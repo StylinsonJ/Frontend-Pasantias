@@ -22,7 +22,8 @@
           <input  
               matInput 
               [(ngModel)]="proveedorNuevo.rucDni"       
-              name="rucDni">
+              name="rucDni"
+              #rucDni="ngModel">
         </mat-form-field>
         <!-- RAZON SOCIAL-->
         <mat-form-field appearance="outline">
@@ -145,7 +146,6 @@
                 (selectionChange)="filtroProvincia($event.value, in)"
                 [(ngModel)]="direccion[in].provincia"
                 [disabled]="dataUbigeo[in].provincia==null">
-              <mat-option selected hidden value="">Selecciona una provincia</mat-option>
               <mat-option *ngFor="let provincia of dataUbigeo[in].provincia" value={{provincia.getCode()}}>
                 {{provincia.getName()}}
               </mat-option>
@@ -161,7 +161,7 @@
                 (selectionChange)="obtenerUbigeo($event.value, in)"
                 [(ngModel)]="direccion[in].distrito"
                 [disabled]="dataUbigeo[in].distrito==null">
-              <mat-option selected hidden value="">Selecciona un distrito</mat-option>
+
               <mat-option *ngFor="let distrito of dataUbigeo[in].distrito" value={{distrito.getCode()}}>
                 {{distrito.getName()}}
               </mat-option>
@@ -273,10 +273,10 @@
             <th></th>
           </tr>
           <tr *ngFor="let cuenta of cuentaBancaria; let in=index">
-            <th><input type="text"    class="form-control" id="entidad"    [(ngModel)]="cuentaBancaria[in].entidad"      name="entidad{{in}}"    ></th>
-            <th><input type="number"  class="form-control" id="numCuenta"  [(ngModel)]="cuentaBancaria[in].numCuenta"    name="numCuenta{{in}}"  ></th>
-            <th><input type="number"  class="form-control" id="cci"        [(ngModel)]="cuentaBancaria[in].cci"          name="cci{{in}}"        ></th>
-            <th><input type="text"    class="form-control" id="tipoCuenta" [(ngModel)]="cuentaBancaria[in].tipoCuenta"   name="tipoCuenta{{in}}" ></th>
+            <th><input type="text"    class="form-control" id="entidad{{in}}"    [(ngModel)]="cuentaBancaria[in].entidad"      name="entidad{{in}}"    ></th>
+            <th><input type="number"  class="form-control" id="numCuenta{{in}}"  [(ngModel)]="cuentaBancaria[in].numCuenta"    name="numCuenta{{in}}"  ></th>
+            <th><input type="number"  class="form-control" id="cci{{in}}"        [(ngModel)]="cuentaBancaria[in].cci"          name="cci{{in}}"        ></th>
+            <th><input type="text"    class="form-control" id="tipoCuenta{{in}}" [(ngModel)]="cuentaBancaria[in].tipoCuenta"   name="tipoCuenta{{in}}" ></th>
             <th>
               <select   class="form-control" 
               id="moneda"  
@@ -309,8 +309,13 @@
   </div>
   <div>
     <button mat-button >Limpiar</button>
-    <button mat-flat-button color="primary"   (click)="create()" >
+    <button mat-flat-button color="primary" (click)="create()" *ngIf="!data else elseBlock">
                   Guardar <mat-icon>save</mat-icon>
     </button>
+    <ng-template #elseBlock>
+      <button mat-flat-button color="primary" (click)="updated()">
+                    Actualizar <mat-icon>edit</mat-icon>
+      </button>
+    </ng-template>
   </div>
 </mat-dialog-actions>
