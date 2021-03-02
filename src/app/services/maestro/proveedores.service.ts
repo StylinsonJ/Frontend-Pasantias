@@ -77,6 +77,11 @@ export class ProveedoresService {
     for(let i=0; i<direccion.length; i++) {
       if(direccion[i].pais === "Perú") {
           direccion[i].ubigeo = District.instance(direccion[i].distrito).getCode();
+      }else {
+        direccion[i].departamento='';
+        direccion[i].provincia='';
+        direccion[i].distrito='';
+        direccion[i].ubigeo='';
       }
     }
     
