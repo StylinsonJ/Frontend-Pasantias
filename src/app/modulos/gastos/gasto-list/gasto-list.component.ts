@@ -23,11 +23,11 @@ export interface GastosList {
 }
 
 const DATA: GastosList[] = [
-  {id: 1, codigo: "C0001", tipo_comprobante:"boleta",
+  {id: 1, codigo: "G0001", tipo_comprobante:"boleta",
   fec_emision: "08/02/2021", num_serie: "S3R13" ,num_comprobante: "ebC0MPR0B4NT3",
   ruc_dni: 12345678901, razon_name: 'ABC', moneda: "dolar",
   val_venta: 100, IGV: 18, monto_tot: 118},
-  {id: 2, codigo: "C0002", tipo_comprobante:"factura",
+  {id: 2, codigo: "G0002", tipo_comprobante:"factura",
   fec_emision: "02/01/2021", num_serie: "S3R134" ,num_comprobante: "fC0MPR0B4NT33",
   ruc_dni: 87654321, razon_name: 'DEF', moneda: "soles",
   val_venta: 200, IGV: 36, monto_tot: 236},
@@ -62,7 +62,7 @@ export class GastoListComponent implements OnInit {
   }
 
   //CABECERA
-  displayedColumns: string[] = ['select', 'id', 'codigo', 'tipo_comprobante', 'fec_emision', 'num_serie' ,'num_comprobante','ruc_dni', 'razon_name', 'moneda','val_venta', 'IGV', 'monto_tot'];
+  displayedColumns: string[] = ['select', 'codigo', 'tipo_comprobante', 'fec_emision', 'num_serie' ,'num_comprobante','ruc_dni', 'razon_name', 'moneda','val_venta', 'IGV', 'monto_tot','actions'];
   dataSource = new MatTableDataSource<GastosList>(DATA);
   selection = new SelectionModel<GastosList>(true, []);
 

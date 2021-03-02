@@ -1,33 +1,42 @@
 .normal-form{
-    margin-top: 3%;
-    margin-left: 5%;
-    margin-right: 5%;
-   
-  }
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+
+}
   
-  /* Busqueda - Tabla*/
-  table  {
-    width: 90%;
-    height: 100%;
-  }
-  
-  .mat-paginator{
-    width: 90%;
-    height: 100%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 50%;
-  }
-  
-  /* Excel*/
-  .excel {
-    color: green;
-  }
-  /*
-  td, th {
-    width: 20%;
-  }
-  
-  */
+ 
+/* Busqueda - Tabla*/
+.mat-form-field {
+  font-size: 14px;
+  width: 80%;
+  margin-right: 2%;
+}
+
+/*Tabla*/
+table  {
+  width: 90%;
+  background-color: #72717609;
+}
+
+th, .mat-paginator{
+  background-color: #72717633 ;
+}
+
+.color-edit{
+  color: rgb(15, 134, 15);
+}
+
+
+.grid-action{
+  display: grid;
+  grid-template-columns: 40px 40px;
+}
+
+
+/* Paginacion*/
+.mat-paginator{
+  width: 90%;
+}
+
+

@@ -1,31 +1,56 @@
 .normal-form{
-    margin-top: 3%;
-    margin-left: 10%;
-    margin-right: 10%;
-    display: grid;
-    grid-template-columns: 30% 70%;
-    grid-template-rows: 60px 0px;
-  }
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 60px 0px;
+}
   
-  /* Busqueda - Tabla*/
-  table  {
-    width: 80%;
-  }
-  
-  .mat-paginator{
-    width: 80%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 400px;
-  }
-  
-  /* Excel*/
-  .excel {
-    color: green;
-  }
-  
-  
-  
-  
+ /* Crear Proveedor */
+.addbank{
+  width: 150px;
+  height: 40px;
+  font-size: 16px;
+}
+
+/* Busqueda - Tabla*/
+.mat-form-field {
+  font-size: 14px;
+  width: 70%;
+  margin-right: 2%;
+}
+
+/*Tabla*/
+table  {
+  width: 80%;
+  background-color: #72717609;
+}
+
+th, .mat-paginator{
+  background-color: #72717633 ;
+}
+
+.color-edit{
+  color: rgb(15, 134, 15);
+}
+
+th, td{
+ margin-left: 10px;
+ margin-right: 10px
+}
+
+.cajita th, td{
+  width: 100px;
+}
+
+.grid-action{
+  display: grid;
+  grid-template-columns: 40px 40px;
+}
+
+
+/* Paginacion*/
+.mat-paginator{
+  width: 80%;
+}

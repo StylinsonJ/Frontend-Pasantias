@@ -1,7 +1,7 @@
 <div class="normal-form">
     <div>
-      <button mat-flat-button (click)="openDialog()" color="primary">
-        <mat-icon>add</mat-icon>Nuevo Registro
+      <button mat-flat-button (click)="openDialog()" color="primary" class="addbank" >
+        <mat-icon>add</mat-icon>Banco
       </button> 
     </div>
     <div align="end">
@@ -41,22 +41,16 @@
           </mat-checkbox>
         </td>
       </ng-container>
-     
-      <!-- ID Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-      </ng-container>
     
       <!-- Entidad Column -->
       <ng-container matColumnDef="entidad">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ENTIDAD </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Entidad </th>
         <td mat-cell *matCellDef="let element"> {{element.entidad}} </td>
       </ng-container>
     
       <!-- N° Cuenta Column -->
       <ng-container matColumnDef="nro_cuenta">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> N° CUENTA </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> N° Cuenta </th>
         <td mat-cell *matCellDef="let element"> {{element.nro_cuenta}} </td>
       </ng-container>
 
@@ -68,24 +62,34 @@
 
       <!-- Tipo de Cuenta Column -->
       <ng-container matColumnDef="tipo_cuenta">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> TIPO DE CUENTA </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de Cuenta </th>
         <td mat-cell *matCellDef="let element"> {{element.tipo_cuenta}} </td>
       </ng-container>
 
       <!-- Moneda Column -->
       <ng-container matColumnDef="moneda">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> MONEDA </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Moneda </th>
         <td mat-cell *matCellDef="let element"> {{element.moneda}} </td>
       </ng-container>
   
-      <ng-container>
-        <th>Eliminar</th>
-        <td>
-          <button mat-icon-button color="warn">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
+      <!-- Edit-Delete Column -->
+    <ng-container matColumnDef="actions"     >
+      <th mat-header-cell *matHeaderCellDef  ></th>
+      <td mat-cell *matCellDef="let element" >
+        <div class="grid-action">
+          <div>
+            <button mat-icon-button class="color-edit"  routerLink="edit/{{element.id}}">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+          <div>
+            <button mat-icon-button color="warn" >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </td>
+    </ng-container>
         
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

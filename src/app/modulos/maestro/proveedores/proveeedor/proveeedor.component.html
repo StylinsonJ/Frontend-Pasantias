@@ -282,9 +282,8 @@
               id="moneda"  
               [(ngModel)]="cuentaBancaria[in].moneda"
               name="moneda{{in}}">
-                <option value="soles" selected>Soles</option>
-                <option value="dólar estadounidense">Dolar Estadounidense</option>
-                <option value="euro">Euro</option>
+                <option value="soles" selected>Pen</option>
+                <option value="dolar">Dolar</option>
               </select>
             </th>
             <th *ngIf="in==0"><button mat-button color="primary"  (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>

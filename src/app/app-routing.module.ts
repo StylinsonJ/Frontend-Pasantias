@@ -24,6 +24,11 @@ import { BancosMaestroComponent } from './modulos/maestro/bancos-maestro/bancos-
 import { CatalogosComponent } from './modulos/maestro/catalogos/catalogos.component';
 import { OrganizacionComponent } from './modulos/maestro/organizacion/organizacion.component';
 import { TablasGeneralesComponent } from './modulos/maestro/tablas-generales/tablas-generales.component';
+import { GastoListComponent } from './modulos/gastos/gasto-list/gasto-list.component';
+import { GastoComponent } from './modulos/gastos/gasto/gasto.component';
+import { PagosComponent } from './modulos/finanzas/pagos/pagos.component';
+import { CobrosComponent } from './modulos/finanzas/cobros/cobros.component';
+import { BancosFinanzasComponent } from './modulos/finanzas/bancos-finanzas/bancos-finanzas.component';
 
 const routes: Routes = [
   {path:'login', component: LoginComponent},
@@ -47,12 +52,23 @@ const routes: Routes = [
           {path: 'tablas-generales', component: TablasGeneralesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
         ]
       },
-  
-      {path: 'gastos',  component: GastosComponent,  canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
       {path: 'ventas',  component: VentasComponent,  canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+      {path: 'gastos', component: GastosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+        children: [
+          {path: '',  redirectTo: '/gastos/list', pathMatch: 'full'},
+          {path: 'list',  component: GastoListComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'new', component: GastoComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+        ]
+      },
       {path: 'compras', component: ComprasComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
       {path: 'almacen', component: AlmacenComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-      {path: 'finanzas',component: FinanzasComponent,canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+      {path: 'finanzas',component: FinanzasComponent,canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+      children: [
+        {path: '',  redirectTo: '/finanzas/pagos', pathMatch: 'full'},
+        {path: 'pagos',  component: PagosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+        {path: 'cobros', component: CobrosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+        {path: 'bancos-finanzas', component: BancosFinanzasComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+      ]},
       {path: 'rrhh',    component: RrhhComponent,    canActivate: [guard], data: { expectedRol: ['admin', 'user']}}
     ]},
   {path: '**', component: PageNotFoundComponent}

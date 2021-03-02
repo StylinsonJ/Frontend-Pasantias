@@ -37,7 +37,7 @@ export class BancosMaestroComponent implements OnInit {
   }
 
   //CABECERA
-  displayedColumns: string[] = ['select', 'id', 'entidad', 'nro_cuenta','CCI','tipo_cuenta', 'moneda'];
+  displayedColumns: string[] = ['select', 'entidad', 'nro_cuenta','CCI','tipo_cuenta', 'moneda', 'actions'];
   dataSource = new MatTableDataSource<Banco>(DATA);
   selection = new SelectionModel<Banco>(true, []);
 

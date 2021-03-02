@@ -1,8 +1,21 @@
 import { Component,OnInit } from '@angular/core';
 import { Producto } from '../../../intefaces/home/compra.class';
-import {FormControl,Validators} from '@angular/forms';
+import { FormControl,Validators} from '@angular/forms';
 //import { AngularFileUploaderComponent } from "angular-file-uploader";
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { District, Region, Province } from "ubigeos";
+import { startWith, map} from 'rxjs/operators';
+import { Observable} from 'rxjs';
+//COMPONENTE
+import { Direccion } from 'src/app/componentes/maestro/direccion'; 
+//SERVICE
+import { CountryI } from 'src/app/intefaces/maestro/pais.interface';
+import { DireccionService } from 'src/app/services/maestro/direccion.service';
+//INTERFACE
+import { Direcciones } from '../../../intefaces/maestro/direcciones.interface';
+import { DataUbigeoI } from 'src/app/intefaces/maestro/data-ubigeo.interface';
+
 
 @Component({
   selector: 'app-gasto',
@@ -11,13 +24,104 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class GastoComponent implements OnInit {
 
-  constructor() { }
+  //SELECT DIRECCION
+  public selectedCountry: CountryI = {id: '', value: ''};
+  public countries: CountryI[] = [];
+  public region: Region[] = [];
+  public provincias!: Province[] | null;
+  public distritos!: District[] | null;
+  public ubigeo:string | null = "";
+  public show:boolean = false;
+  public dataUbigeo: DataUbigeoI[] = [{
+    country: [],
+    region: [],
+    provincia: null,
+    distrito: null,
+    ubigeo: "",
+    show: false
+  }];
+
+//CLASES
+  public direccion: Direccion[] = [{ 
+    id:null,
+    direccion:'', 
+    pais:'',
+    departamento:'',
+    provincia:'',
+    distrito:'',
+    ubigeo:'',
+    clienteId:null}];
+
+  constructor(
+    public route: ActivatedRoute,
+    private direccionService: DireccionService,
+    private router: Router,
+  ) { }
 
   //producto
-  ngOnInit(){
-    this.deleteProducto(1);
-  }
+  ngOnInit(): void{
 
+    this.countries = this.direccionService.getCountries();
+    this.filPais = this.control.valueChanges
+         .pipe(
+           startWith(''),
+           map(value => this.findOption(value))
+         );
+
+   
+   //---------------------Para las regiones de Direccion
+   for (let i=1; i<=25; i++) {
+     if(i<10) {
+       this.region[i] = Region.instance(`0${i}`);
+     }else {
+       this.region[i] = Region.instance(`${i}`);
+     }
+   }
+   this.region = this.region.filter(reg => reg != null);
+
+
+ }
+
+ //---------------------Autocomplete PAIS
+ control: FormControl = new FormControl();
+ filPais!: Observable<any[]>;
+ findOption(value: string) {
+   const filterValue = value.toLowerCase();
+   return this.countries.filter((countries) => countries.value.toLowerCase().indexOf(filterValue) === 0);
+ }
+ onSelectCountry(id:any,i:number):void {
+   if(id === "Perú") {
+     this.dataUbigeo[i].show = true;
+   }else {
+     this.dataUbigeo[i].show = false;
+     this.direccion[i].departamento = '';
+     this.dataUbigeo[i].provincia = null;
+     this.dataUbigeo[i].distrito = null;
+     this.dataUbigeo[i].ubigeo = null;
+   }
+ }
+
+ onSelect(id:string,i:number):void {
+   if(id) {
+     this.dataUbigeo[i].provincia = Region.instance(id).getProvincies().filter(provincia => provincia != null);
+     // this.provincias = Region.instance(id).getProvincies().filter(provincia => provincia != null);
+     this.dataUbigeo[i].distrito = null;
+     this.dataUbigeo[i].ubigeo = null;
+   }
+ }
+
+ filtroProvincia(id:string,i:number):void {
+   if(id) {
+     this.dataUbigeo[i].distrito = Province.instance(id).getDistricts().filter(distrito => distrito != null);
+     this.dataUbigeo[i].ubigeo = null
+   }
+ }
+
+ obtenerUbigeo(id:string,i:number):void {
+   this.dataUbigeo[i].ubigeo = id;
+ }
+
+ //----------------------PRODUCTOS
     id = 1;
 
     PRODUCTOS = [ new Producto(this.id, '', '', 0, 0, 0, 0)];
@@ -92,5 +196,35 @@ export class GastoComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
+  //--------------------DIRECCIONES
+  idDireccion = 1;
+  DIRECCION = [ new Direcciones(this.idDireccion, '', '' , '', '','','')];
+  
+  addDireccion(Entity:any){
+    this.direccion.push({
+      id:null,
+      direccion:'', 
+      pais:'',
+      departamento:'',
+      provincia:'',
+      distrito:'',
+      ubigeo:'',
+      clienteId: null
+    });
+
+    this.dataUbigeo.push({
+      country: [],
+      region: [],
+      provincia: null,
+      distrito: null,
+      ubigeo: "",
+      show: false
+    });
+  }
+  
+  deleteDireccion(id:any){
+    this.direccion.splice(id, 1);
+    this.dataUbigeo.splice(id, 1);
+  }
 
 }

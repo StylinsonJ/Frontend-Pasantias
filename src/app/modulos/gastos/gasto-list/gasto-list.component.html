@@ -1,6 +1,6 @@
 <div class="normal-form">
     
-    <div align="end" >
+    <div align="center" >
       <mat-form-field>
         <input matInput  (keyup)="applyFilter($event)" >
         <mat-icon matSuffix>search</mat-icon>
@@ -119,12 +119,22 @@
             <td mat-cell *matCellDef="let element"> {{element.monto_tot}} </td>
         </ng-container>
 
-        <ng-container>
-          <th>Eliminar</th>
-          <td>
-            <button mat-icon-button color="warn">
-              <mat-icon>delete</mat-icon>
-            </button>
+        <!-- Edit-Delete Column -->
+        <ng-container matColumnDef="actions"     >
+          <th mat-header-cell *matHeaderCellDef  ></th>
+          <td mat-cell *matCellDef="let element" >
+            <div class="grid-action">
+              <div>
+                <button mat-icon-button class="color-edit" routerLink="edit/{{element.id}}">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+              <div>
+                <button mat-icon-button color="warn" >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
           </td>
         </ng-container>
           

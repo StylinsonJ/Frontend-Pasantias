@@ -54,14 +54,14 @@ import { PersonaContactoService } from './services/maestro/persona-contacto.serv
      import { VentasComponent } from './modulos/ventas/ventas.component';
                //Gastos
      import { GastosComponent } from './modulos/gastos/gastos.component';
+        import { GastoComponent } from './modulos/gastos/gasto/gasto.component';
+        import { GastoListComponent } from './modulos/gastos/gasto-list/gasto-list.component';
                //Tablero
       import { TableroComponent } from './modulos/tablero/tablero.component';
 import { ContactoComponent } from './modulos/compras/compra/contacto/contacto.component';
 import { DetalleComponent } from './modulos/almacen/productos/detalle/detalle.component';
 import { ClientesService } from './services/maestro/clientes.service';
 import { BancoComponent } from './modulos/maestro/bancos-maestro/banco/banco.component';
-import { GastoComponent } from './modulos/gastos/gasto/gasto.component';
-import { GastoListComponent } from './modulos/gastos/gasto-list/gasto-list.component';
 import { VentaComponent } from './modulos/ventas/venta/venta.component';
 import { VentaListComponent } from './modulos/ventas/venta-list/venta-list.component';
 import { ComprobanteComponent } from './modulos/ventas/comprobante/comprobante.component';

@@ -1,1 +1,156 @@
-<p>pagos works!</p>
+<div class="normal-form">
+    
+    <div align="center" >
+      <mat-form-field>
+        <input matInput  (keyup)="applyFilter($event)" >
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+  
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item >
+          <mat-icon>cloud_download</mat-icon>
+          <span>Excel</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div> 
+  
+    <div  align="center">
+      
+      <table mat-table  [dataSource]="dataSource" matSort >
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                          [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)"
+                          [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!-- N° Codigo Column -->
+        <ng-container matColumnDef="registro">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> N° Registro </th>
+            <td mat-cell *matCellDef="let element"> {{element.registro}} </td>
+        </ng-container>
+
+        <!-- Fecha de Emisión -->
+        <ng-container matColumnDef="fec_emi">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Emisión </th>
+        <td mat-cell *matCellDef="let element"> {{element.fec_emi}} </td>
+        </ng-container>
+
+        <!-- Fecha de Venc -->
+        <ng-container matColumnDef="fec_ven">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Vencimiento </th>
+            <td mat-cell *matCellDef="let element"> {{element.fec_ven}} </td>
+            </ng-container>
+        
+        <!-- RUC/DNI Column -->
+        <ng-container matColumnDef="ruc_dni">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> RUC - DNI </th>
+            <td mat-cell *matCellDef="let element"> {{element.ruc_dni}} </td>
+        </ng-container>
+
+        <!-- Razon Social Column -->
+        <ng-container matColumnDef="razon_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Razón Social </th>
+            <td mat-cell *matCellDef="let element"> {{element.razon_name}} </td>
+        </ng-container>
+
+           <!-- Tipo de Comprobante -->
+           <ng-container matColumnDef="tipo_com">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Emisión </th>
+            <td mat-cell *matCellDef="let element"> {{element.tipo_comprobante}} </td>
+        </ng-container>
+
+        <!-- N° Serie -->
+        <ng-container matColumnDef="num_serie">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> N° Serie </th>
+            <td mat-cell *matCellDef="let element"> {{element.num_serie}} </td>
+        </ng-container>
+
+        <!-- N° Comprobante -->
+        <ng-container matColumnDef="num_comprobante">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> N° Comprobante </th>
+            <td mat-cell *matCellDef="let element"> {{element.num_comprobante}} </td>
+        </ng-container>
+
+        <!-- Estado Column -->
+        <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+            <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+        </ng-container>
+
+        <!-- Moneda Column -->
+        <ng-container matColumnDef="moneda">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Moneda </th>
+            <td mat-cell *matCellDef="let element"> {{element.moneda}} </td>
+        </ng-container>
+
+        <!-- Importe Total Column -->
+        <ng-container matColumnDef="imp_total">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Importe Total </th>
+            <td mat-cell *matCellDef="let element"> {{element.imp_total}} </td>
+        </ng-container>
+
+        <!-- Edit-Delete Column -->
+    <ng-container matColumnDef="action"     >
+        <th mat-header-cell *matHeaderCellDef  ></th>
+        <td mat-cell *matCellDef="let element" >
+          
+            <div>
+              <button mat-icon-button class="color-edit" routerLink="edit/{{element.id}}">
+                <mat-icon>find_in_page</mat-icon>
+              </button>
+            </div>
+           
+        </td>
+      </ng-container>
+          
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            (click)="selection.toggle(row)">
+        </tr>
+      <!--
+        <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            Loading data...
+          </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            No data.
+          </mat-footer-cell>
+        </ng-container>
+      
+        
+       
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+      
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+   
+      -->
+       
+      </table>
+
+      
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>
