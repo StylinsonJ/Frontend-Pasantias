@@ -1,4 +1,4 @@
-import { Component,ViewChild, OnInit } from '@angular/core';
+import { Component,ViewChild, OnInit, ElementRef } from '@angular/core';
 import { SelectionModel} from '@angular/cdk/collections';
 
 import { MatTableDataSource} from '@angular/material/table';
@@ -8,6 +8,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { ClienteComponent } from './cliente/cliente.component';
 import { ClientesService } from '../../../services/maestro/clientes.service';
+import { HttpClient } from '@angular/common/http';
+import { ClienteDataSource } from './cliente.datasource';
+import { fromEvent } from 'rxjs';
+import { Cliente } from 'src/app/componentes/maestro/cliente';
 
 export interface ClientesList {
   id: number;
@@ -31,13 +35,21 @@ export class ClientesComponent implements OnInit {
   id!: number;
   ruc_dni!: number;
   razon_name!: string;
+  clienteDataSource!: ClienteDataSource;
+  clienteService!: ClientesService | null;
 
   constructor(
+    public httpClient: HttpClient,
     public dialog: MatDialog,
+    public dataService: ClientesService
     ) {}
-
+  
   ngOnInit() {
-    this.dataSource.sort = this.sort;
+    this.loadData();
+  }
+
+  refresh() {
+    this.loadData();
   }
 
   //CABECERA
@@ -47,38 +59,77 @@ export class ClientesComponent implements OnInit {
 
   
   //FILTRO
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  // applyFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
 
   //PAGINATOR
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
+  @ViewChild('filter',  {static: true}) filter!: ElementRef;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  // ngAfterViewInit() {
+  //   this.dataSource.paginator = this.paginator;
+  //   this.dataSource.sort = this.sort;
+  // }
 
-   //REGISTRO-PROVEEDOR ABRIR DIALOGO
-   openDialog(): void {
+  //REGISTRO-PROVEEDOR ABRIR DIALOGO
+  openDialog(): void {
      
     const dialogRef = this.dialog.open(ClienteComponent, {
-      width: '100%',
-   });
+      width: '100%'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if(result === 1) {
+        console.log('The dialog was closed');
+        this.clienteService?.dataChange.value.push(this.dataService.getDialogData());
+        this.refreshTable();
+      }
     });
   }
 
   //CREAR
 
   //EDITAR
+  startEdit(id:number) {
+    this.id = id;
+    const dialogRef = this.dialog.open(ClienteComponent,  {
+      data: {id: id}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === 1) {
+        const foundIndex = this.clienteService?.dataChange.value.findIndex(x => x.id === this.id); 
+        this.clienteService!.dataChange.value[foundIndex!] = this.dataService.getDialogData();
+        this.refreshTable();
+      }
+    });
+  }
 
   //ELIMINAR
   
+  //CARGAR CLIENTES
+  public loadData() {
+    this.clienteService = new ClientesService(this.httpClient);
+    this.clienteDataSource = new ClienteDataSource(this.clienteService, this.paginator, this.sort);
+    fromEvent(this.filter?.nativeElement, 'keyup')
+    .subscribe(() => {
+      if (!this.clienteDataSource) {
+        return;
+      }
+      this.clienteDataSource.filter = this.filter.nativeElement.value;
+    });
+  }
+
+  //REFRESCAR TABLA
+  private refreshTable() {
+    // Refreshing table using paginator
+    // Thanks yeager-j for tips
+    // https://github.com/marinantonio/angular-mat-table-crud/issues/12
+    this.paginator._changePageSize(this.paginator.pageSize);
+  }
+
   //CHECK
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {

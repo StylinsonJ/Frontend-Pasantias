@@ -164,6 +164,9 @@ import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-o
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
+  entryComponents: [
+    ClienteComponent
+  ],
   providers: [ProveedoresService,
               PersonaContactoService,
               ClientesService,
