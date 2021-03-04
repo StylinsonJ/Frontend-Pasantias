@@ -1,6 +1,10 @@
 <div class="normal-form">
-    
-    <div align="center" >
+    <div>
+      <button mat-flat-button (click)="openDialog()" color="primary" class="addprov" >
+        <mat-icon>add</mat-icon>Gasto
+      </button> 
+    </div>
+    <div align="end" >
       <mat-form-field>
         <input matInput  (keyup)="applyFilter($event)" >
         <mat-icon matSuffix>search</mat-icon>

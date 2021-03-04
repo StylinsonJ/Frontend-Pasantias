@@ -1,1 +1,26 @@
-<p>organizacion works!</p>
+<div class="grid-opcion">
+    <div class="grid-linea">
+        <div>
+            <mat-selection-list #shoes [multiple]="false">
+                <mat-list-option routerLink="/maestro/organizacion/consulta-org">
+                    Consulta
+                </mat-list-option>
+                <mat-list-option routerLink="/maestro/organizacion/unidad">
+                    Nueva Unidad
+                </mat-list-option>
+                <mat-list-option routerLink="/maestro/organizacion/area">
+                    Nueva Área
+                </mat-list-option>
+            </mat-selection-list>
+        </div>
+        <div>
+            <hr align="right" class="linea"  width="1px" noshade="noshade">
+        </div>
+    </div>
+    <div class="option">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+
+  

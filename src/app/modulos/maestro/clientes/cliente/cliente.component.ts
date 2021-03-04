@@ -1,25 +1,47 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component,Inject, OnInit  } from '@angular/core';
 import { MatDialogRef} from '@angular/material/dialog';
 import {FormControl,Validators} from '@angular/forms';
 import { District, Region, Province } from "ubigeos";
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable} from 'rxjs';
+import { startWith, map} from 'rxjs/operators';
+
 //COMPONENTE
 import { Direccion } from 'src/app/componentes/maestro/direccion'; 
 import { Cliente } from 'src/app/componentes/maestro/cliente';
 import { PersonaContacto } from 'src/app/componentes/maestro/persona-contacto';
 //SERVICE
 import { ClientesService } from 'src/app/services/maestro/clientes.service';
+import { CountryI } from 'src/app/intefaces/maestro/pais.interface';
+import { DireccionService } from 'src/app/services/maestro/direccion.service';
+//INTERFACE
+import { Direcciones } from '../../../../intefaces/maestro/direcciones.interface';
+import { Contactos } from '../../../../intefaces/maestro/contactos.interfaces';
+import { DataUbigeoI } from 'src/app/intefaces/maestro/data-ubigeo.interface';
 
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
   styleUrls: ['./cliente.component.css']
 })
+
 export class ClienteComponent implements OnInit {
+  //SELECT DIRECCION
+  public selectedCountry: CountryI = {id: '', value: ''};
+  public countries: CountryI[] = [];
   public region: Region[] = [];
   public provincias!: Province[] | null;
   public distritos!: District[] | null;
   public ubigeo:string | null = "";
+  public show:boolean = false;
+  public dataUbigeo: DataUbigeoI[] = [{
+    country: [],
+    region: [],
+    provincia: null,
+    distrito: null,
+    ubigeo: "",
+    show: false
+  }];
 
     // CLASES
     public clienteNuevo:    Cliente = new Cliente();

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort } from '@angular/material/sort';
@@ -6,6 +7,7 @@ import {MatSort } from '@angular/material/sort';
 import { ExcelService} from '../../../services/excel/excel.service';
 
 import {SelectionModel} from '@angular/cdk/collections';
+import { FacturaGtComponent } from './factura-gt/factura-gt.component';
 
 
 export interface PagosList {
@@ -62,6 +64,7 @@ export class PagosComponent implements OnInit {
 
 
   constructor(
+    public dialog: MatDialog,
     private excelService: ExcelService
   ) { }
 
@@ -105,6 +108,19 @@ export class PagosComponent implements OnInit {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+  }
+
+   //REGISTRO-PROVEEDOR ABRIR DIALOGO
+   openDialog(): void {
+     
+    const dialogRef = this.dialog.open(FacturaGtComponent, {
+      width: '100%',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialogo cerrado');
+    });
   }
 
 

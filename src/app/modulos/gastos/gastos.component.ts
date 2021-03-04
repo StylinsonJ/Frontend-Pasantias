@@ -10,7 +10,6 @@ export class GastosComponent implements OnInit {
 
   navEnlaces = [
     { path: 'list', label: 'Consulta'},
-    { path: 'new',  label: 'Nuevo Gasto' },
   ];
   activeLink = this.navEnlaces[0];
   

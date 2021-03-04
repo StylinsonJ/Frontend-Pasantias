@@ -29,6 +29,9 @@ import { GastoComponent } from './modulos/gastos/gasto/gasto.component';
 import { PagosComponent } from './modulos/finanzas/pagos/pagos.component';
 import { CobrosComponent } from './modulos/finanzas/cobros/cobros.component';
 import { BancosFinanzasComponent } from './modulos/finanzas/bancos-finanzas/bancos-finanzas.component';
+import { UnidadesComponent } from './modulos/maestro/organizacion/unidades/unidades.component';
+import { AreasComponent } from './modulos/maestro/organizacion/areas/areas.component';
+import { ConsultaOrgComponent } from './modulos/maestro/organizacion/consulta-org/consulta-org.component';
 
 const routes: Routes = [
   {path:'login', component: LoginComponent},
@@ -48,7 +51,13 @@ const routes: Routes = [
           },
           {path: 'bancos',          component: BancosMaestroComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
           {path: 'catalogos',       component: CatalogosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'organizacion',    component: OrganizacionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'organizacion',    component: OrganizacionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+              children: [
+                {path: '',  redirectTo: '/maestro/organizacion/consulta-org', pathMatch: 'full'},
+                {path: 'unidad',       component: UnidadesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+                {path: 'area',         component: AreasComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+                {path: 'consulta-org', component: ConsultaOrgComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},    
+              ]},
           {path: 'tablas-generales', component: TablasGeneralesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
         ]
       },

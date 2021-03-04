@@ -121,7 +121,7 @@ export class ProveeedorComponent implements OnInit {
           );
 
       this.deleteCuenta(1);
-    //-----------------------Codigo Proveedor
+      //-----------------------Codigo Proveedor
       this.proveedorService.getId().subscribe(
         identificador => 
             this.proveedorNuevo.codigo = identificador+1 < 10 ? "PR000"+(identificador+1) :
@@ -129,20 +129,20 @@ export class ProveeedorComponent implements OnInit {
             identificador+1 < 1000 ? "PR0"+(identificador+1) : 
             (identificador+1).toString() 
       );
-    //---------------------Para las regiones de Direccion
-    for (let i=1; i<=25; i++) {
-      if(i<10) {
-        this.region[i] = Region.instance(`0${i}`);
-      }else {
-        this.region[i] = Region.instance(`${i}`);
+      //---------------------Para las regiones de Direccion
+      for (let i=1; i<=25; i++) {
+        if(i<10) {
+          this.region[i] = Region.instance(`0${i}`);
+        }else {
+          this.region[i] = Region.instance(`${i}`);
+        }
+      }
+      this.region = this.region.filter(reg => reg != null);
+
+      if(this.data != null) {
+        this.cargarProveedor();
       }
     }
-    this.region = this.region.filter(reg => reg != null);
-
-    if(this.data != null) {
-      this.cargarProveedor();
-    }
-  }
 
     //---------------------Autocomplete PAIS
     control: FormControl = new FormControl();

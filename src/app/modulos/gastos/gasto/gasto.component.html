@@ -1,10 +1,17 @@
 <div mat-dialog-title class="detalle">
     <div>
-      <mat-icon>add_box</mat-icon><b>Gasto: GT0001</b>
+      <h4><b>Registro: GT0001</b></h4>
+    </div>
+    <div  align="end">
+      <span class="fill-remaining-space"></span>
+      <button class="btn-dialog-close" mat-button 
+              (click)="onClose()" tabIndex="-1">
+                <mat-icon>clear</mat-icon>
+      </button>
     </div>
 </div>
-
-<div class="formulario">
+<hr>
+<div mat-dialog-content>
   <form>
     <mat-grid-list cols="2" rowHeight="240px" style="margin-bottom: 10px;">
         <mat-grid-tile>
