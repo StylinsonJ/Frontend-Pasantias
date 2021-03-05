@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { ClienteDataSource } from './cliente.datasource';
 import { fromEvent } from 'rxjs';
 import { Cliente } from 'src/app/componentes/maestro/cliente';
+import { DeleteComponent } from './delete/delete.component';
 
 export interface ClientesList {
   id: number;
@@ -108,6 +109,20 @@ export class ClientesComponent implements OnInit {
   }
 
   //ELIMINAR
+  deleteItem(i:number, id:number, codigo: string, rucDni: string, razonSocial: string) {
+    this.id = id;
+    const dialogRef = this.dialog.open(DeleteComponent, {
+      data: {id: id, codigo: codigo, rucDni: rucDni, razonSocial: razonSocial}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === 1) {
+        const foundIndex = this.clienteService?.dataChange.value.findIndex(x => x.id === this.id);
+        this.clienteService?.dataChange.value.splice(foundIndex!, 1);
+        this.refreshTable();
+      }
+    })
+  }
   
   //CARGAR CLIENTES
   public loadData() {
@@ -124,9 +139,6 @@ export class ClientesComponent implements OnInit {
 
   //REFRESCAR TABLA
   private refreshTable() {
-    // Refreshing table using paginator
-    // Thanks yeager-j for tips
-    // https://github.com/marinantonio/angular-mat-table-crud/issues/12
     this.paginator._changePageSize(this.paginator.pageSize);
   }
 

@@ -1,0 +1,17 @@
+<div class="container">
+    <h3 mat-dialog-title>Estas seguro?</h3>
+    <div mat-dialog-content>
+      Codigo: {{ data.codigo }}
+      <p></p>
+      Ruc / Dni: {{data.rucDni}}
+      <p></p>
+      Razon Social: {{data.razonSocial}}
+      <p></p>
+    </div>
+  
+    <mat-dialog-actions mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="1" (click)="confirmDelete()">Delete</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </mat-dialog-actions>
+  </div>
+  

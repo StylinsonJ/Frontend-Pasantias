@@ -87,6 +87,8 @@ import { ConsultaActivosComponent } from './modulos/almacen/consulta-activos/con
 import { OrdenTrasladoComponent } from './modulos/almacen/orden-traslado/orden-traslado.component';
 import { NuevaOtComponent } from './modulos/almacen/orden-traslado/nueva-ot/nueva-ot.component';
 import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-ot/consulta-ot.component';
+import { DeleteComponent } from './modulos/maestro/clientes/delete/delete.component';
+import { BancosMaestroService } from './services/maestro/bancos-maestro.service';
 
 @NgModule({
   declarations: [
@@ -119,6 +121,7 @@ import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-o
     GastosComponent,
     TableroComponent,
     CompraComponent,
+    DeleteComponent,
     ClienteComponent,
     ContactoComponent,
     DetalleComponent,
@@ -170,6 +173,7 @@ import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-o
   providers: [ProveedoresService,
               PersonaContactoService,
               ClientesService,
+              BancosMaestroService,
               
               interceptorProvider],
   bootstrap: [AppComponent]
