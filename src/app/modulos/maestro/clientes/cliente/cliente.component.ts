@@ -1,10 +1,8 @@
-import { Component,Inject, OnInit  } from '@angular/core';
-import { MatDialogRef} from '@angular/material/dialog';
+import { Component, Inject, OnInit  } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormControl,Validators} from '@angular/forms';
 import { District, Region, Province } from "ubigeos";
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable} from 'rxjs';
-import { startWith, map} from 'rxjs/operators';
 
 //COMPONENTE
 import { Direccion } from 'src/app/componentes/maestro/direccion'; 
@@ -13,11 +11,13 @@ import { PersonaContacto } from 'src/app/componentes/maestro/persona-contacto';
 //SERVICE
 import { ClientesService } from 'src/app/services/maestro/clientes.service';
 import { CountryI } from 'src/app/intefaces/maestro/pais.interface';
-import { DireccionService } from 'src/app/services/maestro/direccion.service';
 //INTERFACE
 import { Direcciones } from '../../../../intefaces/maestro/direcciones.interface';
 import { Contactos } from '../../../../intefaces/maestro/contactos.interfaces';
 import { DataUbigeoI } from 'src/app/intefaces/maestro/data-ubigeo.interface';
+import { DireccionService } from 'src/app/services/maestro/direccion.service';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cliente',
@@ -43,109 +43,50 @@ export class ClienteComponent implements OnInit {
     show: false
   }];
 
-    // CLASES
-    public clienteNuevo:    Cliente = new Cliente();
-    public personaContacto: PersonaContacto = new PersonaContacto();
-    //public direccion:       Direccion = new Direccion();
-    public direccion: Direccion = new Direccion(0,'', '', '','','','',0);
-
-    //AGREGAR MAS DIRECCIONES
-    public dirID = 1;
-    public DIRECCIONES = [ new Direccion(this.dirID, '', '', '','','','',0)];
-    isUpdate = null;
-    TempEdit = null;
-    addDir(Entity:any){
-      if(this.isUpdate != null){
-        this.updateDir(this.TempEdit, Entity)
-      }else{
-        this.dirID +=1;
-        const dirEntry = new Direccion(
-          Entity.dirId, 
-          Entity.direccion, 
-          Entity.pais,
-          Entity.departamento, 
-          Entity.provincia,
-          Entity.distrito, 
-          Entity.ubigeo, 
-          Entity.clienteId)
-        this.DIRECCIONES.push(dirEntry);
-        this.resetDir(Entity);
-      }
-    }
-    updateDir(Model:any, Entity:any){
-      for(let i = 0; i < this.DIRECCIONES.length; ++i){
-        if (this.DIRECCIONES[i].id === Model.id){
-          Entity.DIRECCIONES[i].direccion    = Entity.direccion;
-          Entity.DIRECCIONES[i].pais         = Entity.pais;
-          Entity.DIRECCIONES[i].departamento = Entity.departamento;
-          Entity.DIRECCIONES[i].provincia    = Entity.provincia;
-          Entity.DIRECCIONES[i].distrito     = Entity.distrito;
-          Entity.DIRECCIONES[i].ubigeo       = Entity.ubigeo;
-          Entity.DIRECCIONES[i].clienteId    = Entity.clienteId;
-        }
-      }
-      this.resetDir(Entity);
-      this.isUpdate = null;
-    }
-      deleteDir(id:any){
-        for(let i=0; i < this.DIRECCIONES.length; ++i){
-          if(this.DIRECCIONES[i].id === id){
-            this.DIRECCIONES.splice(i,1);
-          }
-        }
-      }
-      
-      EditDir(Entity:any, Model:any){
-        Model.direccion =  Entity.direccion,
-        Model.pais =Entity.pais,
-        Model.departamento = Entity.departamento, 
-        Model.provincia = Entity.provincia,
-        Model.distrito = Entity.distrito, 
-        Model.ubigeo =   Entity.ubigeo, 
-        Model.clienteId=  Entity.clienteId
-      }
-
-      resetDir(Entity :any){
-        Entity.direccion = '';
-        Entity.pais = '';
-        Entity.departamento = '';
-        Entity.provincia = '';
-        Entity.distrito= ''; 
-        Entity.ubigeo= ''; 
-        Entity.clienteId = 0;
-      }
-
-
-
-    edit: boolean = false;
+  // CLASES
+  public clienteNuevo:    Cliente = new Cliente();
+  public personaContacto: PersonaContacto[] = [{
+    cargo: "",
+    clienteId: null,
+    correo: "",
+    id: 0,
+    nombre: "",
+    telefono: "",
+    proveedorId: null
+  }];
+  //public direccion:       Direccion = new Direccion();
+  public direccion: Direccion[] = [{ 
+    id:null,
+    direccion:'', 
+    pais:'',
+    departamento:'',
+    provincia:'',
+    distrito:'',
+    ubigeo:'',
+    clienteId:null}];
 
     //LA DATA SE LLEVA ClienteComponent
     constructor(
-      private clienteService: ClientesService,
-      private activatedRoute: ActivatedRoute,
-      private router: Router,
-      public dialogRef: MatDialogRef<ClienteComponent>) { }
+      public clienteService: ClientesService,
+      private direccionService: DireccionService,
+      public router: Router,
+      public dialogRef: MatDialogRef<ClienteComponent>,
+      @Inject(MAT_DIALOG_DATA) public data:any) { }
 
   ngOnInit(): void {
-    const params = this.activatedRoute.snapshot.params;
-    if (params.id) {
-      this.clienteService.getCliente(params.id)
-        .subscribe(
-          res => {
-            console.log(res);
-              this.clienteNuevo = res;
-              this.edit = true;
-          },
-          err => console.log(err)
-        )
-    }
+    this.countries = this.direccionService.getCountries();
+    this.filPais = this.control.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this.findOption(value))
+          );
 
     this.clienteService.getId().subscribe(
       identificador => 
           this.clienteNuevo.codigo = identificador+1 < 10 ? "CL000"+(identificador+1) :
           identificador+1 < 100 ? "CL00"+(identificador+1) : 
           identificador+1 < 1000 ? "CL0"+(identificador+1) : 
-          identificador.toString() 
+          (identificador+1).toString() 
     );
   
     // PARA SELECT DEPARTAMENTO
@@ -157,63 +98,166 @@ export class ClienteComponent implements OnInit {
       }
     }
     this.region = this.region.filter(reg => reg != null);
-    }
 
-    onSelect(id:string):void {
-      if(id) {
-        this.provincias = Region.instance(id).getProvincies().filter(provincia => provincia != null);
-        this.direccion.provincia = "";
-        this.direccion.distrito = "";
-        this.distritos = null;
-        this.ubigeo = null;
+    if(this.data != null) {
+      this.cargarCliente();
+    }
+  }
+
+    //---------------------Autocomplete PAIS
+    control: FormControl = new FormControl();
+    filPais!: Observable<any[]>;
+    findOption(value: string) {
+      const filterValue = value.toLowerCase();
+      return this.countries.filter((countries) => countries.value.toLowerCase().indexOf(filterValue) === 0);
+    }
+    onSelectCountry(id:any,i:number):void {
+      if(id === "Perú") {
+        this.dataUbigeo[i].show = true;
+      }else {
+        this.dataUbigeo[i].show = false;
+        this.direccion[i].departamento = '';
+        this.dataUbigeo[i].provincia = null;
+        this.dataUbigeo[i].distrito = null;
+        this.dataUbigeo[i].ubigeo = null;
       }
     }
 
-    filtroProvincia(id:string):void {
+    onSelect(id:string,i:number):void {
       if(id) {
-        this.distritos = Province.instance(id).getDistricts().filter(distrito => distrito != null);
-        this.direccion.distrito = "";
-        this.ubigeo = null
+        this.dataUbigeo[i].provincia = Region.instance(id).getProvincies().filter(provincia => provincia != null);
+        // this.provincias = Region.instance(id).getProvincies().filter(provincia => provincia != null);
+        this.dataUbigeo[i].distrito = null;
+        this.dataUbigeo[i].ubigeo = null;
       }
     }
 
-    obtenerUbigeo(id:string):void {
-      this.ubigeo = id;
+    filtroProvincia(id:string,i:number):void {
+      if(id) {
+        this.dataUbigeo[i].distrito = Province.instance(id).getDistricts().filter(distrito => distrito != null);
+        this.dataUbigeo[i].ubigeo = null
+      }
+    }
+
+    obtenerUbigeo(id:string,i:number):void {
+      this.dataUbigeo[i].ubigeo = id;
     }
     //---------------------------------
 
     saveNewCliente(): void {
-      this.clienteService.saveCliente(this.clienteNuevo, this.personaContacto, this.direccion)
-        .subscribe(
-          response => { 
-            console.log(response);
-            this.router.navigate(['/maestro']);
-          },
-          error => 
-            console.log(error)
-          
+      this.clienteService.saveCliente(this.clienteNuevo, this.personaContacto, this.direccion);
+
           // swal('Nuevo Cliente', `El cliente ${proveedor.nombre} ha sido creado con éxito`, 'success')
-        )
     }
   
-  
     updateCliente(): void {
-      this.clienteService.updateCliente(this.clienteNuevo)
+      this.clienteService.updateCliente(this.clienteNuevo, this.direccion, this.personaContacto)
       .subscribe(
         json => {
-          console.log(json);
-          this.router.navigate(['/maestro'])
+          // console.log(json);
+          this.router.navigate(['/maestro/clientes']);
+          this.clienteService.update(this.clienteNuevo);
           // swal('Cliente Actualizado', `${json.mensaje}: ${json.cliente.nombre}`, 'success')
         },
         err => console.error(err)
       )
+    }
+
+    //---------------------traer datos de un cliente
+    cargarCliente(): void {
+      if(this.data.id) {
+        this.clienteService.getCliente(this.data.id).subscribe(
+          json => {
+            console.log(json)
+            this.clienteNuevo = json.cliente;
+            this.direccion = json.direccion;
+            if(this.direccion.length > 1) {
+              for(let i=0; i<this.direccion.length; i++) {
+                if(this.direccion[i].pais === "Perú") {
+                  if(i===0) {
+                    this.dataUbigeo[i] = {
+                      country: [],
+                      region: [],
+                      provincia: Region.instance(this.direccion[i].departamento).getProvincies(),
+                      distrito: Province.instance(this.direccion[i].provincia).getDistricts(),
+                      ubigeo: "",
+                      show: true
+                    }
+                  }else {
+                    this.dataUbigeo.push({
+                      country: [],
+                      region: [],
+                      provincia: Region.instance(this.direccion[i].departamento).getProvincies(),
+                      distrito: Province.instance(this.direccion[i].provincia).getDistricts(),
+                      ubigeo: "",
+                      show: true
+                    });
+                  }
+                }else {
+                  this.dataUbigeo.push({
+                    country: [],
+                    region: [],
+                    provincia: null,
+                    distrito: null,
+                    ubigeo: "",
+                    show: false
+                  });
+                }
+              }
+            }
+            this.personaContacto = json.personaContacto;
+          }
+        )
       }
+    }
     
     //CERRAR REGISTRO
     onClose(): void {
       this.dialogRef.close();
     }
 
+    addDireccion(Entity:any){
+      this.direccion.push({
+        id:null,
+        direccion:'', 
+        pais:'',
+        departamento:'',
+        provincia:'',
+        distrito:'',
+        ubigeo:'',
+        clienteId: null
+      });
+
+      this.dataUbigeo.push({
+        country: [],
+        region: [],
+        provincia: null,
+        distrito: null,
+        ubigeo: "",
+        show: false
+      });
+    }
+    
+    deleteDireccion(id:any){
+      this.direccion.splice(id, 1);
+      this.dataUbigeo.splice(id, 1);
+    }
+
+    addContacto(Entity:any){
+      this.personaContacto.push({
+        cargo: "",
+        clienteId: null,
+        correo: "",
+        id: null,
+        nombre: "",
+        telefono: "",
+        proveedorId: null
+      });
+    }
+    
+    deleteContacto(id:any){
+      this.personaContacto.splice(id, 1);
+    }
   
     //EXPANSION DE DIRECCION Y DATOS PERSONALES
     panelOpenState = false;

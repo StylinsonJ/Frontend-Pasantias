@@ -170,6 +170,9 @@ import { RrhhListComponent } from './modulos/rrhh/rrhh-list/rrhh-list.component'
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
+  entryComponents: [
+    ClienteComponent
+  ],
   providers: [ProveedoresService,
               PersonaContactoService,
               ClientesService,

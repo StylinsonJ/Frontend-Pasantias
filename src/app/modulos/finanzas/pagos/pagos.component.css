@@ -24,7 +24,8 @@
   }
   
   .color-edit{
-    color: rgb(15, 134, 15);
+    color:goldenrod;
+    font-size: xx-large;
   }
   
   
@@ -39,3 +40,8 @@
     width: 90%;
   }
   
+
+  .doc-pago{
+    margin-top: 50px;
+    font-size: x-large;
+  }

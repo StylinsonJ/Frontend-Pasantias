@@ -129,7 +129,7 @@ export class GastoListComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
 
-   //REGISTRO-PROVEEDOR ABRIR DIALOGO
+   /*REGISTRO-PROVEEDOR ABRIR DIALOGO
    openDialog(): void {
      
     const dialogRef = this.dialog.open(GastoComponent, {
@@ -140,6 +140,6 @@ export class GastoListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialogo cerrado');
     });
-  }
+  }*/
 
 }

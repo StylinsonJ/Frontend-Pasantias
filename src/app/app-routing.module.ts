@@ -32,6 +32,9 @@ import { BancosFinanzasComponent } from './modulos/finanzas/bancos-finanzas/banc
 import { UnidadesComponent } from './modulos/maestro/organizacion/unidades/unidades.component';
 import { AreasComponent } from './modulos/maestro/organizacion/areas/areas.component';
 import { ConsultaOrgComponent } from './modulos/maestro/organizacion/consulta-org/consulta-org.component';
+import { VentaListComponent } from './modulos/ventas/venta-list/venta-list.component';
+import { VentaComponent } from './modulos/ventas/venta/venta.component';
+import { StockComponent } from './modulos/ventas/stock/stock.component';
 
 const routes: Routes = [
   {path:'login', component: LoginComponent},
@@ -61,12 +64,19 @@ const routes: Routes = [
           {path: 'tablas-generales', component: TablasGeneralesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
         ]
       },
-      {path: 'ventas',  component: VentasComponent,  canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+      {path: 'ventas',  component: VentasComponent,  canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+        children: [
+          {path: '',  redirectTo: '/ventas/ventas-lista', pathMatch: 'full'},
+          {path: 'ventas-lista',  component: VentaListComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'ventas-add', component: VentaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'stock', component: StockComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+        ]  
+      },
       {path: 'gastos', component: GastosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
         children: [
-          {path: '',  redirectTo: '/gastos/list', pathMatch: 'full'},
-          {path: 'list',  component: GastoListComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'new', component: GastoComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: '',  redirectTo: '/gastos/gastos-lista', pathMatch: 'full'},
+          {path: 'gastos-lista',  component: GastoListComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'gastos-add', component: GastoComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
         ]
       },
       {path: 'compras', component: ComprasComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
