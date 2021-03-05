@@ -89,6 +89,9 @@ import { NuevaOtComponent } from './modulos/almacen/orden-traslado/nueva-ot/nuev
 import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-ot/consulta-ot.component';
 import { DeleteComponent } from './modulos/maestro/clientes/delete/delete.component';
 import { BancosMaestroService } from './services/maestro/bancos-maestro.service';
+import { ConsultaOrgComponent } from './modulos/maestro/organizacion/consulta-org/consulta-org.component';
+import { FacturaGtComponent } from './modulos/finanzas/pagos/factura-gt/factura-gt.component';
+import { RrhhListComponent } from './modulos/rrhh/rrhh-list/rrhh-list.component';
 
 @NgModule({
   declarations: [
@@ -153,7 +156,10 @@ import { BancosMaestroService } from './services/maestro/bancos-maestro.service'
     OrdenTrasladoComponent,
     NuevaOtComponent,
     ConsultaOtComponent,
-    SaveNotifComponent
+    SaveNotifComponent,
+    ConsultaOrgComponent,
+    FacturaGtComponent,
+    RrhhListComponent
   ],
   imports: [
     BrowserModule,

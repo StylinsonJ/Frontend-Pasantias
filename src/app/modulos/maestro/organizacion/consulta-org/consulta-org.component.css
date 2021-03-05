@@ -1,0 +1,29 @@
+table {
+  width: 80%;
+  
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 80%;
+}
+
+.color-edit{
+  color: rgb(15, 134, 15);
+}
+
+.grid-action{
+  display: grid;
+  grid-template-columns: 40px 40px;
+}
+
+th, td{
+  width: 30%;
+  
+}
+  
+/* Paginacion*/
+.mat-paginator{
+  width: 80%;
+}
+

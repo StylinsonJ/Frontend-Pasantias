@@ -9,8 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class GastosComponent implements OnInit {
 
   navEnlaces = [
-    { path: 'list', label: 'Consulta'},
-    { path: 'new',  label: 'Nuevo Gasto' },
+    { path: 'gastos-lista', label: 'Consulta'},
+    { path: 'gastos-add', label: 'Nuevo Ingreso'},
   ];
   activeLink = this.navEnlaces[0];
   

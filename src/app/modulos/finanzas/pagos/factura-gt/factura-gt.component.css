@@ -1,0 +1,88 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  /* ------------PAGO-----------*/
+  .grid-comprobante {
+    display: grid;
+    grid-template-columns:50% 50%;
+  }
+
+  .span-comprobante{
+    margin-top: 35px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns:30% 60% 10%;
+    margin-left: 20px;
+  }
+
+  .fec-pago{
+    width: 100%;
+    margin-right: 10px;
+  }
+  
+  .fec-pago > * {
+    width: 100%;
+    margin-right: 10px;
+  }
+
+  .comentario{
+    width: 100%;
+    margin-right: 10px;
+    margin-left: 25px;
+  }
+  
+  .comentario > * {
+    width: 100%;
+    margin-right: 10px;
+    margin-left: 25px;
+  }
+
+  .grid-fin {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+ /* ------------COMPROBANTE-----------*/
+   /* DETALLE*/
+   .cabecera {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+
+@media only screen and (max-width:1200px){
+  
+  .span-comprobante{
+    margin-top: 20px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns:35% 50% 15%;
+    margin-left: 10px;
+  }
+
+  .fec-pago{
+    width: 95%;
+    margin-right: 5px;
+  }
+  
+  .fec-pago > * {
+    width: 95%;
+    margin-right: 5px;
+  }
+
+  .comentario{
+    width: 100%;
+    margin-right: 10px;
+    margin-left: 5px;
+  }
+  
+  .comentario > * {
+    width: 100%;
+    margin-right: 10px;
+    margin-left: 5px;
+  }
+}
+

@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormControl,Validators} from '@angular/forms';
 import { District, Region, Province } from "ubigeos";
 import { ActivatedRoute, Router } from '@angular/router';
+
 //COMPONENTE
 import { Direccion } from 'src/app/componentes/maestro/direccion'; 
 import { Cliente } from 'src/app/componentes/maestro/cliente';
@@ -10,6 +11,9 @@ import { PersonaContacto } from 'src/app/componentes/maestro/persona-contacto';
 //SERVICE
 import { ClientesService } from 'src/app/services/maestro/clientes.service';
 import { CountryI } from 'src/app/intefaces/maestro/pais.interface';
+//INTERFACE
+import { Direcciones } from '../../../../intefaces/maestro/direcciones.interface';
+import { Contactos } from '../../../../intefaces/maestro/contactos.interfaces';
 import { DataUbigeoI } from 'src/app/intefaces/maestro/data-ubigeo.interface';
 import { DireccionService } from 'src/app/services/maestro/direccion.service';
 import { Observable } from 'rxjs';
@@ -20,6 +24,7 @@ import { map, startWith } from 'rxjs/operators';
   templateUrl: './cliente.component.html',
   styleUrls: ['./cliente.component.css']
 })
+
 export class ClienteComponent implements OnInit {
   //SELECT DIRECCION
   public selectedCountry: CountryI = {id: '', value: ''};

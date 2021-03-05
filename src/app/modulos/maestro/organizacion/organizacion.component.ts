@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganizacionComponent implements OnInit {
 
+  typesOfShoes: string[] = ['Nueva Unidad', 'Nueva Area', 'Consultas'];
+
   constructor() { }
 
   ngOnInit(): void {

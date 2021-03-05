@@ -1,0 +1,197 @@
+<div mat-dialog-content>
+    <mat-horizontal-stepper linear #stepper>
+    <mat-step >
+        <form >
+            <ng-template matStepLabel>Información de Gasto</ng-template>
+            <app-gasto><mat-dialog-content></mat-dialog-content></app-gasto>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Pago</ng-template>
+            
+            <mat-grid-list cols="3" rowHeight="80px" >
+                <mat-grid-tile>
+                    <div class="controles-container">
+                        <!-- ESTADO DE FACTURA-->
+                        <mat-form-field appearance="outline" >
+                            <mat-label> Estado de la Factura</mat-label>
+                            <mat-select  formControlName="secondCtrl" >
+                                <mat-option required value="1">Pendiente</mat-option>
+                                <mat-option value="2">Pagado Parcialmente</mat-option>
+                                <mat-option value="3">Pagado</mat-option>
+                                <mat-option required value="4" >Pagado con TC</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="controles-container">
+                         <!-- TOTAL DE COMPROBANTE-->
+                        <div class="grid-comprobante">
+                            <div class="span-comprobante" align="end">
+                                <span> Total de Comprobante: </span>
+                            </div>
+                            <div class="controles-container">
+                                <mat-form-field appearance="outline">
+                                    <input matInput type="number">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="controles-container">
+                        <!-- SALDO-->
+                        <div class="grid-comprobante">
+                            <div class="span-comprobante" align="end">
+                                <span> Saldo: </span>
+                            </div>
+                            <div class="controles-container">
+                                <mat-form-field appearance="outline">
+                                    <input matInput type="number">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <hr>
+            <mat-grid-list cols="3" rowHeight="140px" style="margin-bottom: 10px;">
+                <mat-grid-tile>
+                    <div class="controles-container">
+                        <!-- TIPO DE CAMBIO-->
+                        <mat-form-field appearance="fill"> 
+                            <mat-label>Tipo de Cambio</mat-label>
+                            <input matInput >
+                        </mat-form-field>
+
+                        <!-- BANCO-->
+                        <mat-form-field appearance="fill">
+                            <mat-label>Banco</mat-label>
+                            <mat-select>
+                                <mat-option value="1">Option</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="controles-container">
+                        <!-- MONEDA DE PAGO-->
+                        <mat-form-field appearance="fill">
+                            <mat-label>Moneda de Pago</mat-label>
+                            <mat-select>
+                                <mat-option value="1">Pen</mat-option>
+                                <mat-option value="2">Dolar</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <!-- TIPO DE PAGO-->
+                        <mat-form-field appearance="fill" >
+                            <mat-label>Tipo de Pago</mat-label>
+                            <mat-select>
+                                <mat-option value="1">Cheque</mat-option>
+                                <mat-option value="2">Efectivo</mat-option>
+                                <mat-option value="3">Transferencia</mat-option>
+                                <mat-option value="4">Tarjeta de Crédito</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="controles-container">
+                        <!-- MONTO PAGADO-->
+                        <mat-form-field appearance="fill" > 
+                            <mat-label>Monto Pagado</mat-label>
+                            <input matInput >
+                        </mat-form-field>
+
+                        <!-- N° OPERACION-->
+                        <mat-form-field appearance="fill"> 
+                            <mat-label>N° Operación</mat-label>
+                            <input matInput type="number">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <div class="grid-3">
+                <div class="fec-pago">
+                    <!-- FECHA DE PAGO-->
+                    <mat-form-field appearance="fill" >
+                        <mat-label>Fecha de Pago</mat-label>
+                        <input matInput type="date" >
+                    </mat-form-field>
+                </div>
+                <div class="comentario">
+                    <!-- Comentario-->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Comentario</mat-label>
+                        <input matInput>
+                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div align="end">
+                    <button mat-button color="primary" style="padding: 8px;" >
+                        <mat-icon>add_box</mat-icon>
+                      </button>
+                </div>
+            </div>  
+        <hr>
+        
+            <!-- GUARDAR-->
+            <div align="end">
+                <button mat-button (click)="stepper.reset()">Limpiar</button>
+                <button mat-button >Guardar</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step >
+        <ng-template matStepLabel>Comprobante</ng-template>
+                
+            <h3><b>Comprobante de Pago : TC0001</b></h3>
+         
+            <mat-grid-list cols="2" rowHeight="150px" >
+                <mat-grid-tile>
+                    <div class="controles-container">
+                        <!-- TITULAR DE LA TC-->
+                        <mat-form-field appearance="fill" > 
+                            <mat-label>Titular de la Tarjeta de Crédito</mat-label>
+                            <input matInput >
+                        </mat-form-field>
+
+                        <!-- ESTADO DE DEVOLUCION-->
+                        <mat-form-field appearance="fill">
+                            <mat-label> Estado de Devolución</mat-label>
+                            <mat-select>
+                                <mat-option value="1">Option</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="controles-container">
+                         <!-- TOTAL DE COMPROBANTE-->
+                         <mat-form-field appearance="fill">
+                            <mat-label>Total de Comprobante</mat-label>
+                            <input matInput type="number">
+                        </mat-form-field>
+                        <!-- MONEDA-->
+                        <mat-form-field appearance="fill">
+                            <mat-label> Moneda</mat-label>
+                            <input matInput type="number">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            
+        <div align="end">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+</div>
+
+  

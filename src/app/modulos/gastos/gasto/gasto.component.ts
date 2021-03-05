@@ -2,7 +2,6 @@ import { Component,OnInit } from '@angular/core';
 import { Producto } from '../../../intefaces/home/compra.class';
 import { FormControl,Validators} from '@angular/forms';
 //import { AngularFileUploaderComponent } from "angular-file-uploader";
-import { MatDialog} from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { District, Region, Province } from "ubigeos";
 import { startWith, map} from 'rxjs/operators';
@@ -56,6 +55,7 @@ export class GastoComponent implements OnInit {
     public route: ActivatedRoute,
     private direccionService: DireccionService,
     private router: Router,
+    
   ) { }
 
   //producto
@@ -196,6 +196,14 @@ export class GastoComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
+  /*---------------------Cerrar dialogo
+  onClose(): void {
+    //this.proveedorService.form.reset();
+    //this.proveedorService.initializeFormGroup();
+    this.dialogRef.close();
+    this.router.navigate(['/gastos/list'])
+  }
+*/
   //--------------------DIRECCIONES
   idDireccion = 1;
   DIRECCION = [ new Direcciones(this.idDireccion, '', '' , '', '','','')];

@@ -35,6 +35,8 @@ import { MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
     imports: [
@@ -73,7 +75,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         ProgressBarModule,
         MatAutocompleteModule,
         MatProgressSpinnerModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatTreeModule,
+        MatStepperModule
     ],
     exports:[
         PortalModule,
@@ -110,7 +114,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         ProgressBarModule,
         MatAutocompleteModule,
         MatProgressSpinnerModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatTreeModule,
+        MatStepperModule
     ]
 })
 export class MaterialModule {}

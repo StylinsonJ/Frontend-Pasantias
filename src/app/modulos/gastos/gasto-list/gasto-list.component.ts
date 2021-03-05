@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort } from '@angular/material/sort';
-
+import { MatDialog } from '@angular/material/dialog';
 import {SelectionModel} from '@angular/cdk/collections';
 
 import { ExcelService} from '../../../services/excel/excel.service';
+import { GastoComponent } from '../gasto/gasto.component';
 
 export interface GastosList {
   id: number;
@@ -54,7 +55,8 @@ export class GastoListComponent implements OnInit {
   monto_tot!: number
 
   constructor(
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    public dialog: MatDialog,
     ) {}
 
   ngOnInit() {
@@ -126,5 +128,18 @@ export class GastoListComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
+
+   /*REGISTRO-PROVEEDOR ABRIR DIALOGO
+   openDialog(): void {
+     
+    const dialogRef = this.dialog.open(GastoComponent, {
+      width: '100%',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialogo cerrado');
+    });
+  }*/
 
 }
