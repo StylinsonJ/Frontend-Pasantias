@@ -1,6 +1,6 @@
 <div mat-dialog-title class="detalle">
     <div>
-      <mat-icon>add_box</mat-icon><b>Requirimiento de Compra: RC0010</b>
+      <h3><b>Requirimiento de Compra: RC0010</b></h3>
     </div>
 </div>
 
@@ -11,11 +11,11 @@
         <mat-grid-tile>
           <div class="controles-container">
             <!--Cotizacion -->
-            <mat-form-field >
+            <mat-form-field appearance="outline">
               <input matInput placeholder="Cotización">
             </mat-form-field>
             <!--Orden de Compra -->
-            <mat-form-field>
+            <mat-form-field appearance="outline">
               <input matInput placeholder="Orden de compra">
             </mat-form-field>
             <!--RUC/DNI -->
@@ -29,7 +29,7 @@
             <!--Subir Archivo -->
             <input  type="file" class="form-control" placeholder="cotizacion" >    
             <!--Fecha de Orden -->
-            <mat-form-field style="margin-top: 10px; margin-bottom: 10px;" >
+            <mat-form-field style="margin-top: 10px; margin-bottom: 10px;" appearance="outline" >
               <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Fecha de Orden">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -43,9 +43,9 @@
       <mat-expansion-panel  (opened)="panelOpenState = false"
                             (closed)="panelOpenState = true">
         <mat-expansion-panel-header>
-          <mat-panel-title>Direcciones</mat-panel-title>
+          <mat-panel-title>Ubicación</mat-panel-title>
           <mat-panel-description>
-            <mat-icon>map</mat-icon>
+            <mat-icon>location_on</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <!--DIRECCION-->
@@ -127,7 +127,7 @@
     <mat-grid-list cols="3" rowHeight="60px" style="margin-bottom: 10px;">
       <mat-grid-tile>
         <div class="controles-container">
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Tipo de Compra</mat-label>
             <mat-select>
               <mat-option value="option">Option</mat-option>
@@ -137,7 +137,7 @@
       </mat-grid-tile>  
       <mat-grid-tile>
         <div class="controles-container">
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Fecha de Vencimiento">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -146,7 +146,7 @@
       </mat-grid-tile> 
       <mat-grid-tile>
         <div class="controles-container">
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Moneda</mat-label>
             <mat-select>
               <mat-option value="option">Option</mat-option>

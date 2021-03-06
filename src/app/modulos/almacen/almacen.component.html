@@ -1,5 +1,15 @@
-<mat-tab-group animationDuration="0ms" >
-    <mat-tab label="Entrada"><app-entrada></app-entrada></mat-tab>
-    <mat-tab label="Productos"><app-productos></app-productos></mat-tab>
-    <mat-tab label="Sucursal"><app-sucursal></app-sucursal></mat-tab>
-</mat-tab-group>
+<nav mat-tab-nav-bar class="cabecera" backgroundColor="primary">
+    <a mat-tab-link 
+       *ngFor="let link of navEnlaces"
+       [routerLink]="link.path"
+       routerLinkActive #rla="routerLinkActive"
+       [routerLinkActiveOptions]="{exact:true}"
+       [active]="rla.isActive"
+       [ngStyle]="{'background-color': rla.isActive? '#727176af':''}"
+       >
+      {{link.label}}
+    </a>
+ </nav>
+ 
+ <router-outlet></router-outlet>
+ 

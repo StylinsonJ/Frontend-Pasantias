@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-rrhh',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RrhhComponent implements OnInit {
 
-  constructor() { }
+  navEnlaces = [
+    { path: 'rrhh-lista', label: 'Consulta'},
+    { path: 'rrhh-add', label: 'Nuevo Ingreso'},
+  ];
+  activeLink = this.navEnlaces[0];
+  
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
   }
-
 }

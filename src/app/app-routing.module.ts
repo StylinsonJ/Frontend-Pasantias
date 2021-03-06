@@ -8,6 +8,7 @@ import { DefaultComponent } from './layouts/default/default.component';
 
 import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
 import { RrhhComponent } from './modulos/rrhh/rrhh.component';
+import { RrhhListComponent } from './modulos/rrhh/rrhh-list/rrhh-list.component';
 import { AlmacenComponent } from './modulos/almacen/almacen.component';
 
 import { MaestroComponent } from './modulos/maestro/maestro.component';
@@ -34,7 +35,13 @@ import { AreasComponent } from './modulos/maestro/organizacion/areas/areas.compo
 import { ConsultaOrgComponent } from './modulos/maestro/organizacion/consulta-org/consulta-org.component';
 import { VentaListComponent } from './modulos/ventas/venta-list/venta-list.component';
 import { VentaComponent } from './modulos/ventas/venta/venta.component';
-import { StockComponent } from './modulos/ventas/stock/stock.component';
+import { EntradaComponent } from './modulos/almacen/entrada/entrada.component';
+import { SalidaComponent } from './modulos/almacen/salida/salida.component';
+import { ProductosComponent } from './modulos/almacen/productos/productos.component';
+import { ConsultaStockComponent } from './modulos/almacen/consulta-stock/consulta-stock.component';
+import { CompraListComponent } from './modulos/compras/compra-list/compra-list.component';
+import { CompraComponent } from './modulos/compras/compra/compra.component';
+import { RrhhAddComponent } from './modulos/rrhh/rrhh-add/rrhh-add.component';
 
 const routes: Routes = [
   {path:'login', component: LoginComponent},
@@ -69,7 +76,7 @@ const routes: Routes = [
           {path: '',  redirectTo: '/ventas/ventas-lista', pathMatch: 'full'},
           {path: 'ventas-lista',  component: VentaListComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
           {path: 'ventas-add', component: VentaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'stock', component: StockComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+         
         ]  
       },
       {path: 'gastos', component: GastosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
@@ -79,16 +86,37 @@ const routes: Routes = [
           {path: 'gastos-add', component: GastoComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
         ]
       },
-      {path: 'compras', component: ComprasComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-      {path: 'almacen', component: AlmacenComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+      {path: 'compras', component: ComprasComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+        children: [
+          {path: '',  redirectTo: '/compras/compras-lista', pathMatch: 'full'},
+          {path: 'compras-lista',  component: CompraListComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'compras-add', component: CompraComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+        ]
+      },
+      {path: 'almacen', component: AlmacenComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+        children: [
+          {path: '',  redirectTo: '/almacen/entrada', pathMatch: 'full'},
+          {path: 'entrada',  component: EntradaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'salida', component: SalidaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'productos', component: ProductosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'stock-lista', component: ConsultaStockComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+
+        ]
+      },
       {path: 'finanzas',component: FinanzasComponent,canActivate: [guard], data: { expectedRol: ['admin', 'user']},
-      children: [
-        {path: '',  redirectTo: '/finanzas/pagos', pathMatch: 'full'},
-        {path: 'pagos',  component: PagosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-        {path: 'cobros', component: CobrosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-        {path: 'bancos-finanzas', component: BancosFinanzasComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-      ]},
-      {path: 'rrhh',    component: RrhhComponent,    canActivate: [guard], data: { expectedRol: ['admin', 'user']}}
+        children: [
+          {path: '',  redirectTo: '/finanzas/pagos', pathMatch: 'full'},
+          {path: 'pagos',  component: PagosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'cobros', component: CobrosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'bancos-finanzas', component: BancosFinanzasComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+        ]}, 
+      {path: 'rrhh',    component: RrhhComponent,    canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+        children: [
+          {path: '',  redirectTo: '/rrhh/rrhh-add', pathMatch: 'full'},
+          {path: 'rrhh-lista',  component: RrhhListComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'rrhh-add', component: RrhhAddComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+        ]
+      }
     ]},
   {path: '**', component: PageNotFoundComponent}
 ];

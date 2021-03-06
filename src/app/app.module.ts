@@ -65,7 +65,6 @@ import { BancoComponent } from './modulos/maestro/bancos-maestro/banco/banco.com
 import { VentaComponent } from './modulos/ventas/venta/venta.component';
 import { VentaListComponent } from './modulos/ventas/venta-list/venta-list.component';
 import { ComprobanteComponent } from './modulos/ventas/comprobante/comprobante.component';
-import { StockComponent } from './modulos/ventas/stock/stock.component';
 import { DashboardComponent } from './modulos/dashboard/dashboard.component';
 import { CatalogosComponent } from './modulos/maestro/catalogos/catalogos.component';
 import { BienesComponent } from './modulos/maestro/catalogos/bienes/bienes.component';
@@ -90,6 +89,7 @@ import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-o
 import { ConsultaOrgComponent } from './modulos/maestro/organizacion/consulta-org/consulta-org.component';
 import { FacturaGtComponent } from './modulos/finanzas/pagos/factura-gt/factura-gt.component';
 import { RrhhListComponent } from './modulos/rrhh/rrhh-list/rrhh-list.component';
+import { RrhhAddComponent } from './modulos/rrhh/rrhh-add/rrhh-add.component';
 
 @NgModule({
   declarations: [
@@ -131,7 +131,6 @@ import { RrhhListComponent } from './modulos/rrhh/rrhh-list/rrhh-list.component'
     VentaComponent,
     VentaListComponent,
     ComprobanteComponent,
-    StockComponent,
     DashboardComponent,
     CatalogosComponent,
     BienesComponent,
@@ -156,7 +155,8 @@ import { RrhhListComponent } from './modulos/rrhh/rrhh-list/rrhh-list.component'
     SaveNotifComponent,
     ConsultaOrgComponent,
     FacturaGtComponent,
-    RrhhListComponent
+    RrhhListComponent,
+    RrhhAddComponent
   ],
   imports: [
     BrowserModule,

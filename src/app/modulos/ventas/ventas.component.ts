@@ -11,7 +11,6 @@ export class VentasComponent implements OnInit {
   navEnlaces = [
     { path: 'ventas-lista', label: 'Consulta'},
     { path: 'ventas-add', label: 'Nuevo Ingreso'},
-    { path: 'stock', label: 'Stock'},
   ];
   activeLink = this.navEnlaces[0];
   

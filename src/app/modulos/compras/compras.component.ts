@@ -1,4 +1,6 @@
 import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-compras',
@@ -6,9 +8,18 @@ import { Component, OnInit} from '@angular/core';
   styleUrls: ['./compras.component.css']
 })
 export class ComprasComponent implements OnInit {
-  constructor() { }
+  navEnlaces = [
+    { path: 'compras-lista', label: 'Consulta'},
+    { path: 'compras-add', label: 'Nuevo Ingreso'},
+  ];
+  activeLink = this.navEnlaces[0];
+  
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
   }
-  
+
 }

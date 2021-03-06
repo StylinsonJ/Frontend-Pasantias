@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatDialogRef} from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-factura-gt',
@@ -12,12 +14,23 @@ export class FacturaGtComponent implements OnInit {
   secondFormGroup!: FormGroup;
   isOptional = false;
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    public  dialogRef: MatDialogRef<FacturaGtComponent>,
+    private router: Router,
+    private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
+  }
+
+   //---------------------Cerrar dialogo
+   onClose(): void {
+    //this.proveedorService.form.reset();
+    //this.proveedorService.initializeFormGroup();
+    this.dialogRef.close();
+    this.router.navigate(['/finanzas/pagos'])
   }
 
 }

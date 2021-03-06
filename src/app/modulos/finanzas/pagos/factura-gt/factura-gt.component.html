@@ -142,7 +142,7 @@
         
             <!-- GUARDAR-->
             <div align="end">
-                <button mat-button (click)="stepper.reset()">Limpiar</button>
+                <button mat-button (click)="onClose()">Cancelar</button>
                 <button mat-button >Guardar</button>
             </div>
         </form>
@@ -187,8 +187,8 @@
             </mat-grid-list>
             
         <div align="end">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+          <button mat-button (click)="onClose()">Cancelar</button>
+          <button mat-button>Guardar</button>
         </div>
       </mat-step>
     </mat-horizontal-stepper>
