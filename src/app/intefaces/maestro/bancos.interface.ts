@@ -1,12 +1,16 @@
 export class Banco {
-    constructor (
-      public id:number,
-      public banco: string,
-      public nro_cuenta: number,
-      public CCI: number,
-      public tipo_cuenta: string,
-      public moneda: string
-     ) {}
-  }
+    public id!:number;
+    public entidad!: string;
+    public moneda!: string;
+    public tipoCuenta!: string;
+    public fechaApertura!: Date | null;
+    public numCuenta!: string;
+    public cci!: string;
+    public funcionario!: string;
+    public agApertura!: string; 
+    public estado!: string;
+    public comentarios!: string
+    constructor () {}
+}
     
   

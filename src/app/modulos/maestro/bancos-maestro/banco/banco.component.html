@@ -13,52 +13,78 @@
         <div class="controles-container">
             <!-- ENTIDAD O BANCO-->
             <mat-form-field> 
-                <input  matInput      
-                name="entidad"       placeholder="Entidad">
+                <input 
+                    matInput      
+                    name="entidad" 
+                    placeholder="Entidad"
+                    [(ngModel)]="banco.entidad">
             </mat-form-field>
             <!-- MONEDA-->
             <mat-form-field>
                 <mat-label> Moneda</mat-label>
-                <mat-select>
+                <mat-select
+                    name="moneda"
+                    [(ngModel)]="banco.moneda">
                   <mat-option value="Pen">Pen</mat-option>
                   <mat-option value="Dolar">Dolar</mat-option>
                 </mat-select>
             </mat-form-field>
             <!-- TIPO DE CUENTA -->
             <mat-form-field>
-                <input  matInput
-                name="cuenta"  placeholder="Tipo de Cuenta">
+                <input 
+                    matInput
+                    name="tipoCuenta" 
+                    [(ngModel)]="banco.tipoCuenta"
+                    placeholder="Tipo de Cuenta">
             </mat-form-field>
             <!-- FECHA DE APERTURA-->
             <mat-form-field>
                 <mat-label>Fecha de Apertura</mat-label>
-                <input  matInput        type="date"
-                    name="fechaIni"     placeholder="Fecha de Inicio">
+                <input 
+                    matInput        
+                    type="date"
+                    name="fechaApertura" 
+                    [(ngModel)]="banco.fechaApertura"
+                    placeholder="Fecha de Inicio">
             </mat-form-field>
             <!-- N° CUENTA-->
             <mat-form-field>
-                <input  matInput
-                name="num_cuenta"  placeholder="N° Cuenta">
+                <input 
+                    matInput
+                    name="numCuenta"
+                    [(ngModel)]="banco.numCuenta"
+                    placeholder="N° Cuenta">
             </mat-form-field>   
             <!-- CCI-->
             <mat-form-field>
-                <input  matInput
-                name="CCI"  placeholder="CCI">
+                <input 
+                    matInput
+                    name="cci" 
+                    [(ngModel)]="banco.cci"
+                    placeholder="CCI">
             </mat-form-field>     
             <!-- FUNCIONARIO -->
             <mat-form-field>
-                <input  matInput
-                name="funcionario"  placeholder="Funcionario">
+                <input 
+                    matInput
+                    name="funcionario"
+                    [(ngModel)]="banco.funcionario" 
+                    placeholder="Funcionario">
                 </mat-form-field>
             <!-- AGENCIA DE APERTURA -->
             <mat-form-field>
-                <input  matInput
-                name="ag_apertura"  placeholder="Agencia de Apertura">
+                <input  
+                    matInput
+                    name="agApertura" 
+                    [(ngModel)]="banco.agApertura"
+                    placeholder="Agencia de Apertura">
             </mat-form-field>
             <!-- ESTADO-->
             <mat-form-field>
                 <mat-label> Estado</mat-label>
-                <mat-select>
+                <mat-select
+                    name="estado"
+                    [(ngModel)]="banco.estado">
                   <mat-option value="option">Activo</mat-option>
                   <mat-option value="option">De baja</mat-option>
                 </mat-select>
@@ -72,12 +98,15 @@
         <mat-form-field appearance="outline">
             <mat-label>Comentario<mat-icon>sentiment_very_satisfied</mat-icon>
             </mat-label>
-            <textarea matNativeControl></textarea>
+            <textarea 
+                matNativeControl
+                name="comentarios"
+                [(ngModel)]="banco.comentarios"></textarea>
         </mat-form-field>
     </div>
     <div>
         <button mat-button >Limpiar</button>
-        <button mat-flat-button color="primary">Guardar <mat-icon>save</mat-icon></button>
+        <button mat-flat-button color="primary" [mat-dialog-close]="1" (click)="confirmAdd()">Guardar <mat-icon>save</mat-icon></button>
     </div>
 </mat-dialog-actions>
       

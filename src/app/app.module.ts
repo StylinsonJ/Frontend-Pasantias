@@ -86,6 +86,8 @@ import { ConsultaActivosComponent } from './modulos/almacen/consulta-activos/con
 import { OrdenTrasladoComponent } from './modulos/almacen/orden-traslado/orden-traslado.component';
 import { NuevaOtComponent } from './modulos/almacen/orden-traslado/nueva-ot/nueva-ot.component';
 import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-ot/consulta-ot.component';
+import { DeleteComponent } from './modulos/maestro/clientes/delete/delete.component';
+import { BancosMaestroService } from './services/maestro/bancos-maestro.service';
 import { ConsultaOrgComponent } from './modulos/maestro/organizacion/consulta-org/consulta-org.component';
 import { FacturaGtComponent } from './modulos/finanzas/pagos/factura-gt/factura-gt.component';
 import { RrhhListComponent } from './modulos/rrhh/rrhh-list/rrhh-list.component';
@@ -122,6 +124,7 @@ import { RrhhAddComponent } from './modulos/rrhh/rrhh-add/rrhh-add.component';
     GastosComponent,
     TableroComponent,
     CompraComponent,
+    DeleteComponent,
     ClienteComponent,
     ContactoComponent,
     DetalleComponent,
@@ -176,6 +179,7 @@ import { RrhhAddComponent } from './modulos/rrhh/rrhh-add/rrhh-add.component';
   providers: [ProveedoresService,
               PersonaContactoService,
               ClientesService,
+              BancosMaestroService,
               
               interceptorProvider],
   bootstrap: [AppComponent]

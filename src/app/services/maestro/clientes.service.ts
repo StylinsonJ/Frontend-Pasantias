@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -29,6 +29,7 @@ export class ClientesService {
     return this.dialogData;
   }
 
+  // No aplico
   getClientes(request: any): Observable<Cliente[]> {
     const params = request;
     return this.http.get<Cliente[]>(this.urlEndPoint, {params});
@@ -60,8 +61,7 @@ export class ClientesService {
     }
     
     this.http.post(this.urlEndPoint, {cliente, personaContacto, direccion}, {headers: this.httpHeaders}).pipe(
-      map( (response: any) =>  this.dialogData = response.cliente as Cliente
-    ));
+      map( (response: any) => response.cliente as Cliente)).subscribe( data => {this.dialogData = data});
   }
 
   updateCliente(cliente: Cliente, direccion: Direccion[], personaContacto: PersonaContacto[]): Observable<any> {
@@ -80,16 +80,17 @@ export class ClientesService {
     return this.http.put<any>(`${this.urlEndPoint}/${cliente.id}`, {cliente, direccion, personaContacto}, {headers: this.httpHeaders});
   }
 
-  deleteCliente(id: number): Observable<Cliente> {
-    return this.http.delete<Cliente>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
+  deleteCliente(id: number): void {
+    this.http.delete(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).subscribe(data => {
+      console.log(data);
+    },
+    (err: HttpErrorResponse) => {
+      console.log('Error ocurred. Details: ' + err.name + ' ' + err.message, 8000);
+    })
   }
 
   deleteAll(): Observable<Cliente[]> {
     return this.http.delete<Cliente[]>(this.urlEndPoint)
-  }
-
-  addCliente(cliente: Cliente): void {
-    this.dialogData = cliente;
   }
 
   update(cliente: Cliente): void {
