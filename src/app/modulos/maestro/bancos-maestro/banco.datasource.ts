@@ -44,7 +44,7 @@ export class BancoDataSource extends DataSource<Banco> {
       return merge(...displayDataChanges).pipe(map( () => {
           // Filter data
           this.filteredData = this._bancoDatabase.data.slice().filter((banco: Banco) => {
-            const searchStr = (banco.entidad + banco.numCuenta + banco.cci + banco.tipoCuenta + banco.moneda).toLowerCase();
+            const searchStr = (banco.entidad + banco.numCuenta + banco.cci + banco.tipoCuenta + banco.moneda).toString().toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
   

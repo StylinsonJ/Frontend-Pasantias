@@ -3,7 +3,7 @@ export class Banco {
     public entidad!: string;
     public moneda!: string;
     public tipoCuenta!: string;
-    public fechaApertura!: Date;
+    public fechaApertura!: Date | null;
     public numCuenta!: string;
     public cci!: string;
     public funcionario!: string;

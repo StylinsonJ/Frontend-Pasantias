@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Banco } from 'src/app/intefaces/maestro/bancos.interface';
 
 @Injectable()
@@ -35,14 +36,9 @@ export class BancosMaestroService {
   }
 
   addItem(banco: Banco): void {
-    this.httpClient.post(this.API_URL, banco, {headers: this.httpHeaders}).subscribe(data => {
-        this.dialogData = data;
-        console.log(this.dialogData);
-        console.log('Successfully added', 3000);
-      },
-      (err: HttpErrorResponse) => {
-        console.log('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
-    });
+    this.httpClient.post(this.API_URL, banco, {headers: this.httpHeaders}).pipe(
+      map((response: any) => response as Banco)
+    );
   }
 
   updateItem(banco: Banco): void {

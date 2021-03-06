@@ -38,7 +38,7 @@ export class BancoComponent implements OnInit{
   }
 
   public confirmAdd(): void {
-    this.bancoService.addItem(this.data);
+    this.bancoService.addItem(this.banco);
   }
 
   loadBanco() {
