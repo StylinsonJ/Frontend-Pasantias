@@ -1,1 +1,818 @@
-<p>rrhh-add works!</p>
+<div align="center" style="margin-top: 20px;"><hr><h4><b> REGISTRO - MBR0001 </b></h4><hr></div>
+<mat-horizontal-stepper [linear]="isLinear" #stepper fxLayoutAlign="center center" class="addrrhh"> 
+  <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Datos Personales</ng-template>
+          <mat-grid-list cols="3" rowHeight="150px">
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- NOMBRES -->
+                <mat-form-field appearance="outline" >
+                    <mat-label> Nombres </mat-label>
+                    <input matInput>
+                </mat-form-field>
+
+                <!-- TIPO DE DOC -->
+                <mat-form-field appearance="outline" class="campo2">
+                  <mat-label> Tipo de Documento</mat-label>
+                  <mat-select  formControlName="secondCtrl" >
+                      <mat-option required value="1">DNI</mat-option>
+                      <mat-option value="2">Pasaporte</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- 1° APELLIDO -->
+                <mat-form-field appearance="outline">
+                  <mat-label> Primer Apellido </mat-label>
+                  <input matInput>
+                </mat-form-field>
+
+                <!-- N° DOC -->
+                <mat-form-field appearance="outline" class="campo2">
+                  <mat-label> N° Documento </mat-label>
+                  <input matInput>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- 2° APELLIDO -->
+                <mat-form-field appearance="outline">
+                  <mat-label> Segundo Apellido </mat-label>
+                  <input matInput>
+                </mat-form-field>
+
+                <!-- Nacionalidad-->
+                <mat-form-field appearance="outline" class="campo2">
+                  <mat-label> Nacionalidad</mat-label>
+                  <input matInput  >
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+        <!-- -----------------------CONTACTO------------------- -->
+        <div class="grid-linea">
+          <div>
+            <hr class="linea1"  width="1px" noshade="noshade">
+          </div>
+          <div class="icon">
+            <mat-icon>perm_contact_calendar</mat-icon> 
+          </div>
+          <div>
+            <hr class="linea2"  width="1px" noshade="noshade">
+          </div>
+        </div>
+             
+        <mat-grid-list cols="4" rowHeight="70px">
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- TELEFONO FIJO-->
+              <mat-form-field appearance="outline">
+                <mat-label>Telf Fijo</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- TELEFONO MOVIL-->
+              <mat-form-field  appearance="outline">
+                <mat-label>Telf Movil</mat-label>
+                  <input matInput>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>         
+        
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- CORREO-->
+              <mat-form-field appearance="outline" class="campo2">
+                <mat-label>Correo </mat-label>
+                  <input matInput 
+                    placeholder="pat@example.com" 
+                  >
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- FECHA DE NACIMIENTO-->
+              <mat-form-field appearance="outline" class="campo2">
+                <mat-label> Fecha de Nacimiento</mat-label>
+                <input matInput type="date" >
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <!-- -----------------------UBICACION------------------- -->
+          <div class="grid-linea">
+            <div>
+              <hr class="linea1"  width="1px" noshade="noshade">
+            </div>
+            <div class="icon">
+              <mat-icon>location_on</mat-icon> 
+            </div>
+            <div>
+              <hr class="linea2"  width="1px" noshade="noshade">
+            </div>
+          </div>
+
+          <div class="campo-container" style="height: 80px;">
+            <!-- DIRECCION-->
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección</mat-label>
+              <input style="text-align: center;"
+                  matInput 
+                  >
+            </mat-form-field>
+          </div>
+            
+          <mat-grid-list cols="5" rowHeight="60px">
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- PAIS   [formControl]="control" -->
+                <mat-form-field  appearance="outline">
+                  <mat-label> Pais</mat-label>
+                  <input type="text"
+                    matInput
+                    [formControl]="myControl"
+                    [matAutocomplete]="auto">
+                    <mat-autocomplete  #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>   
+
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- DEPARTAMENTO-->
+                <mat-form-field appearance="outline">
+                  <mat-label> Departamento</mat-label>
+                  <mat-select >
+                      <mat-option required value="1">Option</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>         
+          
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- PROVINCIA-->
+                <mat-form-field appearance="outline">
+                  <mat-label> Provincia</mat-label>
+                  <mat-select >
+                      <mat-option required value="1">Option</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- DISTRITO-->
+                <mat-form-field appearance="outline">
+                  <mat-label> Distrito</mat-label>
+                  <mat-select >
+                      <mat-option required value="1">Option</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+            
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- UBIGEO-->
+                <mat-form-field appearance="outline">
+                  <mat-label>Ubigeo</mat-label>
+                  <input 
+                      matInput  readonly>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>  
+
+        <!-- -----------------------SEGURO------------------- -->
+          <div class="grid-linea">
+            <div>
+              <hr class="linea1"  width="1px" noshade="noshade">
+            </div>
+            <div class="icon">
+              <mat-icon>security</mat-icon> 
+            </div>
+            <div>
+              <hr class="linea2"  width="1px" noshade="noshade">
+            </div>
+          </div>
+               
+          <mat-grid-list cols="3" rowHeight="60px">
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- N° Seguro Social -->
+                <mat-form-field  appearance="outline">
+                  <mat-label> N° Seguro Social</mat-label>
+                    <input matInput>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- Sistema de Pensión-->
+                <mat-form-field appearance="outline">
+                  <mat-label> Sistema de Pensión</mat-label>
+                  <mat-select >
+                      <mat-option required value="1">Option</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>         
+          
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- CUSPP -->
+                <mat-form-field  appearance="outline">
+                  <mat-label> CUSPP</mat-label>
+                    <input matInput type="number">
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>  
+
+        <!-- -----------------------HABERES------------------- -->
+          <div class="grid-linea">
+            <div>
+              <hr class="linea1"  width="1px" noshade="noshade">
+            </div>
+            <div class="icon">
+              <mat-icon>savings</mat-icon> 
+            </div>
+            <div>
+              <hr class="linea2"  width="1px" noshade="noshade">
+            </div>
+          </div>
+       
+          <mat-grid-list cols="4" rowHeight="60px">
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- BANCO -->
+                <mat-form-field  appearance="outline">
+                  <mat-label> Banco </mat-label>
+                    <input matInput>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- TIPO DE CUENTA-->
+                <mat-form-field appearance="outline">
+                  <mat-label> Tipo de Cuenta</mat-label>
+                    <input matInput>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>         
+          
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- N° CUENTA -->
+                <mat-form-field  appearance="outline">
+                  <mat-label> N° Cuenta</mat-label>
+                    <input matInput >
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <div class="campo-container">
+                <!-- N° CCI -->
+                <mat-form-field  appearance="outline">
+                  <mat-label> CCI</mat-label>
+                    <input matInput >
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list> 
+
+          <div align="end">
+            <button mat-button matStepperNext>Siguiente</button>
+          </div>
+      </form>
+  </mat-step>
+
+  <mat-step >
+    <form >
+      <ng-template matStepLabel>Datos Familiares</ng-template>
+        <!-- ESTADO CIVIL -->
+        <div class="dato2-container" align="center">
+          <mat-form-field appearance="outline">
+            <mat-label> Estado Civil</mat-label>
+            <mat-select>
+                <mat-option value="1">Soltero</mat-option>
+                <mat-option value="2">Casado</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- -------------DATOS DEL CONYUGE------------- -->
+        <div class="grid-linea">
+          <div>
+            <hr class="linea1"  width="1px" noshade="noshade">
+          </div>
+          <div class="icon">
+            <mat-icon svgIcon="conyuge"></mat-icon>
+          </div>
+          <div>
+            <hr class="linea2"  width="1px" noshade="noshade">
+          </div>
+        </div>
+
+        <mat-grid-list cols="3" rowHeight="70px">
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- NOMBRES -->
+              <mat-form-field appearance="outline" >
+                  <mat-label> Nombres </mat-label>
+                  <input matInput>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- 1° APELLIDO -->
+              <mat-form-field appearance="outline">
+                <mat-label> Primer Apellido </mat-label>
+                <input matInput>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- 2° APELLIDO -->
+              <mat-form-field appearance="outline">
+                <mat-label> Segundo Apellido </mat-label>
+                <input matInput>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-grid-list cols="4" rowHeight="70px">
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- TIPO DE DOC -->
+              <mat-form-field appearance="outline" class="campo2">
+                <mat-label> Tipo de Documento</mat-label>
+                <mat-select  formControlName="secondCtrl" >
+                    <mat-option required value="1">DNI</mat-option>
+                    <mat-option value="2">Pasaporte</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- N° DOC -->
+              <mat-form-field appearance="outline" class="campo2">
+                <mat-label> N° Documento </mat-label>
+                <input matInput>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- Nacionalidad-->
+              <mat-form-field appearance="outline" class="campo2">
+                <mat-label> Nacionalidad</mat-label>
+                <input matInput  >
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- FECHA DE NACIMIENTO-->
+              <mat-form-field appearance="outline" class="campo2">
+                <mat-label> Fecha de Nacimiento</mat-label>
+                <input matInput type="date" >
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+        
+        <div class="campo-container" style="height: 80px;">
+          <!-- DIRECCION-->
+          <mat-form-field appearance="outline">
+            <mat-label>Dirección</mat-label>
+            <input style="text-align: center;"
+                matInput 
+                >
+          </mat-form-field>
+        </div>
+          
+        <mat-grid-list cols="5" rowHeight="60px">
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- PAIS   [formControl]="control" -->
+              <mat-form-field  appearance="outline">
+                <mat-label> Pais</mat-label>
+                <input type="text"
+                  matInput
+                  [formControl]="myControl"
+                  [matAutocomplete]="auto">
+                  <mat-autocomplete  #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>   
+
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- DEPARTAMENTO-->
+              <mat-form-field appearance="outline">
+                <mat-label> Departamento</mat-label>
+                <mat-select >
+                    <mat-option required value="1">Option</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>         
+        
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- PROVINCIA-->
+              <mat-form-field appearance="outline">
+                <mat-label> Provincia</mat-label>
+                <mat-select >
+                    <mat-option required value="1">Option</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- DISTRITO-->
+              <mat-form-field appearance="outline">
+                <mat-label> Distrito</mat-label>
+                <mat-select >
+                    <mat-option required value="1">Option</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- UBIGEO-->
+              <mat-form-field appearance="outline">
+                <mat-label>Ubigeo</mat-label>
+                <input 
+                    matInput  readonly>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <!-- -------------DATOS DE HIJOS------------- -->
+        <div class="grid-linea">
+          <div>
+            <hr class="linea1"  width="1px" noshade="noshade">
+          </div>
+          <div class="icon">
+            <mat-icon svgIcon="hijos"></mat-icon>
+          </div>
+          <div>
+            <hr class="linea2"  width="1px" noshade="noshade">
+          </div>
+        </div>
+
+        <div class="dato2-container" align="center">
+          <button mat-flat-button color="primary" (click)="agregarHijos()">
+            Añadir Datos de Hijos
+          </button>
+        </div>
+        <br>
+        <div formArrayName="hijos"
+          *ngFor="let hijo of hijos.controls; let in=index">
+          <div [formGroupName]="in">
+            <div class="form-group row">
+              <!-- PERSONA DE CONTACTO -->
+              <label class="col-md-1" [attr.for]="'nom_ape' + in"> Nombres y Apellidos </label>
+                <div class="col-md-3">
+                  <input type="text" 
+                  [attr.id]="'nom_ape' + in" 
+                  class="form-control" 
+                  formControlName="nom_ape"
+                  placeholder="Ex: Apellidos, Nombre">
+                </div>
+                
+              <!-- FECHA DE NACIMIENTO-->
+              <label class="col-md-1" [attr.for]="'fec_nac' + in"> Fecha de Nacimiento</label>
+                <div class="col-md-2">
+                  <input type="date" 
+                  [attr.id]="'fec_nac' + in" 
+                  class="form-control" 
+                  formControlName="fec_nac">
+                </div>
+               
+              <!-- DNI -->
+              <label class="col-md-1"  [attr.for]="'dni' + in"> DNI </label>
+              <div class="col-md-2">
+                <input type="text" 
+                [attr.id]="'dni' + in"
+                class="form-control" 
+                formControlName="dni">
+              </div>
+
+              <!-- BOTON REMOVER -->
+              <button mat-icon-button color="warn" (click)="removerHijos(in)" > 
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+          
+        <!-- -------------EN CASO DE EMERGENCIA------------- -->
+        <div class="grid-linea">
+          <div>
+            <hr class="linea1"  width="1px" noshade="noshade">
+          </div>
+          <div class="icon">
+            <mat-icon svgIcon="emergencia"></mat-icon>
+          </div>
+          <div>
+            <hr class="linea2"  width="1px" noshade="noshade">
+          </div>
+        </div>
+
+        <mat-grid-list cols="3" rowHeight="70px">
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- PERSONA DE CONTACTO -->
+              <mat-form-field appearance="outline" >
+                  <mat-label> Persona de Contacto </mat-label>
+                  <input matInput 
+                    placeholder="Apellidos, Nombre">
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- N° CONTACTO -->
+              <mat-form-field appearance="outline">
+                <mat-label> N° Contacto </mat-label>
+                <input matInput type="number" 
+                  placeholder="Ex: 999 999 999">
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="campo-container">
+              <!-- RELACION -->
+              <mat-form-field appearance="outline">
+                <mat-label> Relación </mat-label>
+                <input matInput>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+       
+      <div align="end">
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <form>
+      <ng-template matStepLabel>Datos Laborales y Profesionales</ng-template>
+      <mat-grid-list cols="4" rowHeight="70px">
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- Cargo Actual -->
+            <mat-form-field  appearance="outline">
+              <mat-label>Cargo Actual</mat-label>
+                <input matInput>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- Fecha de Ingreso -->
+            <mat-form-field appearance="outline" >
+              <mat-label>Fecha de Ingreso</mat-label>
+              <input matInput type="date" >
+            </mat-form-field>
+          </div>
+        </mat-grid-tile> 
+
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- Fecha de Cese -->
+            <mat-form-field appearance="outline" >
+              <mat-label>Fecha de Cese</mat-label>
+              <input matInput type="date" >
+            </mat-form-field>
+          </div>
+        </mat-grid-tile> 
+
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- Fecha de Inicio en el Cargo-->
+            <mat-form-field appearance="outline" >
+              <mat-label>Fecha de Inicio en el Cargo</mat-label>
+              <input matInput type="date" >
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>         
+      
+      </mat-grid-list> 
+
+      <!-- Dato de Estudio -->
+      <div class="grid-linea">
+        <div>
+          <hr class="linea1"  width="1px" noshade="noshade">
+        </div>
+        <div class="icon">
+          <mat-icon>school</mat-icon>
+        </div>
+        <div>
+          <hr class="linea2"  width="1px" noshade="noshade">
+        </div>
+      </div>
+
+      <mat-grid-list cols="5" rowHeight="70px">
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- Profesión -->
+            <mat-form-field  appearance="outline">
+              <mat-label>Profesión</mat-label>
+                <input matInput>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- Centro de Estudios -->
+            <mat-form-field  appearance="outline">
+              <mat-label>Centro de Estudios</mat-label>
+                <input matInput>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>         
+      
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- Nivel Academico -->
+            <mat-form-field appearance="outline" >
+              <mat-label>Nivel Académico</mat-label>
+              <mat-select  formControlName="secondCtrl" >
+                  <mat-option required value="1">Universitario</mat-option>
+                  <mat-option value="2">Instituto Superior</mat-option>
+                  <mat-option value="3">Colegio</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- Año de Ingreso -->
+            <mat-form-field appearance="outline" >
+              <mat-label>Año de Ingreso</mat-label>
+              <input matInput type="date" >
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- Año de Egreso-->
+            <mat-form-field appearance="outline" class="campo2">
+              <mat-label>Año de Egreso</mat-label>
+              <input matInput type="date" >
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list> 
+    
+      <!-- Dato de Idiomas -->
+      <div class="grid-linea2">
+        <div>
+          <hr class="linea11"  width="1px" noshade="noshade">
+        </div>
+        <div class="icon">
+          <mat-icon>language</mat-icon>
+        </div>
+        <div>
+          <hr class="linea22"  width="1px" noshade="noshade">
+        </div>
+
+        <div>
+          <hr class="linea11"  width="1px" noshade="noshade">
+        </div>
+        <div class="icon">
+          <mat-icon svgIcon="cv"></mat-icon>
+        </div>
+        <div>
+          <hr class="linea22"  width="1px" noshade="noshade">
+        </div>
+      </div>
+
+      <div class="grid-idioma-cv"> 
+        <div>
+          <tr *ngFor="let idiomas of idiomasData; let in=index">
+            <div class="grid-idioma">
+              <div class="campo-container" >
+                <!-- Idiomas -->
+                <mat-form-field appearance="outline" class="campo2" >
+                  <mat-label>Idioma</mat-label>
+                  <mat-select  
+                    [(ngModel)]="idiomasData[in].idiomas"
+                    name="idiomas{{in}}">
+                      <mat-option required value="1">Ingles</mat-option>
+                      <mat-option value="2">Quechua</mat-option>
+                      <mat-option value="3">Japones</mat-option>
+                      <mat-option value="4">Chino</mat-option>
+                      <mat-option value="5">Portugues</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+    
+              <div class="campo-container">
+                <!-- Nivel de Idioma -->
+                <mat-form-field appearance="outline" class="campo2">
+                  <mat-label>Nivel</mat-label>
+                  <mat-select 
+                    [(ngModel)]="idiomasData[in].nivel"
+                    name="nivel{{in}}">
+                      <mat-option required value="1">Basico</mat-option>
+                      <mat-option value="2">Intermedio</mat-option>
+                      <mat-option value="3">Avanzado</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+    
+              <div class="campo-container" align="start">
+                <!-- Añadir Idioma -->
+                <span *ngIf="in==0">
+                  <button mat-button color="primary" class="add_idioma" (click)="addIdioma(this)">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </span>
+                <!-- Remover Idioma -->
+                <span *ngIf="in!=0">
+                  <button mat-button color="warn" class="add_idioma" (click)="deleteIdioma(in)" > 
+                    <mat-icon>remove</mat-icon>
+                  </button>
+                </span>
+              </div>
+            </div> 
+          </tr>
+        </div>
+
+        <div align="center" class="add_idioma" >
+          <input type="file" multiple >
+          <button mat-button color="primary" >Descargar</button>
+        </div>
+      </div>
+      <br>
+      <div class="historial">
+        <!-- HISTORIAL -->
+        <button mat-raised-button color="accent" (click)="openHistorial()">
+           Historial 
+          <mat-icon>history</mat-icon>
+        </button>
+      </div>
+       
+    </form>
+    <div align="end">
+      <button mat-button matStepperPrevious>Atrás</button>
+      <button mat-button >Guardar</button>
+    </div>
+  </mat-step>
+  </mat-horizontal-stepper>

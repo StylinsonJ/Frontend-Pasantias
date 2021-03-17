@@ -92,6 +92,7 @@ import { ConsultaOrgComponent } from './modulos/maestro/organizacion/consulta-or
 import { FacturaGtComponent } from './modulos/finanzas/pagos/factura-gt/factura-gt.component';
 import { RrhhListComponent } from './modulos/rrhh/rrhh-list/rrhh-list.component';
 import { RrhhAddComponent } from './modulos/rrhh/rrhh-add/rrhh-add.component';
+import { HistorialComponent } from './modulos/rrhh/rrhh-add/historial/historial.component';
 
 @NgModule({
   declarations: [
@@ -159,7 +160,8 @@ import { RrhhAddComponent } from './modulos/rrhh/rrhh-add/rrhh-add.component';
     ConsultaOrgComponent,
     FacturaGtComponent,
     RrhhListComponent,
-    RrhhAddComponent
+    RrhhAddComponent,
+    HistorialComponent
   ],
   imports: [
     BrowserModule,
