@@ -27,3 +27,26 @@ th, td{
   width: 80%;
 }
 
+/*mitad*/
+.grid-linea2 {
+  display: grid;
+  grid-template-columns: 20% 10% 20% 20% 10% 20%;
+}
+.linea11{
+  background-color: #70758348;
+  width: 80%;
+  margin-left: 20%;
+}
+
+.linea22{
+  background-color: #70758348;
+  width: 80%;
+  margin-right: 20%;
+}
+
+.icon mat-icon{
+  color:#707583;
+  padding-top: 5px;
+  margin-left: 40%;
+  margin-right: 40%;
+}

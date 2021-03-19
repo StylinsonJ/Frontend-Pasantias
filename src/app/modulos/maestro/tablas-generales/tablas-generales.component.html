@@ -1,1 +1,29 @@
-<p>tablas-generales works!</p>
+<div class="grid-opcion">
+    <div class="grid-linea">
+        <div>
+            <mat-selection-list #shoes [multiple]="false">
+                <mat-list-option routerLink="/maestro/tablas-generales/unidad-medida">
+                    Unidad de Medida
+                </mat-list-option>
+                <mat-list-option routerLink="/maestro/tablas-generales/estados">
+                    Estados
+                </mat-list-option>
+                <mat-list-option routerLink="/maestro/tablas-generales/clasificacion">
+                    Clasificación
+                </mat-list-option>
+                <mat-list-option routerLink="/maestro/tablas-generales/tipo-pago">
+                    Tipo de Pago
+                </mat-list-option>
+                <mat-list-option routerLink="/maestro/tablas-generales/tipo-venta">
+                    Tipo de Venta
+                </mat-list-option>
+            </mat-selection-list>
+        </div>
+        <div>
+            <hr align="right" class="linea"  width="1px" noshade="noshade">
+        </div>
+    </div>
+    <div class="option">
+        <router-outlet></router-outlet>
+    </div>
+</div>

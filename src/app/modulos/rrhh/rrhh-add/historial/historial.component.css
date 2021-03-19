@@ -1,0 +1,12 @@
+
+    /* DETALLE*/
+    .detalle {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 20px 0px;
+        align-content: center;
+      }
+
+      .mat-list-icon {
+        color: rgba(0, 0, 0, 0.54);
+      }

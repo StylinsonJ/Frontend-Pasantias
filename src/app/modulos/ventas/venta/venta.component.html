@@ -22,10 +22,7 @@
                   <mat-option value="2">Servicios</mat-option>
                 </mat-select>
             </mat-form-field>
-              <!--N° Serie -->
-              <mat-form-field>
-                <input matInput placeholder="N° Serie">
-              </mat-form-field>
+             
               <div class="bus_grid">
                 <div>
                     <!--RUC/DNI -->
@@ -44,12 +41,7 @@
           <div class="controles-container">
             <!--Subir Archivo -->
             <input  type="file" class="form-control" placeholder="cotizacion" >    
-            <!--Fecha de Comprobante -->
-            <mat-form-field >
-              <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Fecha de Comprobante">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
+           
             <!--Tipo de Comprobante -->
             <mat-form-field >
                 <mat-label> Tipo de Comprobante</mat-label>
@@ -58,17 +50,15 @@
                   <mat-option value="2">Boleta</mat-option>
                 </mat-select>
             </mat-form-field>
-            <!--N° Comprobante -->
-            <mat-form-field >
-                <input matInput placeholder="N° Comprobante">
-            </mat-form-field>
+           
+             <!--NOMBRE/RAZON SOCIAL -->
+          <mat-form-field>
+            <input matInput placeholder="Nombre/Razon Social">
+        </mat-form-field>
             </div>
         </mat-grid-tile>  
     </mat-grid-list>  
-     <!--NOMBRE/RAZON SOCIAL -->
-     <mat-form-field>
-        <input matInput placeholder="Nombre/Razon Social">
-    </mat-form-field>
+    
     <mat-accordion style="margin-bottom: 10px;">
       <mat-expansion-panel  (opened)="panelOpenState = false"
                             (closed)="panelOpenState = true">
@@ -188,6 +178,26 @@
       </mat-grid-tile> 
   </mat-grid-list>
     
+   <!-- -------------DATOS DE HIJOS------------- -->
+   <div class="grid-linea">
+    <div>
+      <hr class="linea1"  width="1px" noshade="noshade">
+    </div>
+    <div class="icon">
+      <mat-icon>menu_book</mat-icon>
+    </div>
+    <div>
+      <hr class="linea2"  width="1px" noshade="noshade">
+    </div>
+  </div>
+
+  <div class="dato2-container" align="center">
+    <button mat-flat-button color="primary" >
+      Catálogo Almacen
+    </button>
+  </div>
+  <br>
+
         <div style="margin-top: 5px; margin-left: 15px; margin-right: 15px;" >
             <p><b>Detalle Producto</b></p>
             <table class="table" id="tableId">

@@ -1,1 +1,21 @@
-<p>catalogos works!</p>
+
+<div class="grid-opcion">
+    <div class="grid-linea">
+        <div>
+            <mat-selection-list #shoes [multiple]="false">
+                <mat-list-option routerLink="/maestro/catalogos/bienes">
+                    Bienes
+                </mat-list-option>
+                <mat-list-option routerLink="/maestro/catalogos/servicios">
+                    Servicios
+                </mat-list-option>
+            </mat-selection-list>
+        </div>
+        <div>
+            <hr align="right" class="linea"  width="1px" noshade="noshade">
+        </div>
+    </div>
+    <div class="option">
+        <router-outlet></router-outlet>
+    </div>
+</div>

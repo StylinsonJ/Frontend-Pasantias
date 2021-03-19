@@ -1,1 +1,20 @@
-<p>historial works!</p>
+<div mat-dialog-title class="detalle">
+    <div>
+      <h2>Historial de MBR0001</h2>
+    </div>
+    <div  align="end">
+      <span class="fill-remaining-space"></span>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial><mat-icon>clear</mat-icon></button>
+    </div>
+</div>
+
+<mat-dialog-content class="mat-typography">
+    <mat-list>
+        <div mat-subheader>Cargos Anteriores</div>
+        <mat-list-item *ngFor="let folder of folders">
+          <mat-icon mat-list-icon>work</mat-icon>
+          <div mat-line>{{folder.name}}</div>
+          <div mat-line> {{folder.updated | date}} </div>
+        </mat-list-item>
+      </mat-list>
+</mat-dialog-content>

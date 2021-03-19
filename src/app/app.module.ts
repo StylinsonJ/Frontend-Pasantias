@@ -72,8 +72,6 @@ import { ServiciosComponent } from './modulos/maestro/catalogos/servicios/servic
 import { BieneComponent } from './modulos/maestro/catalogos/bienes/biene/biene.component';
 import { ServicioComponent } from './modulos/maestro/catalogos/servicios/servicio/servicio.component';
 import { OrganizacionComponent } from './modulos/maestro/organizacion/organizacion.component';
-import { UnidadesComponent } from './modulos/maestro/organizacion/unidades/unidades.component';
-import { AreasComponent } from './modulos/maestro/organizacion/areas/areas.component';
 import { TablasGeneralesComponent } from './modulos/maestro/tablas-generales/tablas-generales.component';
 import { UnidadMedidaComponent } from './modulos/maestro/tablas-generales/unidad-medida/unidad-medida.component';
 import { EstadosComponent } from './modulos/maestro/tablas-generales/estados/estados.component';
@@ -93,6 +91,9 @@ import { FacturaGtComponent } from './modulos/finanzas/pagos/factura-gt/factura-
 import { RrhhListComponent } from './modulos/rrhh/rrhh-list/rrhh-list.component';
 import { RrhhAddComponent } from './modulos/rrhh/rrhh-add/rrhh-add.component';
 import { HistorialComponent } from './modulos/rrhh/rrhh-add/historial/historial.component';
+import { AddOrgComponent } from './modulos/maestro/organizacion/add-org/add-org.component';
+import { ServicioListComponent } from './modulos/maestro/catalogos/servicios/servicio-list/servicio-list.component';
+import { BieneListComponent } from './modulos/maestro/catalogos/bienes/biene-list/biene-list.component';
 
 @NgModule({
   declarations: [
@@ -142,8 +143,7 @@ import { HistorialComponent } from './modulos/rrhh/rrhh-add/historial/historial.
     BieneComponent,
     ServicioComponent,
     OrganizacionComponent,
-    UnidadesComponent,
-    AreasComponent,
+    
     TablasGeneralesComponent,
     UnidadMedidaComponent,
     EstadosComponent,
@@ -161,7 +161,10 @@ import { HistorialComponent } from './modulos/rrhh/rrhh-add/historial/historial.
     FacturaGtComponent,
     RrhhListComponent,
     RrhhAddComponent,
-    HistorialComponent
+    HistorialComponent,
+    AddOrgComponent,
+    ServicioListComponent,
+    BieneListComponent
   ],
   imports: [
     BrowserModule,

@@ -30,8 +30,6 @@ import { GastoComponent } from './modulos/gastos/gasto/gasto.component';
 import { PagosComponent } from './modulos/finanzas/pagos/pagos.component';
 import { CobrosComponent } from './modulos/finanzas/cobros/cobros.component';
 import { BancosFinanzasComponent } from './modulos/finanzas/bancos-finanzas/bancos-finanzas.component';
-import { UnidadesComponent } from './modulos/maestro/organizacion/unidades/unidades.component';
-import { AreasComponent } from './modulos/maestro/organizacion/areas/areas.component';
 import { ConsultaOrgComponent } from './modulos/maestro/organizacion/consulta-org/consulta-org.component';
 import { VentaListComponent } from './modulos/ventas/venta-list/venta-list.component';
 import { VentaComponent } from './modulos/ventas/venta/venta.component';
@@ -42,6 +40,13 @@ import { ConsultaStockComponent } from './modulos/almacen/consulta-stock/consult
 import { CompraListComponent } from './modulos/compras/compra-list/compra-list.component';
 import { CompraComponent } from './modulos/compras/compra/compra.component';
 import { RrhhAddComponent } from './modulos/rrhh/rrhh-add/rrhh-add.component';
+import { BienesComponent } from './modulos/maestro/catalogos/bienes/bienes.component';
+import { ServiciosComponent } from './modulos/maestro/catalogos/servicios/servicios.component';
+import { UnidadMedidaComponent } from './modulos/maestro/tablas-generales/unidad-medida/unidad-medida.component';
+import { EstadosComponent } from './modulos/maestro/tablas-generales/estados/estados.component';
+import { ClasificacionComponent } from './modulos/maestro/tablas-generales/clasificacion/clasificacion.component';
+import { TipoPagoComponent } from './modulos/maestro/tablas-generales/tipo-pago/tipo-pago.component';
+import { TipoVentaComponent } from './modulos/maestro/tablas-generales/tipo-venta/tipo-venta.component';
 
 const routes: Routes = [
   {path:'login', component: LoginComponent},
@@ -60,15 +65,22 @@ const routes: Routes = [
               ]
           },
           {path: 'bancos',          component: BancosMaestroComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'catalogos',       component: CatalogosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'organizacion',    component: OrganizacionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
-              children: [
-                {path: '',  redirectTo: '/maestro/organizacion/consulta-org', pathMatch: 'full'},
-                {path: 'unidad',       component: UnidadesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-                {path: 'area',         component: AreasComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-                {path: 'consulta-org', component: ConsultaOrgComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},    
-              ]},
-          {path: 'tablas-generales', component: TablasGeneralesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'catalogos',       component: CatalogosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+                children: [
+                  {path: 'bienes',   component: BienesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+                  {path: 'servicios', component: ServiciosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
+                ]
+            },
+          {path: 'organizacion',    component: OrganizacionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+             
+          {path: 'tablas-generales', component: TablasGeneralesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+          children: [
+            {path: 'unidad-medida',   component: UnidadMedidaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+            {path: 'estados', component: EstadosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
+            {path: 'clasificacion',   component: ClasificacionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+            {path: 'tipo-pago', component: TipoPagoComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
+            {path: 'tipo-venta', component: TipoVentaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
+          ]},
         ]
       },
       {path: 'ventas',  component: VentasComponent,  canActivate: [guard], data: { expectedRol: ['admin', 'user']},
