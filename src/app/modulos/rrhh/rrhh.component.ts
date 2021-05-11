@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RrhhComponent implements OnInit {
 
   navEnlaces = [
+    { path: 'dashboard-rrhh', label: 'Dashboard'},
     { path: 'rrhh-lista', label: 'Consulta'},
     { path: 'rrhh-add', label: 'Nuevo Ingreso'},
   ];

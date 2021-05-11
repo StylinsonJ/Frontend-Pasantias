@@ -1,36 +1,174 @@
-<div class="card mt-3">
-    <div class="card-body">
-        <form >
-            <!-- TO UPDATE -->
-            <input type="hidden" >
+<form>
+  <!-- TO UPDATE -->
+  <input type="hidden">
   
-            <div class="form-group">
-              <input 
-                type="text"
-                class="form-control"
-                name="name"
-                placeholder="Nueva Familia"
-                >
-            </div>
-            <div class="form-group">
-                <input 
-                  type="text"
-                  class="form-control"
-                  name="category"
-                  placeholder="Nueva SubFamilia"
-                  >
-              </div>
-            
-  
-            <div class="form-group">
-              <button class="btn btn-primary" type="submit" style="margin-right: 5px;">
-                  <i class="fas fa-plus-circle"></i> Agregar
-              </button>
-              <button class="btn btn-secondary" type="reset">
-                  <i class="fas fa-sync-alt"></i> Limpiar
-              </button>
-            </div>
-
-        </form>
+  <div class="row row-cols-1 row-cols-md-2 g-2">
+  <div class="col">
+    <div class="card">
+      <div class="card-header bg-secondary text-white" >
+        Familia
+      </div>
+      <div class="card-body">
+          <div class="input-group mb-3">
+            <input class="form-control" type="text"  name="familia" >
+            <button class="btn-primary">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-title">Lista de Familia </div>
+        <ul class="list-group list-group-flush ">
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">01</span> - Tecnologia
+            <button mat-icon-button color="warn" >
+              <mat-icon>clear</mat-icon>
+            </button>
+          </li>
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">02</span> - Electrohogar</li>
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">03</span> - Juguetes</li>
+        </ul>
+      </div>
     </div>
   </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-header bg-secondary text-white" >
+        Sub-Familia
+      </div>
+      <div class="card-body">
+          <div class="input-group mb-3">
+            <select class="form-select  bg-outline-secondary" id="inputGroupSelect01" >
+              <option selected disabled>Familia...</option>
+              <option value="1">Tecnologia</option>
+              <option value="2">Electrohogar</option>
+              <option value="3">Juguetes</option>
+            </select>
+            <input class="form-control" type="text"  name="familia" aria-label="Text input with dropdown button">
+            <button class="btn-primary">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          
+      </div>
+      <div class="card-footer">
+        <div class="card-title">Lista de Sub-Familia </div>
+        <ul class="list-group list-group-flush ">
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">0101</span> - Televisores</li>
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">0102</span> - Computo</li>
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">0103</span> - Celulares</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-header bg-secondary text-white" >
+        Marca
+      </div>
+      <div class="card-body">
+          <div class="input-group mb-3">
+            <select class="form-select  bg-outline-secondary" id="inputGroupSelect01" >
+              <option selected disabled>Familia...</option>
+              <option value="1">Tecnologia</option>
+              <option value="2">Electrohogar</option>
+              <option value="3">Juguetes</option>
+            </select>
+            <input class="form-control" type="text"  name="familia" >
+            <button class="btn-primary">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-title">Lista de Marcas </div>
+        <ul class="list-group list-group-flush ">
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">01</span> - Xiaomi
+            <button mat-icon-button color="warn" >
+              <mat-icon>clear</mat-icon>
+            </button>
+          </li>
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">02</span> - LG</li>
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">03</span> - Samsung</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <div class="card-header bg-secondary text-white" >
+       Color
+      </div>
+      <div class="card-body">
+          <div class="input-group mb-3">
+            <input class="form-control" type="text"  name="familia" >
+            <button class="btn-primary">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-title">Lista de Colores </div>
+        <ul class="list-group list-group-flush ">
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">01</span> - Rojo
+            <button mat-icon-button color="warn" >
+              <mat-icon>clear</mat-icon>
+            </button>
+          </li>
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">02</span> - Negro</li>
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">03</span> - Blanco</li>
+          <li class="list-group-item">
+            <span class="badge bg-warning rounded-pill">04</span> - Multicolor</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+<div class="col">
+  <div class="card">
+    <div class="card-header bg-secondary text-white" >
+      Unidades de Medida
+    </div>
+    <div class="card-body">
+        <div class="input-group mb-4">
+          <input class="form-control" type="text"  name="familia" >
+          <span class="input-group-text">#</span>
+          <input class="form-control" type="text"  name="signo" style="width: 5%;" >
+          <button class="btn-primary">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-title">Lista de  Medidas </div>
+      <ul class="list-group list-group-flush ">
+        <li class="list-group-item">
+          <span class="badge bg-warning rounded-pill">01</span> - Kilogramo (kg)
+          <button mat-icon-button color="warn" >
+            <mat-icon>clear</mat-icon>
+          </button>
+        </li>
+        <li class="list-group-item">
+          <span class="badge bg-warning rounded-pill">02</span> - Metro (m)</li>
+        <li class="list-group-item">
+          <span class="badge bg-warning rounded-pill">03</span> - Litro (l)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+
+</form>

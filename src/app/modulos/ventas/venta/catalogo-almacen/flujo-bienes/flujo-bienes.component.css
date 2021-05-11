@@ -1,0 +1,21 @@
+  .example-card {
+    max-width: 400px;
+    margin: 5px 20% 20px 20%;
+  }
+
+  .row{
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  @media only screen and (max-width:1000px){
+    .grid-ventas{
+      display: grid;
+      grid-template-columns: none;
+    }
+  
+    .archivo{
+      margin-top: 2px;
+      margin-bottom: 10px;
+   }
+  }

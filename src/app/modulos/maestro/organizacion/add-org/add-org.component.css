@@ -1,0 +1,8 @@
+.grid-add {
+    display: grid;
+    grid-template-columns:80% 20%;
+}
+
+.btn-add {
+    margin-left: 25%;
+}

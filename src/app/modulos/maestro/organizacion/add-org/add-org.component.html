@@ -5,32 +5,51 @@
             <input type="hidden" >
   
             <div class="form-group">
-              <input 
-                type="text"
-                class="form-control"
-                name="name"
-                placeholder="Nueva Unidad"
-                >
+              <div class="grid-add">
+                <div>
+                  <input 
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    placeholder="Nueva Unidad">
+                </div>
+                <div class="btn-add">
+                  <button mat-button color="primary">
+                    <mat-icon>save</mat-icon>
+                  </button>
+                </div>
+              </div>
             </div>
+        </form>
+    </div>
+  </div>
+
+  <div class="card mt-5">
+    <div class="card-body">
+        <form >
+            <!-- TO UPDATE -->
+            <input type="hidden" >
+  
+            <div class="form-group">
+              <select  class="form-control">
+                <option disabled selected>Seleccione Unidad</option>
+                <option value="1">unidad1</option>
+              </select>
+            </div>
+
             <div class="form-group">
                 <input 
                   type="text"
                   class="form-control"
                   name="category"
-                  placeholder="Nueva Área"
-                  >
-              </div>
+                  placeholder="Nueva Área">
+            </div>
             
-  
-            <div class="form-group">
-              <button class="btn btn-primary" type="submit" style="margin-right: 5px;">
-                  <i class="fas fa-plus-circle"></i> Agregar
-              </button>
-              <button class="btn btn-secondary" type="reset">
-                  <i class="fas fa-sync-alt"></i> Limpiar
+            <div class="form-group" align="end">
+              <button mat-button color="primary">
+                Guardar
               </button>
             </div>
-
         </form>
     </div>
   </div>

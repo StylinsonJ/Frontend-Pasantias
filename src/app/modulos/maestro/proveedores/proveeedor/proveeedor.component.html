@@ -1,6 +1,6 @@
 <div mat-dialog-title class="detalle">
   <div>
-    <h4><b>Registro: {{proveedorNuevo.codigo}}</b></h4>
+    <h4><b>REGISTRO - {{proveedorNuevo.codigo}}</b></h4>
   </div>
   <div  align="end">
     <span class="fill-remaining-space"></span>
@@ -12,9 +12,9 @@
 </div>
 <hr>
 <div mat-dialog-content>
-<form >
-  <div class="grid-but">
-    <div class="grid1">
+<form>
+  <mat-grid-list cols="4" rowHeight="80px">
+    <mat-grid-tile>
       <div class="controles-container">
         <!-- RUC-DNI-->
         <mat-form-field appearance="outline"> 
@@ -23,8 +23,13 @@
               matInput 
               [(ngModel)]="proveedorNuevo.rucDni"       
               name="rucDni"
+              type="number"
               #rucDni="ngModel">
         </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
         <!-- RAZON SOCIAL-->
         <mat-form-field appearance="outline">
           <mat-label>Nombre / Razón Social</mat-label>
@@ -34,6 +39,8 @@
               name="razonSocial">
         </mat-form-field>  
       </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
       <div class="controles-container">
         <!-- FECHA DE INICIO-->
         <mat-form-field appearance="outline">
@@ -45,6 +52,10 @@
               name="fechaIni"     
               placeholder="Fecha de Inicio">
         </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
         <!-- RUBRO DE ACTIVIDAD -->
         <mat-form-field appearance="outline">
           <mat-label>Rubro / Actividad Económica</mat-label>
@@ -54,8 +65,11 @@
               name="rubroActividad" >
         </mat-form-field>
       </div>
-    </div>
-    <div class="grid2">
+    </mat-grid-tile>
+  </mat-grid-list>
+
+    <!--
+       <div class="grid2">
       <div class="add-bottom-padding" >
         <label id="example-radio-group-label"><b>Impuestos Asociados</b></label>
           <mat-radio-group aria-labelledby="example-radio-group-label"
@@ -80,31 +94,32 @@
       </div>
     </div>
   </div>
+    -->
+   
 
   <mat-accordion style="margin-bottom: 10px;">
     <mat-expansion-panel  (opened)="panelOpenState = true"
                           (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
-        <mat-panel-title>Ubicación</mat-panel-title>
+        <mat-panel-title>Dirección</mat-panel-title>
         <mat-panel-description>
           <mat-icon>location_on</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
       <tr *ngFor="let direcciones of direccion; let in=index">
-               
-        <!-- DIRECCION 1-->
-        <mat-form-field style="text-align: center;width: 90%;">
-          <mat-label>Dirección</mat-label>
-          <input 
-              matInput 
+        
+        <!-- DOMICILIO-->
+        <mat-form-field appearance="outline" style="width: 90%; margin-left: 10px;">
+          <input style="text-align: center;"
+              matInput placeholder="Domicilio"
               name="direccion{{in}}"
               id="direccion"
               [(ngModel)]="direccion[in].direccion">
         </mat-form-field>
 
         <!-- PAIS   [formControl]="control" -->
-        <mat-form-field  class="ubicacion">
+        <mat-form-field  class="ubicacion" appearance="outline">
           <mat-label> Pais</mat-label>
           <input type="text"
             matInput
@@ -123,7 +138,7 @@
         </mat-form-field>
 
          <!-- DEPARTAMENTO-->
-          <mat-form-field  class="ubicacion">
+          <mat-form-field  class="ubicacion" appearance="outline">
             <mat-label> Departamento</mat-label>
             <mat-select 
                 id="departamento{{in}}" 
@@ -138,7 +153,7 @@
           </mat-form-field>
 
         <!-- PROVINCIA-->
-          <mat-form-field  class="ubicacion">
+          <mat-form-field  class="ubicacion" appearance="outline">
             <mat-label> Provincia</mat-label>
             <mat-select
                 id="provincia{{in}}"  
@@ -153,7 +168,7 @@
           </mat-form-field>
 
         <!-- DISTRITO-->
-          <mat-form-field  class="ubicacion">
+          <mat-form-field  class="ubicacion" appearance="outline">
             <mat-label> Distrito</mat-label>
             <mat-select
                 id="distrito{{in}}"  
@@ -169,7 +184,7 @@
           </mat-form-field>
 
         <!-- UBIGEO-->
-          <mat-form-field class="ubicacion">
+          <mat-form-field class="ubicacion" appearance="outline">
             <mat-label>Ubigeo</mat-label>
             <input 
                 matInput 
@@ -204,7 +219,7 @@
     
         <tr *ngFor="let contactos of personaContacto; let in=index">
           <!-- NOMBRE-->
-            <mat-form-field class="contacto">
+            <mat-form-field class="contacto" appearance="outline">
               <mat-label>Nombre</mat-label>
                 <input 
                   matInput
@@ -213,7 +228,7 @@
             </mat-form-field>
 
           <!-- CARGO-->
-            <mat-form-field class="contacto">
+            <mat-form-field class="contacto" appearance="outline">
               <mat-label>Cargo</mat-label>
                 <input 
                   matInput
@@ -222,7 +237,7 @@
             </mat-form-field>
 
           <!-- TELEFONO-->
-            <mat-form-field  class="contacto">
+            <mat-form-field  class="contacto" appearance="outline">
               <mat-label>Telefono</mat-label>
                 <input 
                   matInput
@@ -231,7 +246,7 @@
             </mat-form-field>
 
           <!-- CORREO-->
-            <mat-form-field class="contacto">
+            <mat-form-field class="contacto" appearance="outline">
               <mat-label>Correo </mat-label>
                 <input 
                   matInput 
@@ -259,7 +274,8 @@
     </mat-expansion-panel>
   </mat-accordion> <br><!--Prueba-->
     
-  
+   <!-- -----------------CUENTA BANCARIA------------------- -->
+   
   <div style="margin-top: 10px;" >
       <p><b>Cuentas Bancarias</b></p>
       <table class="table" id="tableId">
@@ -278,13 +294,29 @@
             <th><input type="number"  class="form-control" id="cci{{in}}"        [(ngModel)]="cuentaBancaria[in].cci"          name="cci{{in}}"        ></th>
             <th><input type="text"    class="form-control" id="tipoCuenta{{in}}" [(ngModel)]="cuentaBancaria[in].tipoCuenta"   name="tipoCuenta{{in}}" ></th>
             <th>
+             
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01"><mat-icon>attach_money</mat-icon></label>
+                <select class="form-select" id="inputGroupSelect01">
+                  <option selected>Choose...</option>
+                  <option value="1">Soles</option>
+                  <option value="2">Dolar</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+              
+               <!--
               <select   class="form-control" 
               id="moneda"  
               [(ngModel)]="cuentaBancaria[in].moneda"
               name="moneda{{in}}">
-                <option value="soles" selected>Pen</option>
+                <option value="soles" selected>
+                  <mat-icon>attach_money</mat-icon>
+                  Pen
+                </option>
                 <option value="dolar">Dolar</option>
               </select>
+              -->
             </th>
             <th *ngIf="in==0"><button mat-button color="primary"  (click)="addCuenta(this)"> <mat-icon>add</mat-icon></button></th>
             <td *ngIf="in!=0"><button mat-button type="button" color="warn" class="btn btn-secondary btn-sm" (click)="deleteCuenta(in)" > <mat-icon>remove</mat-icon></button></td>

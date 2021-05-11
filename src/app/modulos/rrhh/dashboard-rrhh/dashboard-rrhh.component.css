@@ -1,0 +1,14 @@
+.container{
+    margin-top: 3%;
+}
+
+.col-sm-6 {
+    margin-bottom: 3% ;
+}
+
+.d-icons{
+    height:60px !important;
+    width:60px !important;
+    font-size:60px !important;
+    color: white;
+}

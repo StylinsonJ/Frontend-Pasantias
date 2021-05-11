@@ -1,6 +1,6 @@
   <div mat-dialog-title class="detalle">
     <div name="codigo" id="codigo">
-      <h4 ><b>Nuevo Registro </b></h4>
+      <h4 ><b>REGISTRO - BANCO1 </b></h4>
     </div>
     <div  align="end">
       <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
@@ -12,15 +12,15 @@
     <form>  
         <div class="controles-container">
             <!-- ENTIDAD O BANCO-->
-            <mat-form-field> 
+            <mat-form-field appearance="outline">
+                <mat-label>Banco</mat-label> 
                 <input 
                     matInput      
                     name="entidad" 
-                    placeholder="Entidad"
                     [(ngModel)]="banco.entidad">
             </mat-form-field>
             <!-- MONEDA-->
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label> Moneda</mat-label>
                 <mat-select
                     name="moneda"
@@ -30,57 +30,56 @@
                 </mat-select>
             </mat-form-field>
             <!-- TIPO DE CUENTA -->
-            <mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Tipo de Cuenta</mat-label>
                 <input 
                     matInput
                     name="tipoCuenta" 
-                    [(ngModel)]="banco.tipoCuenta"
-                    placeholder="Tipo de Cuenta">
+                    [(ngModel)]="banco.tipoCuenta">
             </mat-form-field>
             <!-- FECHA DE APERTURA-->
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Fecha de Apertura</mat-label>
                 <input 
                     matInput        
                     type="date"
                     name="fechaApertura" 
-                    [(ngModel)]="banco.fechaApertura"
-                    placeholder="Fecha de Inicio">
+                    [(ngModel)]="banco.fechaApertura">
             </mat-form-field>
             <!-- N° CUENTA-->
-            <mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>N° Cuenta</mat-label>
                 <input 
                     matInput
                     name="numCuenta"
-                    [(ngModel)]="banco.numCuenta"
-                    placeholder="N° Cuenta">
+                    [(ngModel)]="banco.numCuenta">
             </mat-form-field>   
             <!-- CCI-->
-            <mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>CCI</mat-label>
                 <input 
                     matInput
                     name="cci" 
-                    [(ngModel)]="banco.cci"
-                    placeholder="CCI">
+                    [(ngModel)]="banco.cci">
             </mat-form-field>     
             <!-- FUNCIONARIO -->
-            <mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Funcionario</mat-label>
                 <input 
                     matInput
                     name="funcionario"
-                    [(ngModel)]="banco.funcionario" 
-                    placeholder="Funcionario">
+                    [(ngModel)]="banco.funcionario">
                 </mat-form-field>
             <!-- AGENCIA DE APERTURA -->
-            <mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Agencia de Apertura</mat-label>
                 <input  
                     matInput
                     name="agApertura" 
-                    [(ngModel)]="banco.agApertura"
-                    placeholder="Agencia de Apertura">
+                    [(ngModel)]="banco.agApertura">
             </mat-form-field>
             <!-- ESTADO-->
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label> Estado</mat-label>
                 <mat-select
                     name="estado"

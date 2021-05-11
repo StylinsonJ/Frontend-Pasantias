@@ -4,6 +4,7 @@ import {FormControl,Validators} from '@angular/forms';
 //import { AngularFileUploaderComponent } from "angular-file-uploader";
 import {MatDialog} from '@angular/material/dialog';
 import { ContactoComponent } from '../../compras/compra/contacto/contacto.component';
+import { Observable} from 'rxjs';
 
 @Component({
   selector: 'app-venta',
@@ -12,7 +13,11 @@ import { ContactoComponent } from '../../compras/compra/contacto/contacto.compon
 })
 export class VentaComponent implements OnInit {
 
-  
+  //autocomplete
+  myControl = new FormControl();
+  options: string[] = ['Perú', 'Venezuela', 'Japón'];
+  filteredOptions!: Observable<string[]>;
+    
   constructor( public dialog: MatDialog) { }
 
   //SUBIR ARCHIVO
@@ -103,8 +108,10 @@ export class VentaComponent implements OnInit {
 
   //CONTACTO-ABRIR DIALOGO
   openDialog():void {
-    const dialogRef = this.dialog.open(ContactoComponent, {
-      width: '50%',
+    const dialogRef = this.dialog.open(ContactoComponent , {
+      
+      disableClose: true,
+      autoFocus: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

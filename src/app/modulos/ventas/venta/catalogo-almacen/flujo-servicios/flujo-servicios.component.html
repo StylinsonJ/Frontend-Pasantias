@@ -1,0 +1,20 @@
+<div>
+    <div align="center" style="margin-top: 20px;"><hr><h4><b> LISTA DE SERVICIOS </b></h4><hr></div>
+</div>
+
+<mat-card>
+    <mat-selection-list #shoes>
+        <mat-list-option *ngFor="let shoe of typesOfShoes">
+          <li>{{shoe}}</li>
+        </mat-list-option>
+    </mat-selection-list>
+      
+    <p>
+        Servicios seleccionadas: {{shoes.selectedOptions.selected.length}}
+    </p>
+</mat-card>
+
+<div align="center">
+    <button mat-button >Cancelar</button>
+    <button mat-raised-button color="primary">Añadir</button>
+</div>

@@ -1,21 +1,20 @@
-
-<div class="grid-opcion">
-    <div class="grid-linea">
-        <div>
-            <mat-selection-list #shoes [multiple]="false">
-                <mat-list-option routerLink="/maestro/catalogos/bienes">
-                    Bienes
-                </mat-list-option>
-                <mat-list-option routerLink="/maestro/catalogos/servicios">
-                    Servicios
-                </mat-list-option>
-            </mat-selection-list>
-        </div>
-        <div>
-            <hr align="right" class="linea"  width="1px" noshade="noshade">
-        </div>
-    </div>
-    <div class="option">
-        <router-outlet></router-outlet>
-    </div>
+<div class="d-flex">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+        <li ngbNavItem="bienes" >
+            <a  ngbNavLink routerLink="/maestro/catalogos/bienes">BIENES</a>
+            <ng-template ngbNavContent >
+                <app-bienes></app-bienes> 
+            </ng-template>
+        </li>
+        <li ngbNavItem="servicios">
+            <a ngbNavLink routerLink="/maestro/catalogos/servicios">SERVICIOS</a>
+            <ng-template ngbNavContent>
+                <app-servicios></app-servicios>
+            </ng-template>
+        </li>
+        
+    </ul>
+    
+    <div [ngbNavOutlet]="nav" class="ml-4"></div>
 </div>
+

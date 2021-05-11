@@ -1,83 +1,85 @@
 <div mat-dialog-title class="detalle">
     <div name="codigo" id="codigo">
-      <h4 ><b>Registro: {{clienteNuevo.codigo}} </b></h4>
+      <h4 ><b>REGISTRO - {{clienteNuevo.codigo}}</b></h4>
     </div>
     <div  align="end">
       <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
     </div>
 </div>
-  <hr>
-    <div mat-dialog-content>
-         <form #formControl="ngForm">
-            <mat-grid-list cols="2" rowHeight="120px" style="margin-bottom: 10px;">
-                <mat-grid-tile>
-                <div class="controles-container">
+<hr>
+<div mat-dialog-content>
+    <form #formControl="ngForm">
+        <div class="grid-inicio">
+            <div class="grid1">
+                <div class="campo-container">
                     <!-- RUC-DNI-->
-                    <mat-form-field> 
+                    <mat-form-field appearance="outline"> 
+                        <mat-label>RUC / DNI</mat-label>
                         <input  
                             matInput 
                             [(ngModel)]="clienteNuevo.rucDni"       
-                            name="rucDni"
-                            placeholder="RUC/DNI">
+                            name="rucDni">
                     </mat-form-field>
+                </div>
+                <div class="campo-container">
                     <!-- RAZON SOCIAL-->
-                    <mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Razón Social</mat-label>
                         <input 
                             matInput 
                             [(ngModel)]="clienteNuevo.razonSocial"  
-                            name="razonSocial" 
-                            placeholder="Razón Social">
-                    </mat-form-field>   
+                            name="razonSocial">
+                    </mat-form-field>  
                 </div>
-                </mat-grid-tile>  
-                <mat-grid-tile>
-                <div class="controles-container">
-                    <mat-form-field>
+            </div>
+            <div class="grid2">
+                <div class="campo-container">
                     <!-- FECHA DE INICIO-->
-                    <mat-label>Fecha de inicio</mat-label>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Fecha de inicio</mat-label>
                         <input 
                             matInput 
                             [(ngModel)]="clienteNuevo.fechaIni" 
                             type="date"
                             name="fechaIni" 
                             placeholder="Fecha de Inicio">
-                        </mat-form-field>
+                    </mat-form-field>
+                </div>
+                <div class="campo-container">
                     <!-- RUBRO DE ACTIVIDAD -->
-                    <mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Rubro / Actividad Económica</mat-label>
                         <input 
                             matInput 
                             [(ngModel)]="clienteNuevo.rubroActividad"
-                            name="rubroActividad" 
-                            placeholder="Rubro / Actividad Económica">
+                            name="rubroActividad">
                     </mat-form-field>
                 </div>
-                </mat-grid-tile>  
-            </mat-grid-list>
-            
-            <mat-accordion style="margin-bottom: 10px;">
-                <mat-expansion-panel  (opened)="panelOpenState = true"
-                                        (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
+            </div>
+        </div>
+        <mat-accordion style="margin-bottom: 10px;">
+            <mat-expansion-panel  (opened)="panelOpenState = true"
+                                  (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
                     <mat-panel-title>Ubicación</mat-panel-title>
                     <mat-panel-description>
                         <mat-icon>location_on</mat-icon>
                     </mat-panel-description>
-                    </mat-expansion-panel-header>
-            
-                    <tr *ngFor="let direcciones of direccion; let in=index">
-                            
-                    <!-- DIRECCION 1-->
-                    <mat-form-field style="text-align: center;width: 90%;">
-                        <mat-label>Direccion</mat-label>
-                        <input 
-                            matInput 
+                </mat-expansion-panel-header>
+        
+                <tr *ngFor="let direcciones of direccion; let in=index">
+                     
+                     <!-- DIRECCION-->
+                    <mat-form-field appearance="outline" style="width: 90%; margin-left: 10px;">
+                        <input style="text-align: center;"
+                            matInput placeholder="Dirección"
                             name="direccion{{in}}"
                             id="direccion"
                             [(ngModel)]="direccion[in].direccion">
                     </mat-form-field>
-            
+        
                     <!-- PAIS   [formControl]="control" -->
-                    <mat-form-field  class="ubicacion">
+                    <mat-form-field appearance="outline" class="ubicacion">
                         <mat-label> Pais</mat-label>
                         <input type="text"
                             matInput
@@ -93,63 +95,63 @@
                             </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>
-            
-                        <!-- DEPARTAMENTO-->
-                        <mat-form-field  class="ubicacion">
-                        <mat-label> Departamento</mat-label>
-                        <mat-select 
-                            id="departamento{{in}}" 
-                            name="departamento{{in}}"
-                            (selectionChange)="onSelect($event.value, in)"
-                            [(ngModel)]="direccion[in].departamento"
-                            [disabled]="!dataUbigeo[in].show">
-                            <mat-option *ngFor="let reg of region" value={{reg.getCode()}}>
-                            {{reg.getName()}}
-                            </mat-option>
-                        </mat-select>
-                        </mat-form-field>
-            
+        
+                    <!-- DEPARTAMENTO-->
+                    <mat-form-field appearance="outline" class="ubicacion">
+                    <mat-label> Departamento</mat-label>
+                    <mat-select 
+                        id="departamento{{in}}" 
+                        name="departamento{{in}}"
+                        (selectionChange)="onSelect($event.value, in)"
+                        [(ngModel)]="direccion[in].departamento"
+                        [disabled]="!dataUbigeo[in].show">
+                        <mat-option *ngFor="let reg of region" value={{reg.getCode()}}>
+                        {{reg.getName()}}
+                        </mat-option>
+                    </mat-select>
+                    </mat-form-field>
+        
                     <!-- PROVINCIA-->
-                        <mat-form-field  class="ubicacion">
-                        <mat-label> Provincia</mat-label>
-                        <mat-select
-                            id="provincia{{in}}"  
-                            name="provincia{{in}}"
-                            (selectionChange)="filtroProvincia($event.value, in)"
-                            [(ngModel)]="direccion[in].provincia"
-                            [disabled]="dataUbigeo[in].provincia==null">
-                            <mat-option *ngFor="let provincia of dataUbigeo[in].provincia" value={{provincia.getCode()}}>
-                            {{provincia.getName()}}
-                            </mat-option>
-                        </mat-select>
-                        </mat-form-field>
-            
+                    <mat-form-field appearance="outline" class="ubicacion">
+                    <mat-label> Provincia</mat-label>
+                    <mat-select
+                        id="provincia{{in}}"  
+                        name="provincia{{in}}"
+                        (selectionChange)="filtroProvincia($event.value, in)"
+                        [(ngModel)]="direccion[in].provincia"
+                        [disabled]="dataUbigeo[in].provincia==null">
+                        <mat-option *ngFor="let provincia of dataUbigeo[in].provincia" value={{provincia.getCode()}}>
+                        {{provincia.getName()}}
+                        </mat-option>
+                    </mat-select>
+                    </mat-form-field>
+        
                     <!-- DISTRITO-->
-                        <mat-form-field  class="ubicacion">
-                        <mat-label> Distrito</mat-label>
-                        <mat-select
-                            id="distrito{{in}}"  
-                            name="distrito{{in}}" 
-                            (selectionChange)="obtenerUbigeo($event.value, in)"
-                            [(ngModel)]="direccion[in].distrito"
-                            [disabled]="dataUbigeo[in].distrito==null">
-            
-                            <mat-option *ngFor="let distrito of dataUbigeo[in].distrito" value={{distrito.getCode()}}>
-                            {{distrito.getName()}}
-                            </mat-option>
-                        </mat-select>
-                        </mat-form-field>
-            
+                    <mat-form-field appearance="outline" class="ubicacion">
+                    <mat-label> Distrito</mat-label>
+                    <mat-select
+                        id="distrito{{in}}"  
+                        name="distrito{{in}}" 
+                        (selectionChange)="obtenerUbigeo($event.value, in)"
+                        [(ngModel)]="direccion[in].distrito"
+                        [disabled]="dataUbigeo[in].distrito==null">
+        
+                        <mat-option *ngFor="let distrito of dataUbigeo[in].distrito" value={{distrito.getCode()}}>
+                        {{distrito.getName()}}
+                        </mat-option>
+                    </mat-select>
+                    </mat-form-field>
+        
                     <!-- UBIGEO-->
-                    <mat-form-field class="ubicacion">
+                    <mat-form-field appearance="outline" class="ubicacion">
                         <mat-label>Ubigeo</mat-label>
                         <input 
                             matInput 
                             name="ubigeo{{in}}" 
                             [(ngModel)]="direccion[in].ubigeo" 
                             value="{{dataUbigeo[in].ubigeo}}" readonly>
-                        </mat-form-field>
-                    
+                    </mat-form-field>
+                
                     <span *ngIf="in==0">
                         <button mat-button color="primary" (click)="addDireccion(this)">
                         <mat-icon>add_circle_</mat-icon>
@@ -161,86 +163,84 @@
                         </button>
                     </span>
                     <hr>
-                    </tr>
-            
-                </mat-expansion-panel>
-            
-                <mat-expansion-panel  (opened)="panelOpenState = true"
-                                        (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>Contacto</mat-panel-title>
-                        <mat-panel-description>
+                </tr>
+            </mat-expansion-panel>
+        
+            <mat-expansion-panel  (opened)="panelOpenState = true"
+                                  (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Contacto</mat-panel-title>
+                    <mat-panel-description>
                         <mat-icon>account_circle</mat-icon>
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-                
-                    <tr *ngFor="let contactos of personaContacto; let in=index">
-                        <!-- NOMBRE-->
-                        <mat-form-field class="contacto">
-                            <mat-label>Nombre</mat-label>
-                            <input 
-                                matInput
-                                [(ngModel)]="personaContacto[in].nombre"
-                                name="nombre{{in}}">
-                        </mat-form-field>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
             
-                        <!-- CARGO-->
-                        <mat-form-field class="contacto">
-                            <mat-label>Cargo</mat-label>
-                            <input 
-                                matInput
-                                [(ngModel)]="personaContacto[in].cargo"
-                                name="cargo{{in}}">
-                        </mat-form-field>
-            
-                        <!-- TELEFONO-->
-                        <mat-form-field  class="contacto">
-                            <mat-label>Telefono</mat-label>
-                            <input 
-                                matInput
-                                [(ngModel)]="personaContacto[in].telefono"
-                                name="telefono{{in}}">
-                        </mat-form-field>
-            
-                        <!-- CORREO-->
-                        <mat-form-field class="contacto">
-                            <mat-label>Correo </mat-label>
-                            <input 
-                                matInput 
-                                placeholder="pat@example.com" 
-                                required
-                                [(ngModel)]="personaContacto[in].correo"
-                                name="correo{{in}}"
-                            >
-                            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-                        </mat-form-field>
-            
-                        <span *ngIf="in==0">
-                            <button mat-button color="primary" (click)="addContacto(this)">
-                            <mat-icon>add_circle_</mat-icon>
-                            </button>
-                        </span>
-                        <span *ngIf="in!=0">
-                            <button mat-button color="warn" class="btn btn-secondary btn-sm" (click)="deleteContacto(in)" > 
-                            <mat-icon>remove_circle</mat-icon>
-                            </button>
-                        </span>
-                        <hr>
-                    </tr>
-                    
-                </mat-expansion-panel>
-            </mat-accordion> <br><!--Prueba-->
-            <br>
-        </form>
-           
-    </div>
-  <mat-dialog-actions class="acciones" align="end">
+                <tr *ngFor="let contactos of personaContacto; let in=index">
+                    <!-- NOMBRE-->
+                    <mat-form-field appearance="outline" class="contacto">
+                        <mat-label>Nombre</mat-label>
+                        <input 
+                            matInput
+                            [(ngModel)]="personaContacto[in].nombre"
+                            name="nombre{{in}}">
+                    </mat-form-field>
+        
+                    <!-- CARGO-->
+                    <mat-form-field appearance="outline" class="contacto">
+                        <mat-label>Cargo</mat-label>
+                        <input 
+                            matInput
+                            [(ngModel)]="personaContacto[in].cargo"
+                            name="cargo{{in}}">
+                    </mat-form-field>
+        
+                    <!-- TELEFONO-->
+                    <mat-form-field appearance="outline" class="contacto">
+                        <mat-label>Telefono</mat-label>
+                        <input 
+                            matInput
+                            [(ngModel)]="personaContacto[in].telefono"
+                            name="telefono{{in}}">
+                    </mat-form-field>
+        
+                    <!-- CORREO-->
+                    <mat-form-field appearance="outline" class="contacto">
+                        <mat-label>Correo </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="pat@example.com" 
+                            required
+                            [(ngModel)]="personaContacto[in].correo"
+                            name="correo{{in}}"
+                        >
+                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+        
+                    <span *ngIf="in==0">
+                        <button mat-button color="primary" (click)="addContacto(this)">
+                        <mat-icon>add_circle_</mat-icon>
+                        </button>
+                    </span>
+                    <span *ngIf="in!=0">
+                        <button mat-button color="warn" class="btn btn-secondary btn-sm" (click)="deleteContacto(in)" > 
+                        <mat-icon>remove_circle</mat-icon>
+                        </button>
+                    </span>
+                    <hr>
+                </tr>   
+            </mat-expansion-panel>
+        </mat-accordion> <br><!--Prueba-->
+        <br>
+    </form>     
+</div>
+
+<mat-dialog-actions class="acciones" align="end">
     <div class="comentario" >
-      <!--COMENTARIO-->
-      <mat-form-field appearance="outline">
-          <mat-label>Comentario   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          </mat-label>
-          <textarea 
+        <!--COMENTARIO-->
+        <mat-form-field appearance="outline">
+            <mat-label>Comentario   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-label>
+            <textarea 
                 matNativeControl  
                 name="comentarios"
                 [(ngModel)]="clienteNuevo.comentarios"></textarea>
@@ -249,13 +249,13 @@
     <div>
         <button mat-button >Limpiar</button>
         <button mat-flat-button color="primary" [mat-dialog-close]="1" (click)="saveNewCliente()" *ngIf="!data else elseBlock">
-                      Guardar <mat-icon>save</mat-icon>
+                        Guardar <mat-icon>save</mat-icon>
         </button>
         <ng-template #elseBlock>
-          <button mat-flat-button color="primary" [mat-dialog-close]="1" (click)="updateCliente()">
+            <button mat-flat-button color="primary" [mat-dialog-close]="1" (click)="updateCliente()">
                         Actualizar <mat-icon>edit</mat-icon>
-          </button>
+            </button>
         </ng-template>
     </div>
-  </mat-dialog-actions>
+</mat-dialog-actions>
   

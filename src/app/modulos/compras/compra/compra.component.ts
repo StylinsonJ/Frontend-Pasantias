@@ -4,6 +4,7 @@ import {FormControl,Validators} from '@angular/forms';
 //import { AngularFileUploaderComponent } from "angular-file-uploader";
 import {MatDialog} from '@angular/material/dialog';
 import { ContactoComponent } from './contacto/contacto.component';
+import { Observable} from 'rxjs';
 
 export interface NuevoContacto {
   id: number;
@@ -19,6 +20,12 @@ export interface NuevoContacto {
   styleUrls: ['./compra.component.css']
 })
 export class CompraComponent implements OnInit {
+
+  //autocomplete
+myControl = new FormControl();
+options: string[] = ['Perú', 'Venezuela', 'Japón'];
+filteredOptions!: Observable<string[]>;
+  
 
   constructor( public dialog: MatDialog) { }
 

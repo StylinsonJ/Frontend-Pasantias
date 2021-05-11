@@ -1,74 +1,80 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort } from '@angular/material/sort';
-import {MatDialog} from '@angular/material/dialog';
-import { DetalleComponent } from './detalle/detalle.component';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {DecimalPipe} from '@angular/common';
+import {Observable} from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
-import {SelectionModel} from '@angular/cdk/collections';
+import {ProductsService} from './products.service';
+import {NgbdSortableHeader, SortEvent} from './sortable.directive';
+import { ProductoComponent } from './producto/producto.component';
 
-export interface productoList {
+export interface PRODUCTO {
   id: number;
-  producto: string;
+  cod_barra: number;
+  familia: string;
+  subfamilia: string;
+  marca: string;
   descripcion: string;
-  val_uni: number;
-  cantidad: number;
-  accion: string;
-  accion2: string;
+  stock: number;
 }
 
-const DATA: productoList[] = [
-  {id:1, producto: 'telefono', descripcion: 'android', val_uni: 700, cantidad:100, accion:"",accion2:"" },
-  {id:2, producto: 'laptop',   descripcion: 'de japon', val_uni: 500, cantidad:100, accion:"",accion2:""},
-];
+export const DATA_PROD: PRODUCTO[] = [
+  {
+    id: 1,
+    cod_barra: 100310103,
+    familia: "Tecnologia",
+    subfamilia: "Celulares",
+    marca: "Xiaomi",
+    descripcion: "Mi9",
+    stock: 100,
+  },
+]
 
 @Component({
   selector: 'app-productos',
+  providers: [ProductsService, DecimalPipe],
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css']
 })
 export class ProductosComponent implements OnInit {
 
-  id!: number;
-  producto!: string;
-  descripcion!: string;
-  val_uni!: number;
-  cantidad!: number;
-  accion!: string;
-
-  constructor(public dialog: MatDialog) { }
-
-  ngOnInit() {
-    this.dataSource.sort = this.sort;
+  ngOnInit(): void {
   }
 
-  //CABECERA
-  displayedColumns: string[] = [ 'id', 'producto', 'descripcion', 'val_uni', 'cantidad', 'accion','accion2'];
-  dataSource = new MatTableDataSource<productoList>(DATA);
-  selection = new SelectionModel<productoList>(true, []);
+  
+  countries$: Observable<PRODUCTO[]>;
+  total$: Observable<number>;
 
-   //FILTRO
-   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
+
+  constructor(public service: ProductsService,
+    public dialog: MatDialog,) {
+    this.countries$ = service.countries$;
+    this.total$ = service.total$;
   }
 
-  //PAGINATOR
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  onSort({column, direction}: SortEvent) {
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.service.sortColumn = column;
+    this.service.sortDirection = direction;
   }
-//CONTACTO-ABRIR DIALOGO
-openDialog():void {
-  const dialogRef = this.dialog.open(DetalleComponent, {
-    width: '80%',
-  });
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
-  });
-}
+   //REGISTRO-PROVEEDOR ABRIR DIALOGO
+   openDialog(): void {
+     
+    const dialogRef = this.dialog.open(ProductoComponent, {
+      width: '80%',
+      disableClose: true,
+      autoFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }

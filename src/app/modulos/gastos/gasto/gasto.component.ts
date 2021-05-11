@@ -22,7 +22,10 @@ import { DataUbigeoI } from 'src/app/intefaces/maestro/data-ubigeo.interface';
   styleUrls: ['./gasto.component.css']
 })
 export class GastoComponent implements OnInit {
-
+//autocomplete
+myControl = new FormControl();
+options: string[] = ['Perú', 'Venezuela', 'Japón'];
+filteredOptions!: Observable<string[]>;
   //SELECT DIRECCION
   public selectedCountry: CountryI = {id: '', value: ''};
   public countries: CountryI[] = [];

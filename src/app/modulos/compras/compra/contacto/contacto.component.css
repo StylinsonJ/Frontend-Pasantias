@@ -1,7 +1,16 @@
  /* DETALLE*/
  .detalle {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 250px 50px;
     grid-template-rows: 20px 0px;
     align-content: center;
+  }
+
+  .persona-container{
+    width: 100%;
+    padding-left: 15px;
+  }
+  
+  .persona-container > * {
+    width: 100%;
   }

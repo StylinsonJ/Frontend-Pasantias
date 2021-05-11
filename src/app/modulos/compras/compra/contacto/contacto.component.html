@@ -9,37 +9,34 @@
     <hr>
 <div mat-dialog-content>
     <form>
-        <mat-grid-list cols="2" rowHeight="120px" style="margin-bottom: 10px;">
+        <mat-grid-list cols="1" rowHeight="310px" style="margin-bottom: 10px;">
             <mat-grid-tile>
-            <div class="controles-container">
-                <!--NOMBRE -->
-                <mat-form-field> 
-                    <input  matInput placeholder="Nombre">
-                </mat-form-field>
-                <!--CARGO -->
-                <mat-form-field> 
-                    <input  matInput placeholder="Cargo">
-                </mat-form-field>
-            </div>
-            </mat-grid-tile>  
-            <mat-grid-tile>
-            <div class="controles-container">
-                <!--NOMBRE -->
-                <mat-form-field> 
-                    <input  matInput placeholder="Telefono">
-                </mat-form-field>
-                <!--CORREO -->
-                <mat-form-field> 
-                    <input  matInput placeholder="Correo">
-                </mat-form-field>
-            </div>
+                <div class="persona-container">
+                    <!--NOMBRE -->
+                    <mat-form-field appearance="outline"> 
+                        <mat-label>Nombre</mat-label>
+                        <input  matInput>
+                    </mat-form-field>
+                    <!--CARGO -->
+                    <mat-form-field appearance="outline"> 
+                        <mat-label>Cargo</mat-label>
+                        <input  matInput>
+                    </mat-form-field>
+                    <!--TELEFONO -->
+                    <mat-form-field appearance="outline"> 
+                        <mat-label>Telefono</mat-label>
+                        <input  matInput>
+                    </mat-form-field>
+                    <!--CORREO -->
+                    <mat-form-field appearance="outline"> 
+                        <mat-label>Correo</mat-label>
+                        <input  matInput>
+                    </mat-form-field>
+                </div>
             </mat-grid-tile>  
         </mat-grid-list>
     </form>
 </div>
 <mat-dialog-actions class="acciones" align="end">
-    <div>
-      <button mat-button >Cancelar</button>
-      <button mat-flat-button color="primary" >Guardar</button>
-    </div>
-  </mat-dialog-actions>
+     <button mat-button color="primary" >Agregar</button>
+</mat-dialog-actions>

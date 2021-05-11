@@ -1,4 +1,15 @@
-<div class="grid-opcion">
+<mat-grid-list class="grid-all" cols="4" rowHeight="100%">
+    <mat-grid-tile class="card-view"  [colspan]="3" >
+        <app-servicio></app-servicio>
+    </mat-grid-tile>
+    <mat-grid-tile  [colspan]="1">
+        <app-unidad-medida></app-unidad-medida>
+    </mat-grid-tile>
+     
+  </mat-grid-list>
+  
+  
+<!--<div class="grid-opcion">
     <div class="grid-linea">
         <div>
             <mat-selection-list #shoes [multiple]="false">
@@ -26,4 +37,4 @@
     <div class="option">
         <router-outlet></router-outlet>
     </div>
-</div>
+</div>-->

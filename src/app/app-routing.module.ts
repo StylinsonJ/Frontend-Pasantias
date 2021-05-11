@@ -35,7 +35,6 @@ import { VentaListComponent } from './modulos/ventas/venta-list/venta-list.compo
 import { VentaComponent } from './modulos/ventas/venta/venta.component';
 import { EntradaComponent } from './modulos/almacen/entrada/entrada.component';
 import { SalidaComponent } from './modulos/almacen/salida/salida.component';
-import { ProductosComponent } from './modulos/almacen/productos/productos.component';
 import { ConsultaStockComponent } from './modulos/almacen/consulta-stock/consulta-stock.component';
 import { CompraListComponent } from './modulos/compras/compra-list/compra-list.component';
 import { CompraComponent } from './modulos/compras/compra/compra.component';
@@ -47,6 +46,16 @@ import { EstadosComponent } from './modulos/maestro/tablas-generales/estados/est
 import { ClasificacionComponent } from './modulos/maestro/tablas-generales/clasificacion/clasificacion.component';
 import { TipoPagoComponent } from './modulos/maestro/tablas-generales/tipo-pago/tipo-pago.component';
 import { TipoVentaComponent } from './modulos/maestro/tablas-generales/tipo-venta/tipo-venta.component';
+import { ConsultaActivosComponent } from './modulos/almacen/consulta-activos/consulta-activos.component';
+import { OrdenTrasladoComponent } from './modulos/almacen/orden-traslado/orden-traslado.component';
+import { ConsultaOtComponent } from './modulos/almacen/orden-traslado/consulta-ot/consulta-ot.component';
+import { NuevaOtComponent } from './modulos/almacen/orden-traslado/nueva-ot/nueva-ot.component';
+import { CatalogoAlmacenComponent } from './modulos/ventas/venta/catalogo-almacen/catalogo-almacen.component';
+import { FlujoBienesComponent } from './modulos/ventas/venta/catalogo-almacen/flujo-bienes/flujo-bienes.component';
+import { FlujoServiciosComponent } from './modulos/ventas/venta/catalogo-almacen/flujo-servicios/flujo-servicios.component';
+import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { ProductosComponent } from './modulos/almacen/productos/productos.component';
+import { DashboardRrhhComponent } from './modulos/rrhh/dashboard-rrhh/dashboard-rrhh.component';
 
 const routes: Routes = [
   {path:'login', component: LoginComponent},
@@ -65,32 +74,40 @@ const routes: Routes = [
               ]
           },
           {path: 'bancos',          component: BancosMaestroComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'catalogos',       component: CatalogosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
-                children: [
-                  {path: 'bienes',   component: BienesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-                  {path: 'servicios', component: ServiciosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
-                ]
-            },
+          {path:'catalogos',       component: CatalogosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+              children: [
+                {path: 'bienes',   component: BienesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+                {path: 'servicios', component: ServiciosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
+              ]
+          },
           {path: 'organizacion',    component: OrganizacionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-             
           {path: 'tablas-generales', component: TablasGeneralesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
-          children: [
-            {path: 'unidad-medida',   component: UnidadMedidaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-            {path: 'estados', component: EstadosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
-            {path: 'clasificacion',   component: ClasificacionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-            {path: 'tipo-pago', component: TipoPagoComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
-            {path: 'tipo-venta', component: TipoVentaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
-          ]},
+            children: [
+              {path: 'unidad-medida',   component: UnidadMedidaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+              {path: 'estados', component: EstadosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
+              {path: 'clasificacion',   component: ClasificacionComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+              {path: 'tipo-pago', component: TipoPagoComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
+              {path: 'tipo-venta', component: TipoVentaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
+            ]
+          },
         ]
       },
       {path: 'ventas',  component: VentasComponent,  canActivate: [guard], data: { expectedRol: ['admin', 'user']},
         children: [
           {path: '',  redirectTo: '/ventas/ventas-lista', pathMatch: 'full'},
           {path: 'ventas-lista',  component: VentaListComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'ventas-add', component: VentaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-         
-        ]  
+          {path: 'ventas-add',    component: VentaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'catalogo-almacen',       component: CatalogoAlmacenComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+              children: [
+                {path: 'bienes',    component: FlujoBienesComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+                {path: 'servicios', component: FlujoServiciosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},  
+              ]
+          },
+        ] 
       },
+      {path: 'producto-detalle',    component: ProductDetailsComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+    
+         
       {path: 'gastos', component: GastosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
         children: [
           {path: '',  redirectTo: '/gastos/gastos-lista', pathMatch: 'full'},
@@ -110,8 +127,16 @@ const routes: Routes = [
           {path: '',  redirectTo: '/almacen/entrada', pathMatch: 'full'},
           {path: 'entrada',  component: EntradaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
           {path: 'salida', component: SalidaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'productos', component: ProductosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
-          {path: 'stock-lista', component: ConsultaStockComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'consulta-stock', component: ConsultaStockComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'consulta-activos', component: ConsultaActivosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          {path: 'orden-traslado', component: OrdenTrasladoComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']},
+            children: [
+              {path: 'consulta-ot',  component: ConsultaOtComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+              {path: 'nueva-ot', component: NuevaOtComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+            ]
+          },
+          {path: 'productos',    component: ProductosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+         
 
         ]
       },
@@ -125,6 +150,8 @@ const routes: Routes = [
       {path: 'rrhh',    component: RrhhComponent,    canActivate: [guard], data: { expectedRol: ['admin', 'user']},
         children: [
           {path: '',  redirectTo: '/rrhh/rrhh-add', pathMatch: 'full'},
+          {path: 'dashboard-rrhh',  component: DashboardRrhhComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+          
           {path: 'rrhh-lista',  component: RrhhListComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
           {path: 'rrhh-add', component: RrhhAddComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
         ]

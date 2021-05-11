@@ -1,153 +1,231 @@
-<div mat-dialog-title class="detalle">
-    <div>
-      <mat-icon>add_box</mat-icon><b>Comprobante de Venta: VT0001</b>
-    </div>
+<div>
+  <div align="center" style="margin-top: 20px;"><hr><h4><b> REGISTRO - VT0001 </b></h4><hr></div>
 </div>
 
-
-<div class="formulario">
+<mat-card >
   <form>
-    <mat-grid-list cols="2" rowHeight="240px" style="margin-bottom: 10px;">
-        <mat-grid-tile>
-          <div class="controles-container">
-            <!--Cotizacion -->
-            <mat-form-field >
-              <input matInput placeholder="Cotización">
-            </mat-form-field>
-            <!--Tipo de Venta -->
-            <mat-form-field >
-                <mat-label> Tipo de Venta</mat-label>
-                <mat-select>
-                  <mat-option value="1">Bienes</mat-option>
-                  <mat-option value="2">Servicios</mat-option>
-                </mat-select>
-            </mat-form-field>
-             
-              <div class="bus_grid">
-                <div>
-                    <!--RUC/DNI -->
-                    <mat-form-field style="width: 90%;">
-                        <input matInput placeholder="RUC/DNI">
-                    </mat-form-field>
-                </div>
-                <div> 
-                    <!--Bucador de RUC/DNI-->
-                    <button mat-raised-button style="background-color: #dbbd77; width: 100%;" ><mat-icon>person_search</mat-icon>Buscar </button>               
-                </div>
-            </div>
-          </div>
-        </mat-grid-tile>  
-        <mat-grid-tile>
-          <div class="controles-container">
-            <!--Subir Archivo -->
-            <input  type="file" class="form-control" placeholder="cotizacion" >    
-           
-            <!--Tipo de Comprobante -->
-            <mat-form-field >
-                <mat-label> Tipo de Comprobante</mat-label>
-                <mat-select>
-                  <mat-option value="1">Factura</mat-option>
-                  <mat-option value="2">Boleta</mat-option>
-                </mat-select>
-            </mat-form-field>
-           
-             <!--NOMBRE/RAZON SOCIAL -->
-          <mat-form-field>
-            <input matInput placeholder="Nombre/Razon Social">
+    <div class="grid-ventas">
+      <div class="campo-container">
+        <!--Tipo de Venta -->
+        <mat-form-field appearance="outline">
+          <mat-label> Tipo de Venta</mat-label>
+          <mat-select>
+            <mat-option value="1">Bienes</mat-option>
+            <mat-option value="2">Servicios</mat-option>
+          </mat-select>
         </mat-form-field>
-            </div>
-        </mat-grid-tile>  
-    </mat-grid-list>  
-    
-    <mat-accordion style="margin-bottom: 10px;">
-      <mat-expansion-panel  (opened)="panelOpenState = false"
-                            (closed)="panelOpenState = true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>Ubicación</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>location_on</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <!--DIRECCION-->
-              <mat-form-field class="contacto">
-                <mat-label>Direccion 1</mat-label>
-                <input matInput>
-              </mat-form-field>
-              <!--PAIS-->
-              <mat-form-field  class="contacto">
-                <mat-label> Pais</mat-label>
-                <mat-select>
-                  <mat-option value="option">Option</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <!--DEPARTAMENTO-->
-              <mat-form-field  class="contacto">
-                <mat-label> Departamento</mat-label>
-                <mat-select>
-                  <mat-option value="option">Option</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <!--DISTRITO-->
-              <mat-form-field  class="contacto">
-                <mat-label> Distrito</mat-label>
-                <mat-select>
-                  <mat-option value="option">Option</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <!--PROVINCIA-->
-              <mat-form-field  class="contacto">
-                <mat-label> Provincia</mat-label>
-                <mat-select>
-                  <mat-option value="option">Option</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <!--UBIGEO-->
-              <mat-form-field class="contacto">
-                <mat-label>Ubigeo</mat-label>
-                <input matInput>
-              </mat-form-field>
-      </mat-expansion-panel>
-  
-      <mat-expansion-panel  (opened)="panelOpenState = false"
-                            (closed)="panelOpenState = true">
-          <mat-expansion-panel-header>
-            <mat-panel-title>Contacto</mat-panel-title>
-            <mat-panel-description>
-              <mat-icon>account_circle</mat-icon>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-              <mat-form-field  style="text-align: center;width: 100%;">
-                <mat-label> Persona</mat-label>
-                <mat-select>
-                  <mat-option value="option">Option</mat-option>
-                  <mat-option value="nuevo_contacto" (click)="openDialog()">Agregar nuevo contacto</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field class="contacto">
-                <mat-label>Nombre</mat-label>
-                <input matInput>
-              </mat-form-field>
-              <mat-form-field class="contacto">
-                <mat-label>Cargo</mat-label>
-                <input matInput>
-              </mat-form-field>
-              <mat-form-field class="contacto">
-                <mat-label>Telefono</mat-label>
-                <input matInput>
-                <mat-icon matSuffix>phone</mat-icon>
-              </mat-form-field>
-              <mat-form-field class="contacto">
-                <mat-label>Correo </mat-label>
-                <input matInput placeholder="pat@example.com" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-              </mat-form-field>
-      </mat-expansion-panel>
-    </mat-accordion> 
-      <br>
-    <mat-grid-list cols="3" rowHeight="60px" style="margin-bottom: 10px;">
+      </div>
+      <div class="campo-container">
+        <!--Tipo de Comprobante -->
+        <mat-form-field appearance="outline">
+          <mat-label> Tipo de Comprobante</mat-label>
+          <mat-select>
+            <mat-option value="1">Factura</mat-option>
+            <mat-option value="2">Boleta</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="campo-container">
+        <!--Cotizacion -->
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Cotización">
+        </mat-form-field>
+      </div>
+      <div class="campo-container">
+        <!--Subir Archivo -->
+        <input class="archivo" type="file"  >    
+      </div>
+    </div>
+
+    <!-- -----------------------BUSCAR RUC-DNI------------------- -->
+      <div class="grid-linea">
+        <div>
+          <hr class="linea1"  width="1px" noshade="noshade">
+        </div>
+        <div class="icon">
+          <mat-icon>saved_search</mat-icon> 
+        </div>
+        <div>
+          <hr class="linea2"  width="1px" noshade="noshade">
+        </div>
+      </div>
+
+      <div class="form-group" align="center">
+        <div class="input-group" style="width: 50%;">
+          <!--RUC/DNI -->
+          <input 
+            class="form-control"
+            name="price"
+            placeholder="RUC/DNI">
+
+          <!--Bucador de RUC/DNI-->
+          <div class="input-group-prepend">
+            <button class="input-group-text">
+              <mat-icon>person_search</mat-icon>Buscar 
+            </button> 
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-buscar">
+        <div class="campo-container"> 
+          <!--NOMBRE/RAZON SOCIAL -->
+          <mat-form-field appearance="outline" >
+            <mat-label> Nombre/Razon Social</mat-label>
+            <input matInput
+            style="text-align: center;">
+          </mat-form-field>
+        </div>
+        <div class="campo-container">
+          <!-- DIRECCION-->
+          <mat-form-field appearance="outline">
+            <mat-label> Dirección</mat-label>
+            <input style="text-align: center;"
+                matInput >
+          </mat-form-field>
+        </div>
+      </div>
+      
+      <mat-grid-list cols="5" rowHeight="80px">
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- PAIS-->   
+            <mat-form-field  appearance="outline">
+              <mat-label> Pais</mat-label>
+              <input type="text"
+                matInput
+                [formControl]="myControl"
+                [matAutocomplete]="auto">
+                <mat-autocomplete  #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+            </mat-form-field> 
+          </div>
+        </mat-grid-tile>   
+
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- DEPARTAMENTO-->
+            <mat-form-field appearance="outline">
+              <mat-label> Departamento</mat-label>
+              <mat-select >
+                  <mat-option required value="1">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>         
+      
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- PROVINCIA-->
+            <mat-form-field appearance="outline">
+              <mat-label> Provincia</mat-label>
+              <mat-select >
+                  <mat-option required value="1">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- DISTRITO-->
+            <mat-form-field appearance="outline">
+              <mat-label> Distrito</mat-label>
+              <mat-select >
+                  <mat-option required value="1">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+        
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- UBIGEO-->
+            <mat-form-field appearance="outline">
+              <mat-label>Ubigeo</mat-label>
+              <input 
+                  matInput  readonly>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <div class="campo-container">
+        <!-- PERSONA-->
+        <mat-form-field  appearance="outline">
+          <mat-label> Persona</mat-label>
+          <mat-select>
+            <mat-option value="option">Option</mat-option>
+            <mat-option value="nuevo_contacto" (click)="openDialog()">Agregar nuevo contacto</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-grid-list cols="4" rowHeight="80px">
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- NOMBRE -->  
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- CARGO --> 
+            <mat-form-field appearance="outline">
+              <mat-label>Cargo</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </div> 
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- TELEFONO --> 
+            <mat-form-field appearance="outline">
+              <mat-label>Telefono</mat-label>
+              <input matInput>
+              <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="campo-container">
+            <!-- TELEFONO --> 
+            <mat-form-field appearance="outline">
+              <mat-label>Correo </mat-label>
+              <input matInput placeholder="pat@example.com" [formControl]="email" required>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    <!-- FIN BUSCAR RUC-DNI -->
+
+<!-- ----------------------- VENTA-PRODUCTO------------------- -->
+<div class="grid-linea">
+  <div>
+    <hr class="linea1"  width="1px" noshade="noshade">
+  </div>
+  <div class="icon">
+    <mat-icon>assignment_turned_in</mat-icon> 
+  </div>
+  <div>
+    <hr class="linea2"  width="1px" noshade="noshade">
+  </div>
+</div>
+
+    <mat-grid-list cols="3" rowHeight="80px" style="margin-bottom: 10px;">
       <mat-grid-tile>
         <div class="controles-container">
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Tipo de Venta</mat-label>
             <mat-select>
               <mat-option value="option">Credito</mat-option>
@@ -158,8 +236,9 @@
       </mat-grid-tile>  
       <mat-grid-tile>
         <div class="controles-container">
-          <mat-form-field>
-            <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Fecha de Vencimiento">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha de Vencimiento</mat-label>
+            <input formControlName="hireDate" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -167,7 +246,7 @@
       </mat-grid-tile> 
       <mat-grid-tile>
         <div class="controles-container">
-          <mat-form-field>
+          <mat-form-field appearance="outline"> 
             <mat-label>Moneda</mat-label>
             <mat-select>
               <mat-option value="option">Soles</mat-option>
@@ -176,29 +255,53 @@
           </mat-form-field>
         </div>
       </mat-grid-tile> 
-  </mat-grid-list>
+   </mat-grid-list>
     
-   <!-- -------------DATOS DE HIJOS------------- -->
+   <!-- -------------CATALOGO ALMACEN------------- -->
    <div class="grid-linea">
-    <div>
-      <hr class="linea1"  width="1px" noshade="noshade">
-    </div>
-    <div class="icon">
-      <mat-icon>menu_book</mat-icon>
-    </div>
-    <div>
-      <hr class="linea2"  width="1px" noshade="noshade">
-    </div>
+      <div>
+        <hr class="linea1"  width="1px" noshade="noshade">
+      </div>
+      <div class="icon">
+        <mat-icon>menu_book</mat-icon>
+      </div>
+      <div>
+        <hr class="linea2"  width="1px" noshade="noshade">
+      </div>
+   </div>
+   
+   <div align="center" >
+    <div class="btn-group mr-5">
+      <button  type="button" class="btn-catalogo btn btn-success">
+        Catálogo Almacén
+      </button>
+      <div class="btn-group" ngbDropdown role="group">
+        <button class="btn-catalogo-op btn btn-success" ngbDropdownToggle></button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button ngbDropdownItem routerLink="/ventas/catalogo-almacen/bienes">   Bienes</button>
+          <button ngbDropdownItem routerLink="/ventas/catalogo-almacen/servicios">Servicios</button>
+        </div>
+      </div>
+   </div>
   </div>
 
-  <div class="dato2-container" align="center">
-    <button mat-flat-button color="primary" >
-      Catálogo Almacen
-    </button>
-  </div>
-  <br>
+    
+    <br>
+    <!-- 
+      <div class="btn-group mr-3">
+      <button type="button" class="btn btn-primary">
+        Catálogo Almacen
+      </button>
+      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+        <button color="accent" class="dropdown-toggle-split" ngbDropdownToggle></button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button ngbDropdownItem  routerLink="/ventas/bienes">Bienes</button>
+          <button ngbDropdownItem  routerLink="/ventas/servicios">Servicios</button>
+        </div>
+      </div>
+    </div>
 
-        <div style="margin-top: 5px; margin-left: 15px; margin-right: 15px;" >
+      <div style="margin-top: 5px; margin-left: 15px; margin-right: 15px;" >
             <p><b>Detalle Producto</b></p>
             <table class="table" id="tableId">
               <thead class="thread-light">
@@ -257,13 +360,15 @@
               </mat-radio-button>
             </mat-radio-group>
           </div>
-          <!--ESTADO DE LA FACTURA -->
+          -ESTADO DE LA FACTURA -
           <mat-form-field >
             <mat-label> Estado de la Factura</mat-label>
             <mat-select>
               <mat-option value="1">Option</mat-option>
             </mat-select>
         </mat-form-field>
+    -->
+        
   </form>
   <div class="acciones">
     <div class="comentario" >
@@ -274,10 +379,10 @@
           <textarea matNativeControl  name="comentarios"></textarea>
         </mat-form-field>
     </div>
-    <div>
+    <div align="end">
       <button mat-button >Cancelar</button>
       <button mat-flat-button color="primary" >Guardar</button>
     </div>
   </div>
-</div>
+</mat-card>
   

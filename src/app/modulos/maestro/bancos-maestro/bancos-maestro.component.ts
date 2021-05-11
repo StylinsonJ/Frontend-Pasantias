@@ -86,7 +86,7 @@ export class BancosMaestroComponent implements OnInit {
   openDialog(): void {
      
     const dialogRef = this.dialog.open(BancoComponent, {
-      width: '50%',
+      width: '400px',
       disableClose: true,
       autoFocus: true
     });

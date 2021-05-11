@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { UnidadMedidaComponent } from './unidad-medida/unidad-medida.component';
+
+export interface Referencia {
+ color: string;
+ cols: number;
+ rows: number;
+}
 
 @Component({
   selector: 'app-tablas-generales',
@@ -11,5 +18,12 @@ export class TablasGeneralesComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  referencias: Referencia[] = [
+    {cols:3, rows:10, color:'lightblue' },
+    {cols:1, rows:10, color:'lightgreen'},
+   // {text:'Tres',   cols:1, rows:1, color:'lightpink'},
+   // {text:'Cuatro', cols:2, rows:1, color:'red'},
+  ]
 
 }

@@ -1,9 +1,25 @@
-.lis_prod {
-    margin-top: 50px
-}
-
-/* Busqueda - Tabla*/
-table  {
+.row{
+    margin-top: 3%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  
+  
+  .normal-form{
+    margin-top: 40px;
+    margin-left: 10%;
+    margin-right: 10%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 60px 0px;
+  }
+  
+  
+  .span{
+    margin-right: 10px;
+  }
+  /* Busqueda - Tabla*/
+  table  {
     width: 90%;
     height: 100%;
   }
@@ -13,3 +29,19 @@ table  {
     height: 100%;
   }
   
+  .mat-form-field {
+    font-size: 14px;
+    width: 200px;
+    margin-right: 30px;
+  }
+  
+  /* Excel*/
+  .excel {
+    color: green;
+  }
+  /*
+  td, th {
+    width: 20%;
+  }
+  
+  */

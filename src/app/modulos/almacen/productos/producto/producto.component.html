@@ -1,0 +1,149 @@
+<p>producto works!</p>
+<div mat-dialog-title class="detalle">
+    <div name="codigo" id="codigo">
+      <h4 ><b>REGISTRO PROD01 </b></h4>
+    </div>
+    <div  align="end">
+      <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+    </div>
+  </div>
+  <hr>
+
+  
+<div mat-dialog-content>
+    <form> 
+        <div class="card">
+            <div class="card-body">
+            
+                <div class="card-title">Detalle de Producto </div>
+                <div class="grid-producto">
+                
+                    <div class="campo-container"> 
+                        <!-- COD-->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Codigo de Barra</mat-label> 
+                            <input  matInput  >
+                        </mat-form-field>
+        
+                        <!-- Nombre--> 
+                        <mat-form-field appearance="outline">
+                        <mat-label> Nombre</mat-label>
+                        <input  matInput    >
+                    </mat-form-field>
+                    </div>
+                    <div class="campo-container"> 
+                        <!-- FAMILIA-->
+                        <mat-form-field appearance="outline">
+                            <mat-label> Familia</mat-label>
+                            <mat-select>
+                            <mat-option >Tecnologia</mat-option>
+                            <mat-option >Juguete</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+        
+                        <!-- Descripcion--> 
+                    <mat-form-field appearance="outline">
+                        <mat-label> Descipcion</mat-label>
+                        <input  matInput    >
+                    </mat-form-field>
+                    </div>
+                    <div class="campo-container"> 
+                        <!-- SUB FAMILIA-->
+                    <mat-form-field appearance="outline">
+                        <mat-label> Sub Familia</mat-label>
+                        <mat-select>
+                        <mat-option >Celulares</mat-option>
+                        <mat-option >Televisores</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+        
+                    <!-- Unidad--> 
+                    <mat-form-field appearance="outline">
+                        <mat-label> Unidad</mat-label>
+                        <input  matInput    >
+                    </mat-form-field>
+                    </div>  
+                    <div class="campo-container"> 
+                        <!-- MARCA-->
+                        <mat-form-field appearance="outline">
+                        <mat-label> Marca</mat-label>
+                        <mat-select>
+                            <mat-option >Samsung</mat-option>
+                            <mat-option >LG</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+        
+                    
+                    <!-- Color--> 
+                    <mat-form-field appearance="outline">
+                        <mat-label> Color</mat-label>
+                        <input  matInput    >
+                    </mat-form-field>
+                    </div>  
+                </div>
+             </div>
+        </div>
+
+        
+        <!-- -----------------------Dettalle de Stock ------------------- -->
+        <div class="grid-linea">
+            <div>
+            <hr class="linea1"  width="1px" noshade="noshade">
+            </div>
+            <div class="icon">
+            <mat-icon>inventory</mat-icon> 
+            </div>
+            <div>
+            <hr class="linea2"  width="1px" noshade="noshade">
+            </div>
+        </div>
+
+        <div class="grid-producto">
+            <div class="campo-container"> 
+                <!-- Stock-->
+                <mat-form-field appearance="outline">
+                    <mat-label>Stock</mat-label> 
+                    <input  matInput  >
+                </mat-form-field>
+            </div>
+            <div class="campo-container"> 
+                <!-- Precio Costo--> <br>
+                <mat-form-field appearance="outline">
+                    <mat-label> Precio Costo</mat-label>
+                    <input  matInput    >
+                </mat-form-field>
+            </div>
+            <div class="campo-container"> 
+            <!-- Precio Venta--> <br>
+            <mat-form-field appearance="outline">
+                <mat-label> Precio Venta</mat-label>
+                <input  matInput    >
+            </mat-form-field>
+            </div>  
+            <div class="campo-container"> 
+            <!-- Utilidad--> <br>
+            <mat-form-field appearance="outline">
+                <mat-label> Utilidad</mat-label>
+                <input  matInput    >
+            </mat-form-field>
+            </div>  
+        </div>
+    </form>
+</div>
+    <br>
+<mat-dialog-actions class="acciones" align="end">
+    <div class="comentario">
+        <mat-form-field appearance="outline">
+            <mat-label>Comentario<mat-icon>sentiment_very_satisfied</mat-icon>
+            </mat-label>
+            <textarea 
+                matNativeControl
+                name="comentarios"
+              ></textarea>
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-button >Limpiar</button>
+        <button mat-flat-button color="primary" [mat-dialog-close]="1" >Guardar <mat-icon>save</mat-icon></button>
+    </div>
+</mat-dialog-actions>

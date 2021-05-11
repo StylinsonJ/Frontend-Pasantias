@@ -10,10 +10,13 @@ export class AlmacenComponent implements OnInit {
 
   
   navEnlaces = [
-    { path: 'entrada', label: 'Entrada'},
-    { path: 'salida', label: 'Salida'},
+    { path: 'entrada', label: 'Entradas'},
+    { path: 'salida', label: 'Salidas'},
     { path: 'productos', label: 'Productos'},
-    { path: 'stock-lista', label: 'Stock'},
+    { path: 'consulta-stock', label: 'Consulta Stock'},
+    { path: 'consulta-activos', label: 'Consulta Activos'},
+    { path: 'orden-traslado', label: 'Orden de Traslado'},
+   
   ];
   activeLink = this.navEnlaces[0];
   
